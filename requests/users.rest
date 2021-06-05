@@ -1,0 +1,13 @@
+GET http://localhost:8080/api/users
+
+###
+
+POST http://localhost:8080/api/users
+
+###
+
+DELETE http://localhost:8080/api/users
+
+###
+
+PUT http://localhost:8080/api/users

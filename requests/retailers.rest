@@ -1,0 +1,13 @@
+GET http://localhost:8080/api/retailers
+
+###
+
+POST http://localhost:8080/api/retailers
+
+###
+
+DELETE http://localhost:8080/api/retailers
+
+###
+
+PUT http://localhost:8080/api/retailers

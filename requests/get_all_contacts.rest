@@ -1,3 +1,0 @@
-GET http://localhost/api/contacts
-
-GET http://localhost/api/transactions
