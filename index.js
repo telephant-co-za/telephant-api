@@ -4,7 +4,7 @@ import express from 'express';
 // import all resource routers
 import accountsRouter from './api/accounts';
 import contactsRouter from './api/contacts';
-import notificationsRouter from './api/notifcations';
+import notificationsRouter from './api/notifications';
 import retailersRouter from './api/retailers';
 import usersRouter from './api/users';
 
