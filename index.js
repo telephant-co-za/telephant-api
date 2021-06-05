@@ -8,17 +8,27 @@ import notificationsRouter from './api/notifications';
 import retailersRouter from './api/retailers';
 import usersRouter from './api/users';
 
+import wrongPath from './functions/wrongPath';
+const prepareErrors = require('./functions/prepareErrors')
+
 dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
-app.use('/api/accounts', accountsRouter);
-app.use('/api/contacts', contactsRouter);
-app.use('/api/notifications', notificationsRouter);
-app.use('/api/retailers', retailersRouter);
-app.use('/api/users', usersRouter);
+app
+.use('/api/accounts', accountsRouter)
+.use('/api/contacts', contactsRouter)
+.use('/api/notifications', notificationsRouter)
+.use('/api/retailers', retailersRouter)
+.use('/api/users', usersRouter)
+
+// Catches all the wrong routes and refers person to documentation site
+.all('/*', wrongPath)
+
+// Error Handler
+.use(prepareErrors)
 
 // Run the server
-app.listen(port, () => {
+.listen(port, () => {
   console.info(`Server running at ${port}`);
 });
