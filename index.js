@@ -3,13 +3,13 @@ import express from 'express';
 
 // connection to database
 import './db';
+import './seedData';
 
 // import all resource routers
 import accountsRouter from './api/accounts';
 import contactsRouter from './api/contacts';
 import notificationsRouter from './api/notifications';
 import retailersRouter from './api/retailers';
-import usersRouter from './api/users';
 
 import wrongPath from './functions/wrongPath';
 const prepareErrors = require('./functions/prepareErrors');
@@ -24,7 +24,6 @@ app
 .use('/api/contacts', contactsRouter, prepareOutput)
 .use('/api/notifications', notificationsRouter, prepareOutput)
 .use('/api/retailers', retailersRouter, prepareOutput)
-.use('/api/users', usersRouter, prepareOutput)
 
 // Catches all the wrong routes and refers person to documentation site
 .all('/*', wrongPath)
