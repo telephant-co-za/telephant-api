@@ -1,15 +1,21 @@
 import express from 'express';
+import { NotExtended } from 'http-errors';
 
 const router = express.Router();
 
 // GET return list of contacts
-router.get('/', (req, res) => {
-    res.json({"will" : "return list of contacts"});
+router.get('/', (req, res, next) => {
+    const payload = {
+        'code': '200',
+        'message': 'cccc'
+    };
+    res.locals = payload;
+    next();
 });
 
 // POST add a new contact
 router.post('/', (req, res) => {
-    res.json({"will" : "add a new contact"});
+    res.json({"Items" : "add a new contact"});
 });
 
 // DELETE delete a specified contact

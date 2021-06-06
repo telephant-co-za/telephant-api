@@ -9,18 +9,19 @@ import retailersRouter from './api/retailers';
 import usersRouter from './api/users';
 
 import wrongPath from './functions/wrongPath';
-const prepareErrors = require('./functions/prepareErrors')
+const prepareErrors = require('./functions/prepareErrors');
+const prepareOutput = require('./functions/prepareOutput');
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
 app
-.use('/api/accounts', accountsRouter)
-.use('/api/contacts', contactsRouter)
-.use('/api/notifications', notificationsRouter)
-.use('/api/retailers', retailersRouter)
-.use('/api/users', usersRouter)
+.use('/api/accounts', accountsRouter, prepareOutput)
+.use('/api/contacts', contactsRouter, prepareOutput)
+.use('/api/notifications', notificationsRouter, prepareOutput)
+.use('/api/retailers', retailersRouter, prepareOutput)
+.use('/api/users', usersRouter, prepareOutput)
 
 // Catches all the wrong routes and refers person to documentation site
 .all('/*', wrongPath)
