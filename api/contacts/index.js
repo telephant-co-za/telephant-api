@@ -1,24 +1,24 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
-import { NotExtended } from 'http-errors';
 
 // Import models
-import contactModel from './contactModel';
+import Contact from './contactModel';
 
 const router = express.Router();
 const createError = require('http-errors');
+import wrongPath from '../../functions/wrongPath';
 
 // GET return list of contacts
 router
     .get('/', asyncHandler(async (req, res) => {
 
-        let { page = 1, limit = 20 } = req.query; // destructure page and limit and set default values
-        [page, limit] = [+page, +limit]; //trick to convert to numeric (req.query will contain string values)
+        let { page = 1, limit = 20 } = req.query;
+        [page, limit] = [+page, +limit];
         try {
-            const totalDocumentsPromise = contactModel.estimatedDocumentCount(); //Kick off async calls
-            const contactsPromise = contactModel.find().limit(limit).skip((page - 1) * limit);
+            const totalDocumentsPromise = Contact.estimatedDocumentCount();
+            const contactsPromise = Contact.find().limit(limit).skip((page - 1) * limit);
 
-            const totalDocuments = await totalDocumentsPromise; //wait for the above promises to be fulfilled
+            const totalDocuments = await totalDocumentsPromise;
             const contacts = await contactsPromise;
 
             const returnObject = {
@@ -26,7 +26,7 @@ router
                 total_pages: Math.ceil(totalDocuments / limit),
                 total_results: totalDocuments,
                 results: contacts
-            };//construct return Object and insert into response object
+            };
 
             res.status(200).json(returnObject);
         }
@@ -40,7 +40,7 @@ router
         try {
 
             const phoneq = req.params.phoneq;
-            const contact = await contactModel.find({ phone: phoneq });
+            const contact = await Contact.find({ phone: phoneq });
 
             if (contact.length > 0) {
                 res.status(200).json(contact);
@@ -55,19 +55,89 @@ router
         }
     }))
 
-    // POST add a new contact
-    .get('/', asyncHandler(async (req, res) => {
-        res.json({ "Items": "add a new contact" });
+    // POST create a new contact
+    .post('/', asyncHandler(async (req, res, next) => {
+        try{
+            await new Contact(req.body).save();
+            res.status(200).json({ success: true, token: "FakeTokenForNow" });
+        }
+        catch(error)
+        {
+            const err = createError(500, error);
+            next(err);
+        }
     }))
 
     // DELETE delete a specified contact
-    .delete('/', (req, res) => {
-            res.json({ "will": "delete a specified contact" });
-    })
+    .delete('/:phoneq', asyncHandler(async (req, res, next) => {
+        try {
+
+            const phoneq = req.params.phoneq;
+            const result = await Contact.deleteOne({ phone: phoneq });
+
+            if (result.deletedCount === 1) {
+                res.status(200).json({message: 'Contact succesfully deleted'});
+            } else {
+                const err = createError(404, 'Could not find this phone number in your contacts.');
+                next(err);
+            }
+        }
+        catch (error) {
+            const err = createError(500, error);
+            next(err);
+        }
+    }))
 
     // PUT update a specified contact
-    .put('/', (req, res) => {
-            res.json({ "will": "update a specified contact" });
-    });
+    .put('/:phoneq', asyncHandler(async (req, res, next) => {
+        try {
+
+            const phoneq = req.params.phoneq;
+            const result = await Contact.updateOne({ phone: phoneq }, {first_name:"ABCD"});
+            console.log(result);
+
+            var err = ''; 
+            switch (result.n) {
+                case 1:
+                    switch(result.nModified){
+                        case 0:
+                            //{ n: 1, nModified: 0, ok: 1 }               
+                            err = createError(409, 'Contact already matches state requested.');
+                            next(err);
+                            break;
+                        case 1:
+                            //{n: 1, nModified: 1, ok: 1 }
+                            res.status(200).json({message: 'Contact updated succesfully.'});
+                            next(res);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 0:
+                    switch(result.ok){
+                        case 0:
+                            //{ n: 0, nModified: 0, ok: 0 }                
+                            err = createError(409, 'The request was unacceptable.');
+                            next(err);
+                            break;
+                        case 1:
+                            //{ n: 0, nModified: 0, ok: 1 }                
+                            err = createError(404, 'Could not find this phone number in contacts list.');
+                            next(err);
+                            break;
+                        default:
+                            break;
+                }             
+            }
+        }
+        catch (error) {
+            const err = createError(500, error);
+            next(err);
+        }
+    }))
+
+    // UNFOUND METHODS
+    .all('/*', wrongPath)
 
 export default router;
