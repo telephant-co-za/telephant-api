@@ -1,6 +1,9 @@
 import dotenv from 'dotenv';
 import express from 'express';
 
+// connection to database
+import './db';
+
 // import all resource routers
 import accountsRouter from './api/accounts';
 import contactsRouter from './api/contacts';

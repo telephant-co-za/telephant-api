@@ -41,6 +41,7 @@
     "express": "^4.17.1",
     "http-errors": "^1.7.2",
     "json-2-csv": "^3.14.0",
-    "jsontableify": "^1.0.5"
+    "jsontableify": "^1.0.5",
+    "mongoose": "^5.12.13"
   }
 }
