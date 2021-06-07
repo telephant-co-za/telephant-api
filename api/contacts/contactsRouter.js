@@ -94,7 +94,6 @@ router
 
             const phoneq = req.params.phoneq;
             const result = await Contact.updateOne({ phone: phoneq }, {first_name:"ABCD"});
-            console.log(result);
 
             var err = ''; 
             switch (result.n) {
@@ -118,7 +117,7 @@ router
                     switch(result.ok){
                         case 0:
                             //{ n: 0, nModified: 0, ok: 0 }                
-                            err = createError(409, 'The request was unacceptable.');
+                            err = createError(406, 'The request was unacceptable.');
                             next(err);
                             break;
                         case 1:
@@ -138,6 +137,6 @@ router
     }))
 
     // UNFOUND METHODS
-    .all('/*', wrongPath)
+    .all('/*', wrongPath);
 
 export default router;

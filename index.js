@@ -3,11 +3,10 @@ import express from 'express';
 
 // connection to database
 import './db';
-import './seedData';
 
 // import all resource routers
 import accountsRouter from './api/accounts';
-import contactsRouter from './api/contacts';
+import contactsRouter from './api/contacts/contactsRouter';
 import notificationsRouter from './api/notifications';
 import retailersRouter from './api/retailers';
 

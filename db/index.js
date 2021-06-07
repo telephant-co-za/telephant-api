@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import {loadContacts} from '../seedData';
 
 dotenv.config();
 
@@ -15,4 +16,7 @@ db.on('disconnected', () => {
 });
 db.once('open', () => {
     console.log(`database connected to ${db.name} on ${db.host}`);
+    if (process.env.NODE_ENV === 'development') {
+        loadContacts();
+    }
 });
