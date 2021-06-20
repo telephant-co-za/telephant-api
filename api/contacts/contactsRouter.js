@@ -10,14 +10,18 @@ import wrongPath from '../../functions/wrongPath';
 
 // GET return list of contacts
 router
-    .get('/', asyncHandler(async (req, res) => {
+    .get('/', asyncHandler(async (req, res, next) => {
 
         let { page = 1, limit = 20 } = req.query;
         [page, limit] = [+page, +limit];
         try {
             const totalDocumentsPromise = Contact.estimatedDocumentCount();
-            const contactsPromise = Contact.find().limit(limit).skip((page - 1) * limit);
-
+            const contactsPromise = Contact
+                                        .find()
+                                        .limit(limit)
+                                        .skip((page - 1) * limit)
+                                        .select({ _id: 0 });   //drop off the ID - for internal use only
+            
             const totalDocuments = await totalDocumentsPromise;
             const contacts = await contactsPromise;
 
@@ -28,7 +32,9 @@ router
                 results: contacts
             };
 
-            res.status(200).json(returnObject);
+            //res.status(200).json(returnObject);
+            res.locals = returnObject;
+            next()
         }
         catch (error) {
             createError(500, error);
@@ -40,10 +46,13 @@ router
         try {
 
             const phoneq = req.params.phoneq;
-            const contact = await Contact.find({ phone: phoneq });
+            const returnObject = await Contact
+                                        .find({ phone: phoneq })
+                                        .select({ _id: 0 });   //drop off the ID - for internal use only;
 
-            if (contact.length > 0) {
-                res.status(200).json(contact);
+            if (returnObject.length > 0) {
+                res.locals = returnObject;
+                next();
             } else {
                 const err = createError(404, 'Could not find this phone number in your contacts.');
                 next(err);
@@ -59,7 +68,7 @@ router
     .post('/', asyncHandler(async (req, res, next) => {
         try{
             await new Contact(req.body).save();
-            res.status(200).json({ success: true, token: "FakeTokenForNow" });
+            res.status(200).json({ success: true });
         }
         catch(error)
         {

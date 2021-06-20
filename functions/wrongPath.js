@@ -1,8 +1,8 @@
 const createError = require('http-errors');
 
 module.exports = function(req, res, next) {
-
-    if (typeof res.locals.message == "undefined")
+console.log(res.locals.message)
+    if (res.locals === null)
     {
       throw createError(405, `For this API, you haven't specified a valid route. For more details, go to http://developer.telephant.co.za.`, { expose: false });
     }
