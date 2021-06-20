@@ -6,6 +6,7 @@ import './db';
 
 // import all resource routers
 import accountsRouter from './api/accounts';
+import airtimeRouter from './api/airtime';
 import contactsRouter from './api/contacts/contactsRouter';
 import notificationsRouter from './api/notifications';
 import retailersRouter from './api/retailers';
@@ -20,6 +21,7 @@ const port = process.env.PORT;
 
 app
 .use('/api/accounts', accountsRouter, prepareOutput)
+.use('/api/airtime', airtimeRouter, prepareOutput)
 .use('/api/contacts', contactsRouter, prepareOutput)
 .use('/api/notifications', notificationsRouter, prepareOutput)
 .use('/api/retailers', retailersRouter, prepareOutput)
