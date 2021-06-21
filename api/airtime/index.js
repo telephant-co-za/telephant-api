@@ -17,12 +17,12 @@ router.post('/', (req, res) => {
 });
 
 // GET /:ContactID     request airtime from a contact
-router.get('/', (req, res) => {
+router.get('/:ContactID', (req, res) => {
     res.json({"will" : "request airtime from a contact"});
 });
 
 // POST /:ContactID     send airtime to a contact
-router.post('/', (req, res) => {
+router.post('/:ContactID', (req, res) => {
     res.json({"will" : "send airime to a contact"});
 });
 
