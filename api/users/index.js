@@ -9,14 +9,12 @@ const router = express.Router();
 
 // Sign up
 router.post('/', asyncHandler(async (req, res, next) => {
-    console.log(req.body)
     if (req.query.action === 'signup') {
         await User.create({
             username: req.body.username,
             password: req.body.password
         });
         res.status(201).json({ success: true });
-
 
 // Login        
      } else {

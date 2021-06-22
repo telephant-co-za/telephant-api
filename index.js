@@ -5,6 +5,9 @@ import express from 'express';
 import './db';
 import './seedData';
 
+// authentication
+import passport from './authenticate';
+
 // import all resource routers
 import accountsRouter from './api/accounts';
 import airtimeRouter from './api/airtime';
@@ -23,12 +26,13 @@ const app = express();
 
 app
 .use(express.json())
+.use(passport.initialize())
 
-.use('/api/accounts', accountsRouter, prepareOutput)
-.use('/api/airtime', airtimeRouter, prepareOutput)
-.use('/api/contacts', contactsRouter, prepareOutput)
-.use('/api/notifications', notificationsRouter, prepareOutput)
-.use('/api/retailers', retailersRouter, prepareOutput)
+.use('/api/accounts', passport.authenticate('jwt', {session: false}), accountsRouter, prepareOutput)
+.use('/api/airtime', passport.authenticate('jwt', {session: false}), airtimeRouter, prepareOutput)
+.use('/api/contacts', passport.authenticate('jwt', {session: false}), contactsRouter, prepareOutput)
+.use('/api/notifications', passport.authenticate('jwt', {session: false}), notificationsRouter, prepareOutput)
+.use('/api/retailers', passport.authenticate('jwt', {session: false}), retailersRouter, prepareOutput)
 .use('/api/users', usersRouter, prepareOutput)
 
 // Catches all the wrong routes and refers person to documentation site

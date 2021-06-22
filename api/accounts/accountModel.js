@@ -3,10 +3,11 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const AccountSchema = new Schema({
-  accountCode: { type: String, unique: true, required: true},
-  accountType: ['COA', 'GRP', 'USR'],
+  accountID: { type: String, required: true},
+  type: ['COA', 'GRP', 'USR'],
+  name: { type: String, required: true},
   balance: {type: Number, required: true},
-  sign: ['+', '-']
+  sign: { type: Boolean }
 
 });
 
