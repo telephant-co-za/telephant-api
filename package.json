@@ -46,6 +46,8 @@
     "json-2-csv": "^3.14.0",
     "jsontableify": "^1.0.5",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.33",
     "mongoose": "^5.12.13",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0"

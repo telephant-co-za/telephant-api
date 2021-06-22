@@ -1,10 +1,14 @@
 import express from 'express';
 
+// Import models
+import Accounts from '../accounts/accountModel';
+
 const router = express.Router();
 
 // GET return list of accounts
 router.get('/', (req, res) => {
     res.json({"will" : "return list of accounts"});
+    const bleah = Accounts;
 });
 
 // POST add a new account

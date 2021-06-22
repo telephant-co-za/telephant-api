@@ -8,5 +8,5 @@ export const accounts = [
     {"accountID":"08b45474-31d9-4637-9b87-2a91518fcb7a", "type":"USR", "name": "+27829524091", "balance": 250.00, "sign": true},
     {"accountID":"eebc0443-29c0-4c7c-8138-bc2509f98959", "type":"USR", "name": "+27829524020", "balance": 250.00, "sign": true},
     {"accountID":"b2a296a8-183e-48f9-ae2c-a536720fd27f", "type":"USR", "name": "+27829524011", "balance": 250.00, "sign": true},
-    {"accountID":"a129b02e-6d62-46de-8b59-736ab2a3c851", "type":"USR", "name": "+27829524012", "balance": 250.00, "sign": true}
+    {"accountID":"b5939c73-930c-4393-b35d-902dd9e379g5", "type":"GRP", "name": "MyComapny", "balance": 2500.00, "sign": true}
 ];

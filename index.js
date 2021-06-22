@@ -9,8 +9,8 @@ import './seedData';
 import passport from './authenticate';
 
 // import all resource routers
-import accountsRouter from './api/accounts';
-import airtimeRouter from './api/airtime';
+import accountsRouter from './api/accounts/accountsRouter';
+import airtimeRouter from './api/airtime/airtimeRouter';
 import contactsRouter from './api/contacts/contactsRouter';
 import notificationsRouter from './api/notifications';
 import retailersRouter from './api/retailers';

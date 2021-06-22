@@ -1,10 +1,12 @@
 import contactModel from '../api/contacts/contactModel';
 import accountModel from '../api/accounts/accountModel';
 import userModel from '../api/users/userModel';
+import groupsrightsModel from '../api/groupsrights/groupsrightsModel';
 
 import { contacts } from './contacts';
 import { accounts } from './accounts';
 import { users } from './users';
+import { groupsrights } from './groupsrights';
 
 // deletes all user documents in collection and inserts test data
 async function loadContacts() {
@@ -22,7 +24,7 @@ async function loadContacts() {
 export async function loadAccounts() {
   console.log('Load Accounts collection data.');
   try {
-    await accountModel.collection.drop();
+    await accountModel.deleteMany();
     await accountModel.collection.insertMany(accounts);
     console.info(`${accounts.length} Accounts were successfully stored.`);
   } catch (err) {
@@ -32,7 +34,7 @@ export async function loadAccounts() {
 
 async function loadUsers() {
   try {
-    await userModel.collection.drop();
+    await userModel.deleteMany();
     users.forEach(user => userModel.create(user));
     console.info(`${users.length} users were successfully stored.`);
   } catch (err) {
@@ -40,8 +42,20 @@ async function loadUsers() {
   }
 }
 
+async function loadGroupsRights() {
+  try {
+    await groupsrightsModel.deleteMany();
+    groupsrights.forEach(groupsrights => groupsrightsModel.create(groupsrights));
+    console.info(`${groupsrights.length} groups rights were successfully stored.`);
+  } catch (err) {
+    console.error(`failed to load Groups Rights data: ${err}`);
+  }
+}
+
+
 if (process.env.seedDb) {
   loadUsers();
   loadContacts();
   loadAccounts();
+  loadGroupsRights();
 }
