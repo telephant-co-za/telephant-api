@@ -26,6 +26,7 @@ const app = express();
 
 app
 .use(express.json())
+.use(express.urlencoded())
 .use(passport.initialize())
 
 .use('/api/accounts', passport.authenticate('jwt', {session: false}), accountsRouter, prepareOutput)

@@ -17,7 +17,7 @@ async function checkAccountBalance(accountID) {
     let AccountBalance;
 
     if (ownBalance) {
-        ownBalance.sign ? AccountBalance = ownBalance.balance : AccountBalance = -1 * ownBalance.balance
+        ownBalance.sign ? AccountBalance = ownBalance.balance : AccountBalance = -1 * ownBalance.balance;
         return AccountBalance;
     } else {
         return "Not Found";
@@ -45,7 +45,15 @@ async function lookupAccountID(username) {
     const query = {'name': username};
     let document = await Account.findOne(query).select('accountID').exec();
 
-    return document.accountID;
+    if (!document)
+    {
+        return `${username} is not a Telephant user`;
+    }
+        else
+    {
+        return document.accountID;
+    }
+
 }
 
 async function lookupAccountName(accountID) {
@@ -115,8 +123,49 @@ router.get('/:ContactID', (req, res) => {
 });
 
 // POST /:ContactID     send airtime to a contact
-router.post('/:ContactID', (req, res) => {
-    res.json({ "will": "send airime to a contact" });
+router.post('/:PhoneNumber', async (req, res, next) => {
+
+    // Send to telephone number
+    // Can only be a telphant user
+
+    // 1) Check for that telephone number as a username
+    const PhoneNumber = req.params.PhoneNumber;
+    const RecipientID = await lookupAccountID(PhoneNumber);
+
+    if (RecipientID.match(/is not a Telephant user/)) {
+        console.log('Arrrgh');
+    }
+    else
+    {
+        // 2) Extract the request send ammount
+        const SendAmount = req.body.amount;
+
+        // Control A - Reject if NaN
+        if(isNaN(SendAmount)){
+            console.log('Arrrgh2');
+        }
+
+        // Control B - Reject if -Negative
+        if(SendAmount<0){
+            console.log('Arrrgh3')
+        }
+        
+        // The true transaction
+        // 3) Check account balance
+        const SenderID = await lookupAccountID(req.user.username);
+        const CurrentBalance = await checkAccountBalance(SenderID);
+        
+        // Control C - Reject if Balance insufficient
+        if(SendAmount > CurrentBalance)
+        {
+            console.log('Arrrrgh4');
+        }
+
+        // 3) Do the transaction
+    }
+    
+    res.json(req.body.amount);
+
 });
 
 export default router;
