@@ -59,7 +59,6 @@ async function checkAccountsViewable(accountID, username, rights) {
     let accountRights = 
         GroupsRights.
             find({},{_id:0}).
-            //lean().
             where('rights').
             gte(rights).
             where('username').
