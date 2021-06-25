@@ -2,11 +2,13 @@ import contactModel from '../api/contacts/contactModel';
 import accountModel from '../api/accounts/accountModel';
 import userModel from '../api/users/userModel';
 import groupsrightsModel from '../api/groupsrights/groupsrightsModel';
+import transactionsModel from '../api/transactions/transactionsModel';
 
 import { contacts } from './contacts';
 import { accounts } from './accounts';
 import { users } from './users';
 import { groupsrights } from './groupsrights';
+import { transactions } from './transactions';
 
 // deletes all user documents in collection and inserts test data
 async function loadContacts() {
@@ -52,10 +54,21 @@ async function loadGroupsRights() {
   }
 }
 
+async function loadTransactions() {
+  try {
+    await transactionsModel.deleteMany();
+    transactions.forEach(transactions => transactionsModel.create(transactions));
+    console.info(`${transactions.length} transactions were successfully stored.`);
+  } catch (err) {
+    console.error(`failed to load Transactions data: ${err}`);
+  }
+}
+
 
 if (process.env.seedDb) {
   loadUsers();
   loadContacts();
   loadAccounts();
   loadGroupsRights();
+  loadTransactions();
 }

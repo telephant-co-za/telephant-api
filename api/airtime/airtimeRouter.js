@@ -1,14 +1,44 @@
 import express from 'express';
+const mongoose = require('mongoose');
 const moment = require('moment-timezone');
 
 // Import models
 import Account from '../accounts/accountModel';
 import GroupsRights from '../groupsrights/groupsrightsModel';
+import Transactions from '../transactions/transactionsModel';
 
 const router = express.Router();
 
-// Funtionsç
+// Funtions
 // Functions are shared by various routes
+
+async function sendAirtime(credit, debit, balance) {
+
+    try {
+            const session = await mongoose.startSession(); 
+            await session.withTransaction(async () => { 
+
+                // debit
+                const d = await Transactions.create(debit, { session });
+
+                // credit
+                const c = await Transactions.create(credit, { session });
+
+                // balance
+                const b = await Account.findOneAndUpdate([{ 'accountID': '710c7dd8-73e4-45b1-9c61-3c76a8f7fefe' }, { balance: 99999.99 }], { session });
+        
+            });
+
+            session.endSession();
+
+            console.log('success');
+        } 
+        catch (error) 
+        {
+            console.log(error);
+        }
+}
+
 
 async function checkAccountBalance(accountID) {
 
@@ -43,7 +73,7 @@ async function checkAccountsViewable(accountID, username, rights) {
 async function lookupAccountID(username) {
     
     const query = {'name': username};
-    let document = await Account.findOne(query).select('accountID').exec();
+    let document = await Account.findOne(query).select('_id').exec();
 
     if (!document)
     {
@@ -51,6 +81,7 @@ async function lookupAccountID(username) {
     }
         else
     {
+        console.log(document._id);
         return document.accountID;
     }
 
@@ -58,7 +89,7 @@ async function lookupAccountID(username) {
 
 async function lookupAccountName(accountID) {
     
-    const query = {'accountID': accountID};
+    const query = {'_id': accountID};
     let document = await Account.findOne(query).select('name').exec();
 
     return document;
@@ -131,6 +162,9 @@ router.post('/:PhoneNumber', async (req, res, next) => {
     // 1) Check for that telephone number as a username
     const PhoneNumber = req.params.PhoneNumber;
     const RecipientID = await lookupAccountID(PhoneNumber);
+    
+    // Make a time stamp in GMT+2
+    var now = moment().tz('Africa/Johannesburg').format('dddd, MMMM Do YYYY, h:mm:ss a z');
 
     if (RecipientID.match(/is not a Telephant user/)) {
         console.log('Arrrgh');
@@ -149,19 +183,50 @@ router.post('/:PhoneNumber', async (req, res, next) => {
         if(SendAmount<0){
             console.log('Arrrgh3')
         }
+
+        // Control D - Check user has sufficient rights
+        //if(SendAmount<0){
+        //    AccountID = await lookupAccountID(req.user.username);
+        //    console.log('Arrrgh5')
+        //}
         
         // The true transaction
         // 3) Check account balance
         const SenderID = await lookupAccountID(req.user.username);
         const CurrentBalance = await checkAccountBalance(SenderID);
         
-        // Control C - Reject if Balance insufficient
+        // Control D - Reject if Balance insufficient
         if(SendAmount > CurrentBalance)
         {
             console.log('Arrrrgh4');
         }
 
-        // 3) Do the transaction
+        // 3) Perform transaction because Control A, B, C passed
+ 
+        const account = "Account";
+ 
+        const creditObject = [{
+            'accountID': RecipientID,
+            'amount': SendAmount,
+            'type': 'RECEIVE',
+            'counterParty': SenderID,
+            'dateTime': now,
+            'sign': true
+        }];
+ 
+        const debitObject = [{
+            'accountID': SenderID,
+            'amount': SendAmount,
+            'type': 'SEND',
+            'counterParty': RecipientID,
+            'dateTime': now,
+            'sign': false
+        }];
+ 
+        const balanceObject = [{ 'accountID': SenderID }, { balance: 99999.99 }];
+
+        sendAirtime(creditObject, debitObject, balanceObject);
+
     }
     
     res.json(req.body.amount);
