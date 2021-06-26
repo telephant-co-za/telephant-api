@@ -42,6 +42,7 @@
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
     "http-errors": "^1.8.0",
+    "js-yaml": "^3.14.1",
     "json-2-csv": "^3.14.1",
     "jsontableify": "^1.0.5",
     "jsonwebtoken": "^8.5.1",
@@ -51,6 +52,7 @@
     "mongoose-transactions": "^1.1.4",
     "oso": "^0.13.0",
     "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "swagger-ui-express": "^4.1.6"
   }
 }

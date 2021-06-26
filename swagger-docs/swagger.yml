@@ -1,0 +1,279 @@
+openapi: 3.0.0
+info:
+  x-logo:
+    url: "http://developer.telephant.co.za/telephant-documentation-logo.png"
+    backgroundColor: "#ed6524"
+  title: Telephant API
+  description: >-
+    HTTP is the backbone of the Telephant API. Our API is RESTful in nature. It has resource URLs that are predictable. To indicate errors, it returns HTTP response codes. It also accepts JSON in the HTTP body and returns it. To use Rebilly's API, you can use one of our SDKs or your preferred HTTP/REST library for your programming language (currently available in PHP and Javascript).
+    ## Authentication
+    You will get your secret API key when you sign up for an account. Additional API keys can be created, and API keys can be deleted (as you may need to rotate your keys in the future). By using your secret key in the request header, you can authenticate with the Telephant API.
+    Never share your secret keys. Keep them guarded and secure.
+    ## Errors
+    Telephant uses the RFC 7807 error response format, also known as Problem Details for HTTP APIs. Your client must be prepared to gracefully manage these types of responses, just as it must with our standard normal API responses.
+    ### 400 Bad Request
+    Due to an apparent client error, the server cannot or will not process the request (e.g., malformed request syntax, size too large, invalid request message framing, or deceptive request routing)
+    ### 401 Unauthorized
+    Authentication is required and has failed or has not yet been provided.
+    ### 402 Payment Required
+    Insufficient balance in your airtime account.
+    ### 403 Forbidden
+    The request was legitimate and the server acknowledged it, but the server is refusing to act. This may be because the user lacks the required permissions for a resource.  For example you are asking to delete a contact not associated to your account.
+    ### 404 Not Found
+    The requested resource was not identified, but it could be accessible later. The client is free to make additional requests.
+    ### 405 Method Not Allowed
+    A GET request on a form that needs data to be presented via POST, or a PUT request on a read-only resource, for example, is not supported for the requested resource.
+    ## SDKs
+    To communicate with the API, Telephant provides a Javascript SDK and a PHP SDK. The API, on the other hand, does not require the use of an SDK.
+    You can test our API with any HTTP we can recommend:
+    * Chrome Browser
+    * Firefox Browser
+    * WGET
+    * CURL
+    * Postman
+    ### Javascript SDK
+    This github repository contains installation and usage instructions. The docs folder contains SDK code examples.
+    ### PHP SDK
+    This github repository contains installation and usage instructions. The docs folder contains SDK code examples.
+  contact:
+    name: Telephant API Team
+    url: http://developer.telephant.co.za
+    email: api@telephant.co.za
+  version: '1.0'
+servers:
+- url: http://api.telephant.co.za
+  variables: {}
+paths:
+  /contacts:
+    get:
+      tags:
+      - Contacts
+      summary: List all contacts
+      description: Retrieve a list of contacts associated with the account.
+      operationId: Listallcontacts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+      - Contacts
+      summary: Create a contact
+      description: Create a new contact against this account.
+      operationId: Createacontact
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /contacts/{telephone_number}:
+    get:
+      tags:
+      - Contacts
+      summary: Get a contacts details
+      description: Retrieve the details of a single contact.
+      operationId: Getacontactsdetails
+      parameters:
+      - name: telephone_number
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+      - Contacts
+      summary: Delete a specific contact
+      description: Delete a specified contact from your account's contacts.
+      operationId: Deleteaspecificcontact
+      parameters:
+      - name: telephone_number
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    put:
+      tags:
+      - Contacts
+      summary: Update a specific contact
+      description: Update the details of a specified contact in your account's contacts.
+      operationId: Updateaspecificcontact
+      parameters:
+      - name: telephone_number
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /transactions:
+    get:
+      tags:
+      - Transactions
+      summary: List transactions
+      description: Retrieve a list of transactions related to the account.
+      operationId: Listtransactions
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listoftransactions'
+      deprecated: false
+  /notifications:
+    get:
+      tags:
+      - Notifications
+      summary: List notifications
+      description: Retrieve a list of notifications related to the account.
+      operationId: Listnotifications
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /notifications/{NotificationID}:
+    get:
+      tags:
+      - Notifications
+      summary: Get a notifications details
+      description: Retrieve a list of notifications associated with the account.
+      operationId: Getanotificationsdetails
+      parameters:
+      - name: NotificationID
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /:
+    get:
+      tags:
+      - Airtime
+      summary: Get account balance
+      description: Retrieve the airtime balance of the account.
+      operationId: Getaccountbalance
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /airtime/{ContactID}:
+    put:
+      tags:
+      - Airtime
+      summary: Send airtime credit
+      description: Send a request for airtime from a contact.
+      operationId: Sendairtimecredit
+      parameters:
+      - name: ContactID
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+      - Airtime
+      summary: Request airtime credit
+      description: This resource does not have any attributes. Instead it offers the initial API affordances in the form of the links in the JSON body.
+      operationId: Requestairtimecredit
+      parameters:
+      - name: ContactID
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /ping:
+    get:
+      tags:
+      - Utility
+      summary: Ping
+      description: Test if the api is working.  You can use any HTTP method on this endpoint and it will return the same response.
+      operationId: Ping
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pong'
+      deprecated: false
+      security: []
+components:
+  schemas:
+    Listoftransactions:
+      title: Listoftransactions
+      type: object
+      description: List of transactions
+    Pong:
+      title: Pong
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          type: string
+          description: This is the message the server will respond with.
+          example: Pong.
+      description: Respond to a ping call.
+      example:
+        message: Pong.
+tags:
+- name: Contacts
+  description: You can access and edit your contacts lists from your personal, company, and other accounts in Contacts. You can also add, update, and delete details about your contacts.  In order to request or send airtime you will need a verified contact.
+- name: Transactions
+  description: ''
+- name: Notifications
+  description: ''
+- name: Airtime
+  description: ''
+- name: Utility
+  description: ''
