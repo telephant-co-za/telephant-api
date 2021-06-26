@@ -3,8 +3,8 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const RetailerSchema = new Schema({
-  username: { type: String, unique: true, required: true},
-  password: {type: String, required: true }
+  name: { type: String, unique: true, required: true},
+  area: {type: String, required: true }
 });
 
 export default mongoose.model('Contact', RetailerSchema);

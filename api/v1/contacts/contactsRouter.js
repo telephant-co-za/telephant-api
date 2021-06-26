@@ -6,7 +6,7 @@ import Contact from './contactModel';
 
 const router = express.Router();
 const createError = require('http-errors');
-import wrongPath from '../../functions/wrongPath';
+import wrongPath from '../../../functions/wrongPath';
 
 // GET return list of contacts
 router

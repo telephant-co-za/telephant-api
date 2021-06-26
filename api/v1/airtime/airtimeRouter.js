@@ -102,10 +102,10 @@ async function lookupAccountName(accountID) {
 router.get('/', async (req, res, next) => {
 
     // Lookup the account ID for username
-    const AccountID = await lookupAccountID(req.user.username);
+    const AccountID = await lookupAccountID('+27829524031');
 
     // Check which other accounts the username can view (2)
-    let AccountsViewable = await checkAccountsViewable(AccountID, req.user.username, 2);
+    let AccountsViewable = await checkAccountsViewable(AccountID, '+27829524031', 2);
 
     // A user will have level 5 control over their own account that will not be reflected in the
     // groupsrights, so will add that account to AccountsViewable at the top of the array 

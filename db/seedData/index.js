@@ -1,8 +1,8 @@
-import contactModel from '../api/contacts/contactModel';
-import accountModel from '../api/accounts/accountModel';
-import userModel from '../api/users/userModel';
-import groupsrightsModel from '../api/groupsrights/groupsrightsModel';
-import transactionsModel from '../api/transactions/transactionsModel';
+import contactModel from '../../api/v1/contacts/contactModel';
+import accountModel from '../../api/v1/accounts/accountModel';
+import userModel from '../../api/v1/users/userModel';
+import groupsrightsModel from '../../api/v1/groupsrights/groupsrightsModel';
+import transactionsModel from '../../api/v1/transactions/transactionsModel';
 
 import { contacts } from './contacts';
 import { accounts } from './accounts';
@@ -63,7 +63,6 @@ async function loadTransactions() {
     console.error(`failed to load Transactions data: ${err}`);
   }
 }
-
 
 if (process.env.seedDb) {
   loadUsers();
