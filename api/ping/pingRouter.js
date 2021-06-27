@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express();
 
-router.all('/', (req, res) => {
+router.get('/', (req, res) => {
     res.status(200).json({
         message: 'Pong.'
     });
