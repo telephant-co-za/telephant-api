@@ -31,20 +31,19 @@ paths:
           $ref: '#/components/responses/NotFound'
         '5XX':
           $ref: '#/components/responses/ServerError'
-  /v1/accounts/{AccountID}:
     get:
       summary: Get account.
       description: Get the details of a specific group account.
       tags:
         - accounts
       parameters:
-        - in: path
-          name: AccountID
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
-          required: true
-          description: Unique ID of the account.
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -58,13 +57,13 @@ paths:
       tags:
         - accounts
       parameters:
-        - in: path
-          name: AccountID
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
-          required: true
-          description: Unique ID of the account.
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -78,13 +77,13 @@ paths:
       tags:
         - accounts
       parameters:
-        - in: path
-          name: AccountID
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
-          required: true
-          description: Unique ID of the account.
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -413,6 +412,14 @@ paths:
     get:
       summary: Get transactions.
       description: Get a transaction listing for an individual or group account.
+      parameters:
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       tags:
         - transactions
       responses:
