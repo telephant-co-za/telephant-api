@@ -8,10 +8,20 @@ info:
 paths:
   /v1/accounts:
     get:
-      summary: Get accounts.
-      description: List all the accounts available to this username.
+      summary: Get account(s).
+      description: Get the details of a specific account(s). List one or all of the details of accounts available to this username.
       tags:
         - accounts
+      security:
+        - BearerAuth: []
+      parameters:
+      - in: header
+        name: x-account-id
+        description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+        schema:
+          type: string
+          format: uuid
+        required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -24,26 +34,22 @@ paths:
       description: Create a new group account.
       tags:
         - accounts
-      responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '5XX':
-          $ref: '#/components/responses/ServerError'
-    get:
-      summary: Get account.
-      description: Get the details of a specific group account.
-      tags:
-        - accounts
-      parameters:
-        - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
-          schema:
-            type: string
-            format: uuid
-          required: false
+      security:
+        - BearerAuth: []
+      requestBody:
+        description: Define the properties of the account to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  maxLength: 50
+                  example: My Company's Airtime Account
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -56,6 +62,22 @@ paths:
       description: Update the details of a group account.
       tags:
         - accounts
+      security:
+        - BearerAuth: []
+      requestBody:
+        description: Define the properties of the account to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  maxLength: 50
+                  example: My Company's Airtime Account
       parameters:
         - in: header
           name: x-account-id
@@ -76,6 +98,8 @@ paths:
       description: Delete a specific group account.
       tags:
         - accounts
+      security:
+        - BearerAuth: []
       parameters:
         - in: header
           name: x-account-id
@@ -97,6 +121,16 @@ paths:
       description: Check the balance of a group or individual accounts airtime balance.
       tags:
         - airtime
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -109,6 +143,8 @@ paths:
       description: Convert positive airtime balance for use as airtime on phone.
       tags:
         - airtime
+      security:
+        - BearerAuth: []
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -122,6 +158,8 @@ paths:
       description: Request airtime credit from a contact.
       tags:
         - airtime
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: ContactsPhoneNumber
@@ -130,6 +168,13 @@ paths:
             pattern: ^(27)[0-9]{9}$
           required: true
           description: A contact's unique mobile phone number from an accounts contacts list.
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -142,6 +187,8 @@ paths:
       description: Send airtime credit to a contact.
       tags:
         - airtime
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: ContactsPhoneNumber
@@ -150,6 +197,13 @@ paths:
             pattern: ^(27)[0-9]{9}$
           required: true
           description: A contact's unique mobile phone number from an accounts contacts list.
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -163,6 +217,16 @@ paths:
       description: List the contacts for account  
       tags:
         - contacts
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -175,6 +239,16 @@ paths:
       description: Create a contact for a individual or group account.
       tags:
         - contacts
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -188,6 +262,8 @@ paths:
       description: Get the details of a specific contact for an individual or group account.
       tags:
         - contacts
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: ContactsPhoneNumber
@@ -196,6 +272,13 @@ paths:
             pattern: ^(27)[0-9]{9}$
           required: true
           description: A contact's unique mobile phone number from an accounts contacts list.
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -208,6 +291,8 @@ paths:
       description: Update a specific contact for an individual or group account.
       tags:
         - contacts
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: ContactsPhoneNumber
@@ -216,6 +301,13 @@ paths:
             pattern: ^(27)[0-9]{9}$
           required: true
           description: A contact's unique mobile phone number from an accounts contacts list.
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -228,6 +320,8 @@ paths:
       description: Delete a specific contact for an individual or group account.
       tags:
         - contacts
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: ContactsPhoneNumber
@@ -236,6 +330,13 @@ paths:
             pattern: ^(27)[0-9]{9}$
           required: true
           description: A contact's unique mobile phone number from an accounts contacts list.
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -249,6 +350,16 @@ paths:
       description: Get the list of notifications for an individual or group account.
       tags:
         - notifications
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -261,6 +372,16 @@ paths:
       description: Mark all unread notifications as read on an individual or group account.
       tags:
         - notifications
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -274,6 +395,8 @@ paths:
       description: Get the details of a specific notification for an individual or group account.
       tags:
         - notifications
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: NotificationID
@@ -282,6 +405,13 @@ paths:
             format: uuid
           required: true
           description: Unique ID of the notification.
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -294,6 +424,8 @@ paths:
       description: On an individual or group account, mark a specific notification as read.
       tags:
         - notifications
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: NotificationID
@@ -302,6 +434,13 @@ paths:
             format: uuid
           required: true
           description: Unique ID of the notification.
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -314,6 +453,8 @@ paths:
       description: Accept or reject a specific airtime send request from a contact.
       tags:
         - notifications
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: NotificationID
@@ -322,6 +463,13 @@ paths:
             format: uuid
           required: true
           description: Unique ID of the notification.
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -360,6 +508,16 @@ paths:
       description: Create a Telephant retailer listing.
       tags:
         - retailers
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: true
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -373,6 +531,8 @@ paths:
       description: Update a retailer listing.
       tags:
         - retailers
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: RetailerID
@@ -381,6 +541,13 @@ paths:
             format: uuid
           required: true
           description: Unique ID of the retailer listing.
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: true
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -393,6 +560,8 @@ paths:
       description: Delete a retailer listing.
       tags:
         - retailers
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: RetailerID
@@ -401,6 +570,13 @@ paths:
             format: uuid
           required: true
           description: Unique ID of the retailer listing.
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: true
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -422,6 +598,8 @@ paths:
           required: false
       tags:
         - transactions
+      security:
+        - BearerAuth: []
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -435,6 +613,8 @@ paths:
       description: View the details of a specific transaction for an individual or group account.
       tags:
         - transactions
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: TransactionID
@@ -443,6 +623,13 @@ paths:
             format: uuid
           required: true
           description: Unique ID of the transaction.
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -481,6 +668,16 @@ paths:
       description: Check the status of an individual or group account's verification.
       tags:
         - verifications
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -493,6 +690,16 @@ paths:
       description: Submit verification requirements on a per-account or per-group basis.
       tags:
         - verifications
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -505,6 +712,16 @@ paths:
       description: Update the verification requirements for a single account or a group account.
       tags:
         - verifications
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: header
+          name: x-account-id
+          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -520,6 +737,10 @@ servers:
     url: http://localhost:8080/v1
 
 components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
   schemas:
     NotFound:
       type: object
@@ -550,6 +771,7 @@ components:
         status_code:
           type: integer
           example: 500
+
     Transactions:
       type: object
       required:

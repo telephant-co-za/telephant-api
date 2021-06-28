@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import express from 'express';
+import https from 'https';
 
 // import main routers
 import apiRouter from './api/v1/v1Router';
@@ -15,7 +16,7 @@ import passport from './functions/authenticate';
 
 // import env variables
 dotenv.config();
-const port = process.env.PORT;
+//const port = process.env.PORT;
 const app = express();
 
 app
@@ -33,7 +34,14 @@ app
 // Error Handler
 .use(prepareErrors)
 
+// SSL
+const fs = require('fs');
+const key = fs.readFileSync('./key.pem');
+const cert = fs.readFileSync('./cert.pem');
+const sslPort = process.env.SSL_PORT;
+const server = https.createServer({key: key, cert: cert }, app);
+
 // Run the server
-.listen(port, () => {
-  console.info(`Server running at ${port}`);
+server.listen(sslPort,() => {
+  console.info(`HTTPS Server running at ${sslPort}`);
 });
