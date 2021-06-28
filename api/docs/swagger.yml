@@ -655,6 +655,26 @@ paths:
             User actions:
              * `signup` - Create a user account.
              * `login` - As a user, sign in.
+      requestBody:
+        description: Provide the telphone number and a password to signup or login.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - telephoneNumber
+                - password
+              properties:
+                telephoneNumber:
+                  type: string
+                  pattern: ^(27)[0-9]{9}$
+                  description: Provide a valid South African mobile telphone number in the format 27XXXXXXXXXX.
+                  example: 27821234567
+                password:
+                  type: string
+                  description: Provide a suitable password.
+                  example: Password
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
@@ -734,13 +754,14 @@ servers:
   - description: SwaggerHub API Auto Mocking
     url: https://virtserver.swaggerhub.com/wazby/TelephantAPI/1.0
   - description: https://api.telephant.co.za
-    url: http://localhost:8080/v1
+    url: https://localhost:3443
 
 components:
   securitySchemes:
     BearerAuth:
       type: http
       scheme: bearer
+      bearerFormat: JWT
   schemas:
     NotFound:
       type: object

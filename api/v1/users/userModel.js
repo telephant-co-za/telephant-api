@@ -2,12 +2,12 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 
 const UserSchema = new mongoose.Schema({
-    username: { type: String, unique: true, required: true },
+    telephoneNumber: { type: String, unique: true, required: true },
     password: { type: String, required: true }
 });
 
 UserSchema.statics.findByUserName = function (username) {
-    return this.findOne({ username: username });
+    return this.findOne({ telephoneNumber: username });
 };
 
 UserSchema.methods.comparePassword = function (passw, callback) {

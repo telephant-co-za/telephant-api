@@ -24,7 +24,7 @@ app
 
 // top routes
 .use('/docs', docsRouter)
-.use('/ping', pingRouter)
+.use('/v1/ping', pingRouter)
 //.use('/superadmin', passport.authenticate('jwt', {session: false}), superadminRouter, prepareOutput)
 .use('/v1', apiRouter, prepareOutput)
 
@@ -36,8 +36,8 @@ app
 
 // SSL
 const fs = require('fs');
-const key = fs.readFileSync('./key.pem');
-const cert = fs.readFileSync('./cert.pem');
+const key = fs.readFileSync('./ssl/key.pem');
+const cert = fs.readFileSync('./ssl/cert.pem');
 const sslPort = process.env.SSL_PORT;
 const server = https.createServer({key: key, cert: cert }, app);
 

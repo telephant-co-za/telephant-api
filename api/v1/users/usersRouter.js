@@ -11,7 +11,7 @@ const router = express.Router();
 router.post('/', asyncHandler(async (req, res, next) => {
     if (req.query.action === 'signup') {
         await User.create({
-            username: req.body.username,
+            telephoneNumber: req.body.telephoneNumber,
             password: req.body.password
         });
         res.status(201).json({ success: true });
@@ -20,9 +20,9 @@ router.post('/', asyncHandler(async (req, res, next) => {
      } else {
         
         // Does user exist?
-        const user = await User.findByUserName(req.body.username);
+        const user = await User.findByUserName(req.body.telephoneNumber);
         if (!user) {
-            const err = createError(401, 'Sorry. No record of user ('+req.body.username+') found.');
+            const err = createError(401, 'Sorry. No record of user (`{req.body.telephoneNumber}`) found.');
             next(err);
         }
 
