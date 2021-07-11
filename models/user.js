@@ -1,9 +1,33 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 
+const validateTelephoneNumber = telephoneNumber => {
+    const re = /^(27)[0-9]{9}$/;
+    return re.test(telephoneNumber);
+};
+
+const validatePassword = password => {
+    const re = /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
+    return re.test(password);
+};
+
 const UserSchema = new mongoose.Schema({
-    telephoneNumber: { type: String, unique: true, required: true },
-    password: { type: String, required: true }
+    telephoneNumber: {
+        type: String,
+        unique: [true],
+        required: [true, 'A telephone number is required.'],
+        validate: [validateTelephoneNumber, 'The telephone number does not conform to the South African format (27XXXXXXXXX).']
+    },
+    password: {
+        type: String,
+        required: true,
+        validate: [validatePassword, 'Password not complex enough.']
+    },
+    role: {
+        type: String,
+        default: 'basic',
+        enum: ["basic", "supervisor", "admin"]
+       }
 });
 
 UserSchema.statics.findByUserName = function (username) {

@@ -12,7 +12,6 @@ import pingRouter from './api/ping/pingRouter';
 const wrongPath = require('./functions/wrongPath');
 const prepareErrors = require('./functions/prepareErrors');
 const prepareOutput = require('./functions/prepareOutput');
-import passport from './functions/authenticate';
 
 // import env variables
 dotenv.config();
@@ -24,7 +23,7 @@ app
 
 // top routes
 .use('/docs', docsRouter)
-.use('/v1/ping', pingRouter)
+.use('/ping', pingRouter)
 //.use('/superadmin', passport.authenticate('jwt', {session: false}), superadminRouter, prepareOutput)
 .use('/v1', apiRouter, prepareOutput)
 

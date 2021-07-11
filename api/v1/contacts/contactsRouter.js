@@ -1,29 +1,37 @@
+// imports
+
 import express from 'express';
 import asyncHandler from 'express-async-handler';
 
-// Import models
-import Contact from './contactModel';
-
-const router = express.Router();
 const createError = require('http-errors');
+const router = express.Router();
+
+// models
+import Contact from '../../../models/contact';
+
+// custom functions
 import wrongPath from '../../../functions/wrongPath';
+
+
+
+
+// ROUTER
 
 // GET return list of contacts
 router
     .get('/', asyncHandler(async (req, res, next) => {
 
-        let { page = 1, limit = 20 } = req.query;
+        let { page = 1, limit = 10 } = req.query;
         [page, limit] = [+page, +limit];
         try {
-            const totalDocumentsPromise = Contact.estimatedDocumentCount();
             const contactsPromise = Contact
-                                        .find()
+                                        .find({ owner: req.body.owner })
                                         .limit(limit)
                                         .skip((page - 1) * limit)
                                         .select({ _id: 0 });   //drop off the ID - for internal use only
             
-            const totalDocuments = await totalDocumentsPromise;
             const contacts = await contactsPromise;
+            const totalDocuments = await Contact.find({ owner: req.body.owner }).countDocuments();
 
             const returnObject = {
                 page: page,
@@ -32,9 +40,8 @@ router
                 results: contacts
             };
 
-            //res.status(200).json(returnObject);
             res.locals = returnObject;
-            next()
+            next();
         }
         catch (error) {
             createError(500, error);
@@ -47,7 +54,7 @@ router
 
             const phoneq = req.params.phoneq;
             const returnObject = await Contact
-                                        .find({ phone: phoneq })
+                                        .find({ phone: phoneq, owner: req.body.owner })
                                         .select({ _id: 0 });   //drop off the ID - for internal use only;
 
             if (returnObject.length > 0) {
@@ -66,8 +73,9 @@ router
 
     // POST create a new contact
     .post('/', asyncHandler(async (req, res, next) => {
+
         try{
-            await new Contact(req.body).save();
+            new Contact(req.body).save();
             res.status(200).json({ success: true });
         }
         catch(error)
@@ -82,7 +90,7 @@ router
         try {
 
             const phoneq = req.params.phoneq;
-            const result = await Contact.deleteOne({ phone: phoneq });
+            const result = await Contact.deleteOne({ phone: phoneq, owner: req.body.owner });
 
             if (result.deletedCount === 1) {
                 res.status(200).json({message: 'Contact succesfully deleted'});

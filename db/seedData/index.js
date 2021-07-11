@@ -1,8 +1,8 @@
-import contactModel from '../../api/v1/contacts/contactModel';
-import accountModel from '../../api/v1/accounts/accountModel';
-import userModel from '../../api/v1/users/userModel';
-import groupsrightsModel from '../../api/v1/groupsrights/groupsrightsModel';
-import transactionsModel from '../../api/v1/transactions/transactionsModel';
+import contactModel from '../../models/contact';
+import accountModel from '../../models/account';
+import userModel from '../../models/user';
+import groupsrightsModel from '../../models/groupsright';
+import transactionsModel from '../../models/transaction';
 
 import { contacts } from './contacts';
 import { accounts } from './accounts';

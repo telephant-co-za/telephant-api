@@ -2,7 +2,7 @@ import passport from 'passport';
 import passportJWT from 'passport-jwt';
 import dotenv from 'dotenv';
 
-import UserModel from '../api/v1/users/userModel';
+import UserModel from '../models/user';
 
 dotenv.config();
 

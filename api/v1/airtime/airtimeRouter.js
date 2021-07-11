@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const moment = require('moment-timezone');
 
 // Import models
-import Account from '../accounts/accountModel';
-import GroupsRights from '../groupsrights/groupsrightsModel';
-import Transactions from '../transactions/transactionsModel';
+import Account from '../../../models/account';
+import GroupsRights from '../../../models/groupsright';
+import Transactions from '../../../models/transaction';
 
 const router = express.Router();
 
