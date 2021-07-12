@@ -7,11 +7,11 @@ module.exports = function(req, res, next) {
     // This prepares the res for delivery based on the requested format
     res.format({
       'text/plain' : function(){
-          res.status(200).send(res.locals);
+          res.status(200).send(res.locals.output);
       },
       'text/html' : function(){
           // strip off the pagination stuff if it is there
-          if (res.locals.results) { var output = res.locals.results;} else { var output = res.locals;}
+          if (res.locals.output.results) { var output = res.locals.output.results;} else { var output = res.locals.output;}
           
           // strip off all the weird objet grbage mongoose leaves
           var json = JSON.stringify(output);
@@ -27,11 +27,11 @@ module.exports = function(req, res, next) {
           res.status(200).send(html);
       },
       'application/json' : function(){
-        res.status(200).json(res.locals);
+        res.status(200).json(res.locals.output);
       },
       'text/csv' : function(){
         // strip off the pagination stuff if it is there
-        if (res.locals.results) { var output = res.locals.results;} else { var output = res.locals;}
+        if (res.locals.output.results) { var output = res.locals.output.results;} else { var output = res.locals.output;}
         
         // strip off all the weird objet grbage mongoose leaves
         var json = JSON.stringify(output);

@@ -2,7 +2,7 @@
 import Account from '../models/account';
 const createError = require('http-errors');
 
-module.exports = async function(req, res, next) {
+async function accountHeader(req, res, next) {
 
     // Perform following checks
 
@@ -18,33 +18,48 @@ module.exports = async function(req, res, next) {
 
     if (!req.headers.account_id)
     {
-        req.body.account_id = req.user._id;
+        const accountIdPromise = Account.find({ accountName: req.user.telephoneNumber }, { _id: 1 });
+        const account = await accountIdPromise;
+        const accountId = account.map((account) => { return account._id; });
+
+        res.locals.account_id = accountId[0];
+        res.locals.action = 'listing';
     }
 
     // 3) If the account id is set in the header
     if (req.headers.account_id)
     {
-        // 3.1) confirm that it is a valid account id
-        const isValidAccount = await Account
-        .checkValidAccount(req.headers.account_id)
+        // define promises
+        const OwnershipCheckPromise = Account.find({ _id: req.headers.account_id, owners: req.user.telephoneNumber }).countDocuments();
+        const ValidAccountCheckPromise = Account.findById(req.headers.account_id).countDocuments();
 
-        if (!isValidAccount){
-            const err = createError(404, 'Not a valid account.');
+        // 3.1) confirm that it is a valid account id
+        const ValidAccountCheck = await ValidAccountCheckPromise;
+
+        if (!ValidAccountCheck)
+        {
+            const err = createError(404, 'Not a valid account id.');
             next(err);
         }
 
         // 3.2) confirm that the user has ownership on this account
-        const isOwner = await Account
-        .checkOwnership(req.headers.account_id, req.user.telephoneNumber);
+        const OwnershipCheck = await OwnershipCheckPromise;
 
-        if (!isOwner){
-            const err = createError(403, 'Not authorised on this group account');
+        if (!OwnershipCheck || OwnershipCheck <= 0 )
+        {
+            const err = createError(403, 'Not authorised on this group account.');
             next(err);
         }
+
+        // Set vars for next section
+        res.locals.account_id = req.headers.account_id;
+        res.locals.action = 'item';
                
     }
     
     // if those tests are passed
     next();
 
-};
+}
+
+module.exports = accountHeader;

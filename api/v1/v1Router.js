@@ -27,16 +27,19 @@ router
 .use(express.json())
 .use(express.urlencoded())
 
-.use('/accounts', protectRoute, accountHeader, accountsRouter, prepareOutput)
-.use('/airtime', protectRoute, accountHeader,airtimeRouter, prepareOutput)
-.use('/contacts', protectRoute, accountHeader,contactsRouter, prepareOutput)
-.use('/notifications', protectRoute, accountHeader,notificationsRouter, prepareOutput)
-.use('/retailers', protectRoute, accountHeader,retailersRouter, prepareOutput)
-.use('/transactions', protectRoute, accountHeader,transactionsRouter, prepareOutput)
-.use('/users', usersRouter, prepareOutput)
+.use('/accounts', protectRoute, accountHeader, accountsRouter)
+.use('/airtime', protectRoute, accountHeader,airtimeRouter)
+.use('/contacts', protectRoute, accountHeader,contactsRouter)
+.use('/notifications', protectRoute, accountHeader,notificationsRouter)
+.use('/retailers', protectRoute, accountHeader,retailersRouter)
+.use('/transactions', protectRoute, accountHeader,transactionsRouter)
+.use('/users', usersRouter)
 
 // Catches all the wrong routes and refers person to documentation site
 .all('/*', wrongPath)
+
+// Prepare the output into the correct format
+.use(prepareOutput)
 
 // Error Handler
 .use(prepareErrors);
