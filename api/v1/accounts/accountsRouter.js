@@ -34,7 +34,7 @@ router
                     })
                     .limit(limit)
                     .skip((page - 1) * limit)
-                    .select(' _id accountName ');
+                    .select(' _id accountName description ');
 
                 const accounts = await accountsPromise;
                 const totalDocuments = await Account
@@ -66,6 +66,7 @@ router
                     .find({ _id: req.headers.account_id, owners: req.user.telephoneNumber }, {
                         "_id": 1,
                         "accountName": 1,
+                        "description": 1,
                         "owners": 1
                     });
 
@@ -82,9 +83,51 @@ router
     }))
 
     // POST add a new account
-    .post('/', (req, res) => {
-        res.json({ "will": "add a new account" })
-    })
+    .post('/', asyncHandler(async(req, res, next) => {
+
+        try {
+            await Account.create({
+                // Predefined - unchangable
+                    type: 'GRP',                               // through this API only GRP accounts will be possible (COA = chart of account and USR = user are generated internally)
+                    balance: 0.00,                             // Will always be zero
+                    sign: true,                                // Will always be positiove because cannot drop into arrears
+                    owners : [req.user.telephoneNumber],       // first owner will be the creator account
+
+                //  Attributes that can be set                
+                    accountName: req.body.accountName,         // must validate against scheme, /^[a-z0-9-]{3,16}$/
+                    description: req.body.description          // 3 - 16 charac, lowercase letter (a-z), number (0-9), or underscores
+                });                                            // this will be used be used as a reference on bank statements - for auto allocation of funds
+                res.status(201).json({
+                    message: "The group account was successfully created.",        
+                });
+            } catch (error) 
+            {
+                if(typeof error.errors !== 'undefined' && error.errors.accountName)
+                {
+                    const errStr = error._message + ' : ' + error.errors.accountName.properties.message;
+                    const err = createError(400, errStr);
+                    next(err);
+                }
+                if(typeof error.errors !== 'undefined' && error.errors.description)
+                {
+                    const errStr = error._message + ' : ' + error.errors.description.properties.message;
+                    const err = createError(400, errStr);
+                    next(err);
+                }
+                else if(typeof error !== 'undefined' && error.code === 11000)
+                {
+                    const errStr = 'This group account name is already registered.  Please choose another.';
+                    const err = createError(409, errStr);
+                    next(err);
+                }
+                else
+                {
+                    const err = createError(500, error);
+                    next(err);
+                }
+            }
+        })
+    )
 
     // DELETE delete a specified accounts
     .delete('/', asyncHandler(async (req, res, next) => {
@@ -98,9 +141,10 @@ router
         else
         {
             try {
-                const account = await Account.findByIdAndDelete(res.locals.account_id);
-                res.locals.output = {"message": "Record successfully deleted."};
-                next();
+                await Account.findByIdAndDelete(res.locals.account_id);
+                res.status(200).json({
+                    message: "The account was succesfully deleted.",        
+                });
             }
             catch (error) {
                 const err = createError(500, error);
@@ -110,9 +154,61 @@ router
     }))
 
     // PUT update a specified account
-    .put('/:AccountID', (req, res) => {
-        res.json({ "will": "update a specified account" });
-    })
+    .put('/', asyncHandler(async (req, res, next) => {
+
+        // changing own account - cannot delete your own account
+        // Note: this scenario was identified in accountHeader and tagged with 'listing'
+        if (res.locals.action === 'listing') {
+            const err = createError(403, 'It is not possible to change your own account.    Please provide a different group account in the header.  See the documentation for detail.');
+            next(err);
+        }
+        // make sure that request does not include 'illegal' items and reject if set
+        else if (req.body.type || req.body.balance || req.body.sign || req.body._id)
+        {
+            const err = createError(403, 'The request attempts to replace values on the account that are forbidden and illegal.  See the documentation for detail.');
+            next(err);
+        }
+        // cannot change the name of a group
+        else if (req.body.accountName) {
+            const err = createError(403, 'It is not possible to change the name of account group.');
+            next(err);            
+        }
+
+        // Updates sections
+        // description
+        if (req.body.description) {
+        try {
+            const account = await Account.findOneAndUpdate(
+                { _id: req.headers.account_id },
+                { description: req.body.description },
+                { new: true }
+            );
+        }
+        catch (error) 
+        { 
+            if(typeof error.errors !== 'undefined' && error.errors.description)
+            {
+                const errStr = error._message + ' : ' + error.errors.accountName.properties.message;
+                const err = createError(400, errStr);
+                next(err);
+            }
+            else
+            {
+                const err = createError(500, error);
+                next(err);
+                }
+            }
+        }
+
+        if (req.body.owner) {
+            // IMPLEMENT
+        }
+
+        res.status(201).json({
+            message: "The group account was successfully updated.",        
+        });
+    }))
+
 
     // Catches all the wrong routes and refers person to documentation site
     .all('/*', wrongPath);
