@@ -8,6 +8,7 @@ const router = express.Router();
 
 // Import models
 import Account from '../../../models/account';
+import User from '../../../models/user';
 
 // custom functions
 const wrongPath = require('../../../functions/wrongPath');
@@ -175,40 +176,86 @@ router
         }
 
         // Updates sections
-        // description
-        if (req.body.description) {
-        try {
-            const account = await Account.findOneAndUpdate(
-                { _id: req.headers.account_id },
-                { description: req.body.description },
-                { new: true }
-            );
-        }
-        catch (error) 
-        { 
-            if(typeof error.errors !== 'undefined' && error.errors.description)
+        
+        if (req.body){
+
+            // description
+            if (req.body.description) {
+            try {
+                const account = await Account.findOneAndUpdate(
+                    { _id: req.headers.account_id },
+                    { description: req.body.description },
+                    { new: true }
+                );
+                res.locals.output = account;
+            }
+            catch (error) 
+            { 
+                if(typeof error.errors !== 'undefined' && error.errors.description)
+                {
+                    const errStr = error._message + ' : ' + error.errors.accountName.properties.message;
+                    const err = createError(400, errStr);
+                    next(err);
+                }
+                else
+                {
+                    const err = createError(500, error);
+                    next(err);
+                    }
+                }
+            }
+
+            // owner
+            if (req.body.owner) 
             {
-                const errStr = error._message + ' : ' + error.errors.accountName.properties.message;
-                const err = createError(400, errStr);
-                next(err);
+                if (req.body.owner === req.user.telephoneNumber)
+                {
+                    const err = createError(400, 'The user telephone number is already an owner on this account.');
+                    next(err);                   
+                }
+                else
+                {
+                    // check that telephone number is valid and a user in the system
+                    try {
+                            const check = await User.findOne({"telephoneNumber": req.body.owner}).countDocuments();
+                        
+                            if (check != 1){
+                                const err = createError(400, 'Not a valid user\'s telphone number.');
+                                next(err);  
+                            }
+                        }
+                        catch (error) 
+                        {
+                            const err = createError(500, error);
+                            next(err);
+                        }
+                        
+                    try {
+                            const account = await Account.findOneAndUpdate(
+                                { _id: req.headers.account_id },
+                                { owner: req.body.telephoneNumber },
+                                { new: true }
+                            );
+                            res.locals.output = account;
+                        }
+                        catch (error) 
+                        {
+                            const err = createError(500, error);
+                            next(err);
+                        }
+
+                    res.status(201).json({
+                    message: "The group account was successfully updated.",        
+                    });
+                }
             }
             else
             {
-                const err = createError(500, error);
+                const err = createError(400, 'No relevant fields to update were defined.');
                 next(err);
-                }
             }
         }
-
-        if (req.body.owner) {
-            // IMPLEMENT
-        }
-
-        res.status(201).json({
-            message: "The group account was successfully updated.",        
-        });
     }))
-
 
     // Catches all the wrong routes and refers person to documentation site
     .all('/*', wrongPath);
