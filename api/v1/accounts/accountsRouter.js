@@ -44,6 +44,13 @@ router
                         ]
                     }).countDocuments();
 
+                // if no results return a message - shouldn't happen for accounts!
+                if (totalDocuments == 0)
+                {
+                    const err = createError(400, 'No accounts found.');
+                    return next(err); 
+                }
+
                 const returnObject = {
                     page: page,
                     total_pages: Math.ceil(totalDocuments / limit),

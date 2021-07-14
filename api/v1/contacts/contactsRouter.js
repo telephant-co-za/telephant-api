@@ -17,21 +17,28 @@ import wrongPath from '../../../functions/wrongPath';
 // GET return list of contacts
 router
     .get('/', asyncHandler(async (req, res, next) => {
-
+        
             let { page = 1, limit = 10 } = req.query;
             [page, limit] = [+page, +limit];
 
             try {
                 const contactsPromise = Contact
-                    .find({ owner: res.locals.account_id })
+                    .find({ owner: res.locals.account_name })
                     .limit(limit)
                     .skip((page - 1) * limit)
                     .select(' _id first_name last_name email owner ');
 
                 const contacts = await contactsPromise;
                 const totalDocuments = await Contact
-                    .find({ owner: res.locals.account_id })
+                    .find({ owner: res.locals.account_name })
                     .countDocuments();
+
+                // if no results return a message
+                if (totalDocuments == 0)
+                {
+                    const err = createError(400, 'No contacts found.');
+                    return next(err); 
+                }
 
                 const returnObject = {
                     page: page,
@@ -51,12 +58,12 @@ router
     ))
 
     // GET return details of a contact
-    .get('/:phoneq', asyncHandler(async (req, res, next) => {
+    .get('/:contactPhoneNumber', asyncHandler(async (req, res, next) => {
         try {
 
-            const phoneq = req.params.phoneq;
+            const contactPhoneNumber = req.params.contactPhoneNumber;
             const returnObject = await Contact
-                                        .find({ phone: phoneq, owner: req.body.owner })
+                                        .find({ phone: contactPhoneNumber, owner: res.locals.account_name })
                                         .select({ _id: 0 });   //drop off the ID - for internal use only;
 
             if (returnObject.length > 0) {

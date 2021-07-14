@@ -36,6 +36,7 @@ async function accountHeader(req, res, next) {
 
         res.locals.account_id = accountId[0];
         res.locals.action = 'listing';
+        res.locals.account_name = req.user.telephoneNumber;
     }
 
     // 3) If the account id is set in the header
@@ -53,6 +54,7 @@ async function accountHeader(req, res, next) {
             // define promises
             const OwnershipCheckPromise = Account.find({ _id: req.headers.account_id, owners: req.user.telephoneNumber }).countDocuments();
             const ValidAccountCheckPromise = Account.findById(req.headers.account_id).countDocuments();
+            const accountNamePromise = Account.find({ _id: req.headers.account_id }, { _id: 0, accountName: 1});
 
             // 3.1) confirm that it is a valid account id
             const ValidAccountCheck = await ValidAccountCheckPromise;
@@ -63,7 +65,12 @@ async function accountHeader(req, res, next) {
                 return next(err);
             }
 
-            // 3.2) confirm that the user has ownership on this account
+            // 3.2) get the account name
+            const account = await accountNamePromise;
+            const accountName = account.map((account) => { return account.accountName; });
+            res.locals.account_name = accountName[0];
+
+            // 3.3) confirm that the user has ownership on this account
             const OwnershipCheck = await OwnershipCheckPromise;
 
             if (!OwnershipCheck || OwnershipCheck <= 0 )
@@ -75,8 +82,7 @@ async function accountHeader(req, res, next) {
 
         // Set vars for next section
         res.locals.account_id = req.headers.account_id;
-        res.locals.action = 'item';
-               
+        res.locals.action = 'item';            
     }
     
     // if those tests are passed

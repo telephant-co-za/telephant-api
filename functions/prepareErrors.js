@@ -9,8 +9,8 @@ module.exports = function(error, req, res, next) {
     console.log('\nDate Time:', now.toUTCString());
     console.log('\nError status:', error.status);
     console.log('\nMessage: ', error.message);
-    console.log('\nStack: \n', error.stack);
-    console.log('\nRequest: \n',req);
+    //console.log('\nStack: \n', error.stack);
+    //console.log('\nRequest: \n',req);
     console.log('*** END ERROR LOG *** \n\n');
   
     // Output to client
