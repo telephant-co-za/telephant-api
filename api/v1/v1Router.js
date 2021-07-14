@@ -36,7 +36,7 @@ router
 .use('/users', usersRouter)
 
 // Catches all the wrong routes and refers person to documentation site
-.all('/*', wrongPath)
+.use('/*', wrongPath)
 
 // Prepare the output into the correct format
 .use(prepareOutput)

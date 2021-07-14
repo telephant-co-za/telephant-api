@@ -12,41 +12,43 @@ import Contact from '../../../models/contact';
 // custom functions
 import wrongPath from '../../../functions/wrongPath';
 
-
-
-
 // ROUTER
 
 // GET return list of contacts
 router
     .get('/', asyncHandler(async (req, res, next) => {
 
-        let { page = 1, limit = 10 } = req.query;
-        [page, limit] = [+page, +limit];
-        try {
-            const contactsPromise = Contact
-                                        .find({ owner: req.body.owner })
-                                        .limit(limit)
-                                        .skip((page - 1) * limit)
-                                        .select({ _id: 0 });   //drop off the ID - for internal use only
-            
-            const contacts = await contactsPromise;
-            const totalDocuments = await Contact.find({ owner: req.body.owner }).countDocuments();
+            let { page = 1, limit = 10 } = req.query;
+            [page, limit] = [+page, +limit];
 
-            const returnObject = {
-                page: page,
-                total_pages: Math.ceil(totalDocuments / limit),
-                total_results: totalDocuments,
-                results: contacts
-            };
+            try {
+                const contactsPromise = Contact
+                    .find({ owner: res.locals.account_id })
+                    .limit(limit)
+                    .skip((page - 1) * limit)
+                    .select(' _id first_name last_name email owner ');
 
-            res.locals = returnObject;
-            next();
+                const contacts = await contactsPromise;
+                const totalDocuments = await Contact
+                    .find({ owner: res.locals.account_id })
+                    .countDocuments();
+
+                const returnObject = {
+                    page: page,
+                    total_pages: Math.ceil(totalDocuments / limit),
+                    total_results: totalDocuments,
+                    results: contacts
+                };
+
+                res.locals.output = returnObject;
+                next();
+            }
+            catch (error) {
+                const err = createError(500, error);
+                return next(err);
+            }
         }
-        catch (error) {
-            createError(500, error);
-        }
-    }))
+    ))
 
     // GET return details of a contact
     .get('/:phoneq', asyncHandler(async (req, res, next) => {

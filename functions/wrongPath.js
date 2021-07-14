@@ -1,9 +1,12 @@
 const createError = require('http-errors');
 
+console.log("hello");
+
 module.exports = function(req, res, next) {
     if (res.locals == null)
     {
-      throw createError(405, `For this API, you haven't specified a valid route. For more details, go to http://developer.telephant.co.za.`, { expose: false });
+      const err = createError(405, `For this API, you haven't specified a valid route. For more details, go to http://developer.telephant.co.za.`, { expose: false });
+      return next(err);
     }
     else
     {
