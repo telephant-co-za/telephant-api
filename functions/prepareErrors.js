@@ -3,12 +3,15 @@ module.exports = function(error, req, res, next) {
     // Log the error
     // Make less verbose (comment out outputting stack and req)
     // Errors logged will appear in Cloudwatch Stream
-    console.log('***')
-    console.log('Error status: ', error.status);
-    console.log('Message: ', error.message);
-    console.log('Stack: ', error.stack);
-    //console.log(req)
-    console.log('***');
+    var now = new Date();
+
+    console.log('\n\n*** ERROR LOGGED BY prepareErrors ***');
+    console.log('\nDate Time:', now.toUTCString());
+    console.log('\nError status:', error.status);
+    console.log('\nMessage: ', error.message);
+    console.log('\nStack: \n', error.stack);
+    console.log('\nRequest: \n',req);
+    console.log('*** END ERROR LOG *** \n\n');
   
     // Output to client
     res.status(error.status);

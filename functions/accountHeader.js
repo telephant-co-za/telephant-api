@@ -4,9 +4,6 @@ const ObjectId = require('mongoose').Types.ObjectId;
 const createError = require('http-errors');
 
 function isValidObjectId(id){
-    console.log('*************')
-    console.log(id)
-    console.log('*************')
 
     if(ObjectId.isValid(id)){
         if((String)(new ObjectId(id)) === id)
@@ -48,29 +45,32 @@ async function accountHeader(req, res, next) {
         if (!isValidObjectId(req.headers.account_id))
         {
             const err = createError(400, 'The account ID provided is not valid.');
-            next(err);
+            return next(err);
         }
-
-        // define promises
-        const OwnershipCheckPromise = Account.find({ _id: req.headers.account_id, owners: req.user.telephoneNumber }).countDocuments();
-        const ValidAccountCheckPromise = Account.findById(req.headers.account_id).countDocuments();
-
-        // 3.1) confirm that it is a valid account id
-        const ValidAccountCheck = await ValidAccountCheckPromise;
-
-        if (!ValidAccountCheck)
+        else 
         {
-            const err = createError(404, 'Not a valid account id.');
-            next(err);
-        }
 
-        // 3.2) confirm that the user has ownership on this account
-        const OwnershipCheck = await OwnershipCheckPromise;
+            // define promises
+            const OwnershipCheckPromise = Account.find({ _id: req.headers.account_id, owners: req.user.telephoneNumber }).countDocuments();
+            const ValidAccountCheckPromise = Account.findById(req.headers.account_id).countDocuments();
 
-        if (!OwnershipCheck || OwnershipCheck <= 0 )
-        {
-            const err = createError(403, 'Not authorised on this group account.');
-            next(err);
+            // 3.1) confirm that it is a valid account id
+            const ValidAccountCheck = await ValidAccountCheckPromise;
+
+            if (!ValidAccountCheck)
+            {
+                const err = createError(404, 'Not a valid account id.');
+                return next(err);
+            }
+
+            // 3.2) confirm that the user has ownership on this account
+            const OwnershipCheck = await OwnershipCheckPromise;
+
+            if (!OwnershipCheck || OwnershipCheck <= 0 )
+            {
+                const err = createError(403, 'Not authorised on this group account.');
+                return next(err);
+            }
         }
 
         // Set vars for next section

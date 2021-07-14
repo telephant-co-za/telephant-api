@@ -28,11 +28,11 @@ router
 .use(express.urlencoded())
 
 .use('/accounts', protectRoute, accountHeader, accountsRouter)
-.use('/airtime', protectRoute, accountHeader,airtimeRouter)
-.use('/contacts', protectRoute, accountHeader,contactsRouter)
-.use('/notifications', protectRoute, accountHeader,notificationsRouter)
-.use('/retailers', protectRoute, accountHeader,retailersRouter)
-.use('/transactions', protectRoute, accountHeader,transactionsRouter)
+.use('/airtime', protectRoute, accountHeader, airtimeRouter)
+.use('/contacts', protectRoute, accountHeader, contactsRouter)
+.use('/notifications', protectRoute, accountHeader, notificationsRouter)
+.use('/retailers', protectRoute, accountHeader, retailersRouter)
+.use('/transactions', protectRoute, accountHeader, transactionsRouter)
 .use('/users', usersRouter)
 
 // Catches all the wrong routes and refers person to documentation site

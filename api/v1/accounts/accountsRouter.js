@@ -13,8 +13,6 @@ import User from '../../../models/user';
 // custom functions
 const wrongPath = require('../../../functions/wrongPath');
 
-
-
 // ROUTER
 
 // GET return list of accounts
@@ -58,7 +56,7 @@ router
             }
             catch (error) {
                 const err = createError(500, error);
-                next(err);
+                return next(err);
             }
         }
         else if (res.locals.action === 'item') {
@@ -78,7 +76,7 @@ router
             }
             catch (error) {
                 const err = createError(500, error);
-                next(err);
+                return next(err);
             }
         }
     }))
@@ -107,24 +105,24 @@ router
                 {
                     const errStr = error._message + ' : ' + error.errors.accountName.properties.message;
                     const err = createError(400, errStr);
-                    next(err);
+                    return next(err);
                 }
                 if(typeof error.errors !== 'undefined' && error.errors.description)
                 {
                     const errStr = error._message + ' : ' + error.errors.description.properties.message;
                     const err = createError(400, errStr);
-                    next(err);
+                    return next(err);
                 }
                 else if(typeof error !== 'undefined' && error.code === 11000)
                 {
                     const errStr = 'This group account name is already registered.  Please choose another.';
                     const err = createError(409, errStr);
-                    next(err);
+                    return next(err);
                 }
                 else
                 {
                     const err = createError(500, error);
-                    next(err);
+                    return next(err);
                 }
             }
         })
@@ -137,7 +135,7 @@ router
         // Note: this scenario was identified in accountHeader and tagged with 'listing'
         if (res.locals.action === 'listing') {
             const err = createError(403, 'It is not possible to delete your own account.  Please provide a group account in the header.  See the documentation for detail.');
-            next(err);
+            return next(err);
         }
         else
         {
@@ -149,7 +147,7 @@ router
             }
             catch (error) {
                 const err = createError(500, error);
-                next(err);
+                return next(err);
             }
         }
     }))
@@ -161,18 +159,18 @@ router
         // Note: this scenario was identified in accountHeader and tagged with 'listing'
         if (res.locals.action === 'listing') {
             const err = createError(403, 'It is not possible to change your own account.    Please provide a different group account in the header.  See the documentation for detail.');
-            next(err);
+            return next(err);
         }
         // make sure that request does not include 'illegal' items and reject if set
         else if (req.body.type || req.body.balance || req.body.sign || req.body._id)
         {
             const err = createError(403, 'The request attempts to replace values on the account that are forbidden and illegal.  See the documentation for detail.');
-            next(err);
+            return next(err);
         }
         // cannot change the name of a group
         else if (req.body.accountName) {
             const err = createError(403, 'It is not possible to change the name of account group.');
-            next(err);            
+            return next(err);            
         }
 
         // Updates sections
@@ -195,12 +193,12 @@ router
                 {
                     const errStr = error._message + ' : ' + error.errors.accountName.properties.message;
                     const err = createError(400, errStr);
-                    next(err);
+                    return next(err);
                 }
                 else
                 {
                     const err = createError(500, error);
-                    next(err);
+                    return next(err);
                     }
                 }
             }
@@ -211,7 +209,7 @@ router
                 if (req.body.owner === req.user.telephoneNumber)
                 {
                     const err = createError(400, 'The user telephone number is already an owner on this account.');
-                    next(err);                   
+                    return next(err);                   
                 }
                 else
                 {
@@ -221,13 +219,13 @@ router
                         
                             if (check != 1){
                                 const err = createError(400, 'Not a valid user\'s telphone number.');
-                                next(err);  
+                                return next(err);  
                             }
                         }
                         catch (error) 
                         {
                             const err = createError(500, error);
-                            next(err);
+                            return next(err);
                         }
                         
                     try {
@@ -241,7 +239,7 @@ router
                         catch (error) 
                         {
                             const err = createError(500, error);
-                            next(err);
+                            return next(err);
                         }
 
                     res.status(201).json({
@@ -252,7 +250,7 @@ router
             else
             {
                 const err = createError(400, 'No relevant fields to update were defined.');
-                next(err);
+                return next(err);
             }
         }
     }))
