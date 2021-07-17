@@ -1,4 +1,8 @@
 openapi: 3.0.0
+schemes:
+  - https
+host: api.telphant.co.za
+basePath: /v1
 info:
   version: '1.0'
   x-logo:
