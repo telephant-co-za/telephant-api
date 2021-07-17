@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - './api/docs/telephant-api-documentation.yml'
-      - './.github/workflows/*'
+      - '.github/workflows/*'
 
 jobs:
   copy-file:
