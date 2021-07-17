@@ -1,5 +1,7 @@
 # Read Me
 
+![Waterford Institute of Technology](./README/img/wit-logo.jpeg)
+
 <table>
    <tbody>
       <tr>
