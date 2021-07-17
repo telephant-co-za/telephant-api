@@ -25,12 +25,12 @@ tags:
 - name: Accounts
   description: In addition to a user's own account, organizations such as enterprises, clubs, and homes can create accounts. Multiple users can manage an account, which has its own resources and actions.
 - name: Airtime
-  description: >-
+  description: |
     Airtime is the life blood of the Telephant service.  This endpoint allows you to check an account's airtime balance, send and request airtime from your contacts.
 
     **Note:**  You'll need a verified contact in order to request or them send airtime.
 - name: Contacts
-  description: >-
+  description: |
     You may view and edit an account's contacts listings, as well as add, update, and delete details contacts, using this collection.
     
     **Note:**  You'll need a verified contact in order to request or them send airtime.
