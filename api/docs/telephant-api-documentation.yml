@@ -27,23 +27,27 @@ tags:
 - name: Airtime
   description: |
     Airtime is the life blood of the Telephant service.  This endpoint allows you to check an account's airtime balance, send and request airtime from your contacts.
-
+    
     **Note:**  You'll need a verified contact in order to request or them send airtime.
 - name: Contacts
   description: |
-    You may view and edit an account's contacts listings, as well as add, update, and delete details contacts, using this collection.
+    You may view and edit an account's contacts listings, as well as add, update, and delete details contacts, using this end point.
     
     **Note:**  You'll need a verified contact in order to request or them send airtime.
 - name: Notifications
-  description: ''
+  description: Review read, unread or all the notifications sent about your account. Also mark notifications as read.
 - name: Retailers
-  description: ''
+  description: Obtain a public list of Telephant credit-accepting merchants. Add, delete, or edit merchant information that will be made public.
 - name: Transactions
-  description: ''
+  description: View the details of a given transaction from a filtered or unfiltered list of transactions on an account.
 - name: Users
-  description: ''
+  description: |
+    Logging in and registering up are both done through the Users interface.
+
+    ** Note:** Before you may interact with this API, you must first obtain a JWT bearer token via the signup action on the Users endpoint.
 - name: Ping
-  description: ''
+  description: Ping is a utility function that can be used to test the health of the Telephant service.  The ping service only responds with 'Pong'.
+
 x-tagGroups:
   - name: Functionality
     tags:
