@@ -1,0 +1,24 @@
+name: Push Swagger File
+
+on: 
+  push:
+    paths:
+      '/api/docs/telephant-api-documentation.yml'
+
+jobs:
+  copy-file:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Pushes test file
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source_file: 'telephant-api-documentation.yml'
+        destination_repo: 'telephant-co-za/api-documentation'
+        user_email: 'warren.byron@email.com'
+        user_name: 'Warren-Byron'
+        commit_message: 'Updating the Telephant API documentation...'

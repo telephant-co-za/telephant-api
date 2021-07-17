@@ -1,28 +1,17 @@
-import contactModel from '../../models/contact';
 import accountModel from '../../models/account';
-import userModel from '../../models/user';
-import groupsrightsModel from '../../models/groupsright';
+import contactModel from '../../models/contact';
+import notificationsModel from '../../models/notification';
+import retailersModel from '../../models/retailer'
 import transactionsModel from '../../models/transaction';
+import userModel from '../../models/user';
 
-import { contacts } from './contacts';
 import { accounts } from './accounts';
-import { users } from './users';
-import { groupsrights } from './groupsrights';
+import { contacts } from './contacts';
+import { notifications } from './notifications';
+import { retailers } from './retailers';
 import { transactions } from './transactions';
+import { users } from './users';
 
-// deletes all user documents in collection and inserts test data
-async function loadContacts() {
-  console.log('Load Contacts collection data.');
-  try {
-    await contactModel.deleteMany();
-    await contactModel.collection.insertMany(contacts);
-    console.info(`${contacts.length} contacts were successfully stored.`);
-  } catch (err) {
-    console.error(`Failed to load Contacts data: ${err}`);
-  }
-}
-
-// deletes all account documents in collection and inserts test data
 export async function loadAccounts() {
   console.log('Load Accounts collection data.');
   try {
@@ -34,23 +23,34 @@ export async function loadAccounts() {
   }
 }
 
-async function loadUsers() {
+async function loadContacts() {
+  console.log('Load Contacts collection data.');
   try {
-    await userModel.deleteMany();
-    users.forEach(user => userModel.create(user));
-    console.info(`${users.length} users were successfully stored.`);
+    await contactModel.deleteMany();
+    await contactModel.collection.insertMany(contacts);
+    console.info(`${contacts.length} contacts were successfully stored.`);
   } catch (err) {
-    console.error(`failed to Load user Data: ${err}`);
+    console.error(`Failed to load Contacts data: ${err}`);
   }
 }
 
-async function loadGroupsRights() {
+async function loadNotifications() {
   try {
-    await groupsrightsModel.deleteMany();
-    groupsrights.forEach(groupsrights => groupsrightsModel.create(groupsrights));
-    console.info(`${groupsrights.length} groups rights were successfully stored.`);
+    await notificationsModel.deleteMany();
+    notifications.forEach(notifications => notificationsModel.create(notifications));
+    console.info(`${transactions.length} notifications were successfully stored.`);
   } catch (err) {
-    console.error(`failed to load Groups Rights data: ${err}`);
+    console.error(`failed to load Notifcations data: ${err}`);
+  }
+}
+
+async function loadRetailers() {
+  try {
+    await retailersModel.deleteMany();
+    retailers.forEach(retailers => retailersModel.create(retailers));
+    console.info(`${retailers.length} retailers were successfully stored.`);
+  } catch (err) {
+    console.error(`failed to load Retailers data: ${err}`);
   }
 }
 
@@ -64,10 +64,21 @@ async function loadTransactions() {
   }
 }
 
+async function loadUsers() {
+  try {
+    await userModel.deleteMany();
+    users.forEach(user => userModel.create(user));
+    console.info(`${users.length} users were successfully stored.`);
+  } catch (err) {
+    console.error(`failed to Load user Data: ${err}`);
+  }
+}
+
 if (process.env.seedDb) {
-  loadUsers();
-  loadContacts();
   loadAccounts();
-  loadGroupsRights();
+  loadContacts();
+  loadNotifications();
+  loadRetailers();
   loadTransactions();
+  loadUsers();
 }

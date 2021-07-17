@@ -31,7 +31,7 @@ router
 .use('/airtime', protectRoute, accountHeader, airtimeRouter)
 .use('/contacts', protectRoute, accountHeader, contactsRouter)
 .use('/notifications', protectRoute, accountHeader, notificationsRouter)
-.use('/retailers', protectRoute, accountHeader, retailersRouter)
+.use('/retailers', retailersRouter)
 .use('/transactions', protectRoute, accountHeader, transactionsRouter)
 .use('/users', usersRouter)
 

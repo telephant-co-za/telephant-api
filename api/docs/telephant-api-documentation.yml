@@ -1,7 +1,14 @@
 openapi: 3.0.0
 info:
   version: '1.0'
+  x-logo:
+    url: "http://developer.telephant.co.za/telephant-documentation-logo.png"
+    backgroundColor: "#fafafa"
   title: Telephant API
+  contact:
+    name: Telephant API Team
+    url: http://developer.telephant.co.za
+    email: api@telephant.co.za
   description: >-
     Telephant’s APIs (Application Programming Interfaces) power its platform for
     exchanging airtime.
@@ -25,15 +32,14 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     post:
       summary: Create account.
       description: Create a new group account.
       tags:
-        - accounts
+        - Accounts
       security:
         - BearerAuth: []
       requestBody:
@@ -53,15 +59,14 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     put:
       summary: Update account.
       description: Update the details of a group account.
       tags:
-        - accounts
+        - Accounts
       security:
         - BearerAuth: []
       requestBody:
@@ -89,15 +94,14 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     delete:
       summary: Delete account.
       description: Delete a specific group account.
       tags:
-        - accounts
+        - Accounts
       security:
         - BearerAuth: []
       parameters:
@@ -111,8 +115,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/airtime:
@@ -120,7 +123,7 @@ paths:
       summary: Get airtime balance.
       description: Check the balance of a group or individual accounts airtime balance.
       tags:
-        - airtime
+        - Airtime
       security:
         - BearerAuth: []
       parameters:
@@ -134,22 +137,20 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     post:
       summary: Use airtime.
       description: Convert positive airtime balance for use as airtime on phone.
       tags:
-        - airtime
+        - Airtime
       security:
         - BearerAuth: []
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/airtime/{ContactsPhoneNumber}:
@@ -157,7 +158,7 @@ paths:
       summary: Request airtime.
       description: Request airtime credit from a contact.
       tags:
-        - airtime
+        - Airtime
       security:
         - BearerAuth: []
       parameters:
@@ -178,15 +179,14 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     post:
       summary: Send airtime.
       description: Send airtime credit to a contact.
       tags:
-        - airtime
+        - Airtime
       security:
         - BearerAuth: []
       parameters:
@@ -207,8 +207,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/contacts:
@@ -216,7 +215,7 @@ paths:
       summary: List the contacts of an individual or group account.
       description: List the contacts for account  
       tags:
-        - contacts
+        - Contacts
       security:
         - BearerAuth: []
       parameters:
@@ -230,15 +229,14 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     post:
       summary: Create contact.
       description: Create a contact for a individual or group account.
       tags:
-        - contacts
+        - Contacts
       security:
         - BearerAuth: []
       parameters:
@@ -252,8 +250,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/contacts/{ContactsPhoneNumber}:
@@ -261,7 +258,7 @@ paths:
       summary: View specific contact.
       description: Get the details of a specific contact for an individual or group account.
       tags:
-        - contacts
+        - Contacts
       security:
         - BearerAuth: []
       parameters:
@@ -282,15 +279,14 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     put:
       summary: Update specific contact.
       description: Update a specific contact for an individual or group account.
       tags:
-        - contacts
+        - Contacts
       security:
         - BearerAuth: []
       parameters:
@@ -311,15 +307,14 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     delete:
       summary: Delete specific contact.
       description: Delete a specific contact for an individual or group account.
       tags:
-        - contacts
+        - Contacts
       security:
         - BearerAuth: []
       parameters:
@@ -340,8 +335,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/notifications:
@@ -349,7 +343,7 @@ paths:
       summary: Get list of notifications.
       description: Get the list of notifications for an individual or group account.
       tags:
-        - notifications
+        - Notifications
       security:
         - BearerAuth: []
       parameters:
@@ -363,15 +357,13 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
         '5XX':
           $ref: '#/components/responses/ServerError'
     post:
       summary:  Mark unread notifications as read.
       description: Mark all unread notifications as read on an individual or group account.
       tags:
-        - notifications
+        - Notifications
       security:
         - BearerAuth: []
       parameters:
@@ -385,8 +377,6 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/notifications/{NotificationID}:
@@ -394,7 +384,7 @@ paths:
       summary: View specific notification.
       description: Get the details of a specific notification for an individual or group account.
       tags:
-        - notifications
+        - Notifications
       security:
         - BearerAuth: []
       parameters:
@@ -415,15 +405,13 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
         '5XX':
           $ref: '#/components/responses/ServerError'
     post:
       summary: Mark notifcation as read.
       description: On an individual or group account, mark a specific notification as read.
       tags:
-        - notifications
+        - Notifications
       security:
         - BearerAuth: []
       parameters:
@@ -444,15 +432,13 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
         '5XX':
           $ref: '#/components/responses/ServerError'
     put:
       summary: Accept or reject airtime request.
       description: Accept or reject a specific airtime send request from a contact.
       tags:
-        - notifications
+        - Notifications
       security:
         - BearerAuth: []
       parameters:
@@ -473,8 +459,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /ping:
@@ -482,7 +467,7 @@ paths:
       summary: Ping the API.
       description: To make sure the API is up and working, ping the server.
       tags:
-        - ping
+        - Ping
       responses:
         '200':
           description: This API call only returns 'pong' to confirm that the API is up and running.
@@ -499,12 +484,11 @@ paths:
       summary: Get retailers.
       description: Get a listing of Telephant retailers.
       tags:
-        - retailers
+        - Retailers
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     post:
@@ -525,8 +509,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/retailers/{RetailerID}:
@@ -534,7 +517,7 @@ paths:
       summary: Update retailer.
       description: Update a retailer listing.
       tags:
-        - retailers
+        - Retailers
       security:
         - BearerAuth: []
       parameters:
@@ -555,15 +538,14 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     delete:
       summary: Delete retailer.
       description: Delete a retailer listing.
       tags:
-        - retailers
+        - Retailers
       security:
         - BearerAuth: []
       parameters:
@@ -584,8 +566,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/transactions:
@@ -601,14 +582,13 @@ paths:
             format: uuid
           required: false
       tags:
-        - transactions
+        - Transactions
       security:
         - BearerAuth: []
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/transactions/{TransactionID}:
@@ -616,7 +596,7 @@ paths:
       summary: View a transaction.
       description: View the details of a specific transaction for an individual or group account.
       tags:
-        - transactions
+        - Transactions
       security:
         - BearerAuth: []
       parameters:
@@ -637,8 +617,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/users:
@@ -646,7 +625,7 @@ paths:
       summary: User authentication.
       description: Provides an end point to sign up as a user or log in.
       tags:
-        - users
+        - Users
       parameters:
         - in: query
           name: action
@@ -736,7 +715,7 @@ paths:
       summary: Get verifications.
       description: Check the status of an individual or group account's verification.
       tags:
-        - verifications
+        - Verifications
       security:
         - BearerAuth: []
       parameters:
@@ -750,15 +729,14 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     post:
       summary: Create verifications.
       description: Submit verification requirements on a per-account or per-group basis.
       tags:
-        - verifications
+        - Verifications
       security:
         - BearerAuth: []
       parameters:
@@ -772,15 +750,14 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     put:
       summary: Update verification.
       description: Update the verification requirements for a single account or a group account.
       tags:
-        - verifications
+        - Verifications
       security:
         - BearerAuth: []
       parameters:
@@ -794,8 +771,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
 servers:
@@ -893,3 +869,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ServerError'
+tags:
+- name: Accounts
+  description: ''
+- name: Airtime
+  description: ''
+- name: Contacts
+  description: You can access and edit your contacts lists from your personal, company, and other accounts in Contacts. You can also add, update, and delete details about your contacts.  In order to request or send airtime you will need a verified contact.
+- name: Notifications
+  description: ''
+- name: Retailers
+  description: ''
+- name: Share
+  description: ''
+- name: Transactions
+  description: ''
+- name: Users
+  description: ''

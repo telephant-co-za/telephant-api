@@ -7,4 +7,4 @@ const RetailerSchema = new Schema({
   area: {type: String, required: true }
 });
 
-export default mongoose.model('Contact', RetailerSchema);
+export default mongoose.model('Retailer', RetailerSchema);

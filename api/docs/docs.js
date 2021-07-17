@@ -7,7 +7,7 @@ import yaml from 'js-yaml';
 import fs from 'fs';
 
 const router = express();
-const swaggerDocument = yaml.load(fs.readFileSync('./api//docs/swagger.yml', 'utf8'));
+const swaggerDocument = yaml.load(fs.readFileSync('./api/docs/telephant-api-documentation.yml', 'utf8'));
 
 // /docs -> swagger docs
 router.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument))

@@ -1,35 +1,129 @@
-import express from 'express';
+// imports
 
+import express from 'express';
+import asyncHandler from 'express-async-handler';
+const accountHeader = require('../../../functions/accountHeader');
+import passport from '../../../functions/authenticate';
+const protectRoute = passport.authenticate('jwt', {session: false});
+const ObjectId = require('mongoose').Types.ObjectId;
+const createError = require('http-errors');
 const router = express.Router();
 
-// import common middleware
-const wrongPath = require('../../../functions/wrongPath');
-const prepareErrors = require('../../../functions/prepareErrors');
+// models
+import Retailer from '../../../models/retailer';
+
+// custom functions
+import wrongPath from '../../../functions/wrongPath';
+
+function isValidObjectId(id){
+
+    if(ObjectId.isValid(id)){
+        if((String)(new ObjectId(id)) === id)
+            return true;
+        return false;
+    }
+    return false;
+}
+
+// ROUTER
 
 // GET return list of retailers
-router.get('/', (req, res) => {
-    res.json({"will" : "return list of retailer"});
-});
+router.get('/', asyncHandler(async(req, res, next) => 
+
+// This shows all the retailers - it does not use authentication to limit
+// the listing
+
+{
+    let { page = 1, limit = 10 } = req.query;
+    [page, limit] = [+page, +limit];
+
+    try {
+        const retailersPromise = Retailer
+                                .find({ })
+                                .limit(limit)
+                                .skip((page - 1) * limit)
+                                .select(' _id name area ');
+
+        const retailers = await retailersPromise;
+        const totalDocuments = await Retailer
+                                    .find({}).countDocuments();
+
+        // if no results return a message - shouldn't happen for accounts!
+        if (totalDocuments == 0)
+        {
+            const err = createError(400, 'No accounts found.');
+            return next(err); 
+        }
+
+        const returnObject = {
+                                page: page,
+                                total_pages: Math.ceil(totalDocuments / limit),
+                                total_results: totalDocuments,
+                                results: retailers
+                                };
+
+        res.locals.output = returnObject;
+        next();
+    }
+        catch (error) {
+        const err = createError(500, error);
+        return next(err);
+    }
+}))
 
 // POST add a new retailer
-router.post('/', (req, res) => {
+.post('/', protectRoute, asyncHandler(async(req, res, next) => {
     res.json({"will" : "add a new retailer"});
-});
+}))
 
 // DELETE delete a specified retailer
-router.delete('/', (req, res) => {
+.delete('/:retailer_id', protectRoute, accountHeader, asyncHandler(async(req, res, next) => {
+    console.log(req.params.retailer_id);
+
+    // isValidObjectId
+    if (!isValidObjectId(req.params.retailer_id))
+    {
+        const err = createError(400, 'The retailer ID provided is not valid.');
+        return next(err);
+    }
+
+    // confirm that it is a valid retailer id and has rights
+    try {
+        const retailersPromise = Retailer.find({ _id: req.params.retailer_id, owner: req.params.retailer_id});
+        const checkExists_Ownership = await retailersPromise;
+
+        // if no results return a message - shouldn't happen for accounts!
+        if (checkExists_Ownership == 0)
+        {
+            const err = createError(400, 'No rights to delete that retailer.');
+            return next(err); 
+        }
+        else
+        {
+            await 
+            Retailer.deleteOne({
+                _id: req.params.retailer_id
+               });
+        }
+        next();
+    }
+        catch (error) {
+        const err = createError(500, error);
+        return next(err);
+    }
+
+
+    // consirm that the user has ownership rights on the 
+
     res.json({"will" : "delete a specified retailer"});
-});
+}))
 
 // PUT update a specified retailer
-router.put('/', (req, res) => {
+.put('/', (req, res) => {
     res.json({"will" : "update a specified retailer"});
 })
 
 // Catches all the wrong routes and refers person to documentation site
-.all('/*', wrongPath)
-
-// Error Handler
-.use(prepareErrors);
+.all('/*', wrongPath);
 
 export default router;
