@@ -3,7 +3,7 @@ info:
   version: '1.0'
   x-logo:
     url: "http://developer.telephant.co.za/telephant-documentation-logo.jpg"
-    backgroundColor: "#fafafa"
+    backgroundColor: "#fff000"
   title: Telephant API
   contact:
     name: Telephant API Team
