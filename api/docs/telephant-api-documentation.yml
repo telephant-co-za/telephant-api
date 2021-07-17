@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   version: '1.0'
   x-logo:
-    url: "http://developer.telephant.co.za/telephant-documentation-logo.png"
+    url: "http://developer.telephant.co.za/telephant-documentation-logo.jpg"
     backgroundColor: "#fafafa"
   title: Telephant API
   contact:
@@ -35,7 +35,7 @@ paths:
       summary: Get account(s).
       description: Get the details of a specific account(s). List one or all of the details of accounts available to this username.
       tags:
-        - accounts
+        - Accounts
       security:
         - BearerAuth: []
       parameters:
