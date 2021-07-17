@@ -12,6 +12,23 @@ info:
   description: >-
     Telephant’s APIs (Application Programming Interfaces) power its platform for
     exchanging airtime.
+tags:
+- name: Accounts
+  description: ''
+- name: Airtime
+  description: ''
+- name: Contacts
+  description: You can access and edit your contacts lists from your personal, company, and other accounts in Contacts. You can also add, update, and delete details about your contacts.  In order to request or send airtime you will need a verified contact.
+- name: Notifications
+  description: ''
+- name: Retailers
+  description: ''
+- name: Share
+  description: ''
+- name: Transactions
+  description: ''
+- name: Users
+  description: ''
 paths:
   /v1/accounts:
     get:
@@ -869,20 +886,3 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ServerError'
-tags:
-- name: Accounts
-  description: ''
-- name: Airtime
-  description: ''
-- name: Contacts
-  description: You can access and edit your contacts lists from your personal, company, and other accounts in Contacts. You can also add, update, and delete details about your contacts.  In order to request or send airtime you will need a verified contact.
-- name: Notifications
-  description: ''
-- name: Retailers
-  description: ''
-- name: Share
-  description: ''
-- name: Transactions
-  description: ''
-- name: Users
-  description: ''
