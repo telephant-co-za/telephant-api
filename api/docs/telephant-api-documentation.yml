@@ -1,21 +1,26 @@
 openapi: 3.0.0
-schemes:
-  - https
-host: api.telphant.co.za
-basePath: /v1
+
 info:
-  version: '1.0'
-  x-logo:
-    url: "http://developer.telephant.co.za/telephant-documentation-logo.jpg"
-    backgroundColor: "#fafafa"
   title: Telephant API
+  description: >-
+    Telephant’s APIs (Application Programming Interfaces) power its platform for
+    exchanging airtime.
+  terms-of-service: http://www.telephant.co.za/terms-of-service
+  version: '1.0'
   contact:
     name: Telephant API Team
     url: http://developer.telephant.co.za
     email: api@telephant.co.za
-  description: >-
-    Telephant’s APIs (Application Programming Interfaces) power its platform for
-    exchanging airtime.
+  x-logo:
+    url: "http://developer.telephant.co.za/telephant-documentation-logo.jpg"
+    backgroundColor: "#fafafa"
+
+servers:
+  - description: Sandbox Server
+    url: https://localhost:3443
+  - description: Live Server
+    url: https://api.telephant.co.za
+
 tags:
 - name: Accounts
   description: ''
@@ -27,12 +32,26 @@ tags:
   description: ''
 - name: Retailers
   description: ''
-- name: Share
-  description: ''
 - name: Transactions
   description: ''
 - name: Users
   description: ''
+- name: Ping
+  description: ''
+x-tagGroups:
+  - name: Functionality
+    tags:
+      - Accounts
+      - Airtime
+      - Contacts
+      - Notifications
+      - Retailers
+      - Transactions
+      - Users
+  - name: Utility
+    tags:
+      - Ping
+
 paths:
   /v1/accounts:
     get:
@@ -516,7 +535,7 @@ paths:
       summary: Create a retailer listing.
       description: Create a Telephant retailer listing.
       tags:
-        - retailers
+        - Retailers
       security:
         - BearerAuth: []
       parameters:
@@ -795,12 +814,7 @@ paths:
 
         '5XX':
           $ref: '#/components/responses/ServerError'
-servers:
-  # Added by API Auto Mocking Plugin
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/wazby/TelephantAPI/1.0
-  - description: https://api.telephant.co.za
-    url: https://localhost:3443
+
 
 components:
   securitySchemes:
