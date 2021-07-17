@@ -18,7 +18,7 @@ jobs:
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
-        source_file: 'telephant-api-documentation.yml'
+        source_file: './api/docs/telephant-api-documentation.yml'
         destination_repo: 'telephant-co-za/api-documentation'
         user_email: 'warren.byron@email.com'
         user_name: 'Warren-Byron'
