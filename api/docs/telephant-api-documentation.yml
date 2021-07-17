@@ -2,9 +2,15 @@ openapi: 3.0.0
 
 info:
   title: Telephant API
-  description: >-
-    Telephant’s APIs (Application Programming Interfaces) power its platform for
-    exchanging airtime.
+  description: |
+    *The mechanism for swapping airtime is powered by Telephant's APIs. Developers can use the API to tap into the platform's capabilities and incorporate the service into their own apps.*
+
+    The Telephant API's backbone is HTTP. The nature of our API is RESTful. It has a set of predictable resource URLs. It returns HTTP response codes to indicate errors. It also accepts JSON as an HTTP body payload and returns it, along with some other useful formats.
+    
+    You can use your favorite HTTP/REST library for your programming language or an HTTP client like Postman or CURL to use Telephant's API.
+
+    Happy programming **:-)**
+
   terms-of-service: http://www.telephant.co.za/terms-of-service
   version: '1.0'
   contact:
