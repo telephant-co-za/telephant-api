@@ -3,7 +3,7 @@ name: Push Swagger File
 on: 
   push:
     paths:
-      '/api/docs/telephant-api-documentation.yml'
+      './api/docs/telephant-api-documentation.yml'
 
 jobs:
   copy-file:
