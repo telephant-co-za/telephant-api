@@ -123,7 +123,7 @@ Vendors will be able to send clients airtime via the app. As a result, the vendo
 
 <img alt="Street vendor" width="50%" height="50%" src="https://github.com/telephant-co-za/telephant-api/blob/746e74e0cb1f681b449b7d89dc88f8aee51d01a4/README/img/1.jpeg">
 
-#### Informal Traders and Spaza Shops (i.e. localised retailers)**
+#### Informal Traders and Spaza Shops (i.e. localised retailers)
 In every neighborhood and township across the city are street vendors and spaza shops.  These vendors are generally very close to where consumers work, live or travel.  Unlike huge retail enterprises, which have vast IT systems to manage, control, and supply airtime and may interface directly into mobile networks, these mall shops will be able to buy, sell, control, manage, and issue airtime using only a mobile app or a USSD interface, thanks to the Telephant app.  Despite the low margins on air time, the vendor will find a method to attract customers, while the consumer will gain from the convenience.It also gives the informal trader a cash management mechanism in a world where street crime is a major concern.
 
 <img alt="Spaza shop." width="50%" height="50%" src="https://github.com/telephant-co-za/telephant-api/blob/746e74e0cb1f681b449b7d89dc88f8aee51d01a4/README/img/3.jpeg">
