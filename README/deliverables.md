@@ -4,7 +4,9 @@ The deliverables for the assignment are listed below.
 
 ## Github Repo
 
-The Telephant API source code can be found in the github repositories indicated below. Because of the commercial nature of the app, a separate Telephant account was created, and the required repositories were set to 'pivate' to protect the system's integrity. As collaborators, the lecturers have been invited to review the work on the Telephant repository.
+The Telephant API source code can be found in the github repositories indicated below. 
+
+**Note:** Because of the commercial nature of the app, a separate Telephant account was created, and the required repositories were set to 'pivate' to protect the system's integrity. As collaborators, the lecturers have been invited to review the work on the Telephant repository.
 
 * [https://github.com/telephant-co-za/telephant-api](https://github.com/telephant-co-za/telephant-api)
 
