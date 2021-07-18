@@ -12,7 +12,7 @@ The characteristics and functionalities required per the assignment rubric are l
             Property / Characteristic
         </th>
         <th>
-            Implemntation Comment
+            Implementation Comment
         </th>
     </tr>
     <tr>
@@ -38,17 +38,17 @@ The characteristics and functionalities required per the assignment rubric are l
 
 ## Confident Developer
 <table>
-    <th>
-        <td>
+    <tr>
+        <th>
             Attempted
-        </td>
-        <td>
+        </th>
+        <th>
             Property / Characteristic
-        </td>
-        <td>
-            Implemntation Comment
-        </td>
-    </th>
+        </th>
+        <th>
+            Implementation Comment
+        </th>
+    </tr>
     <tr>
         <td>
             [ ]
@@ -87,9 +87,15 @@ The characteristics and functionalities required per the assignment rubric are l
 ### Independent Learner
 <table>
     <tr>
-        <th>Attempted</th>
-        <th>Property / Charateristic</th>
-        <th>Implementation Comment</th>
+        <th>
+            Attempted
+        </th>
+        <th>
+            Property / Characteristic
+        </th>
+        <th>
+            Implementation Comment
+        </th>
     </tr>
     <tr>
         <td></td>
@@ -121,9 +127,15 @@ The characteristics and functionalities required per the assignment rubric are l
 ### Exceptional Ability
 <table>
     <tr>
-        <th>Attempted</th>
-        <th>Property / Charateristic</th>
-        <th>Implementation Comment</th>
+        <th>
+            Attempted
+        </th>
+        <th>
+            Property / Characteristic
+        </th>
+        <th>
+            Implementation Comment
+        </th>
     </tr>
     <tr>
         <td></td>
