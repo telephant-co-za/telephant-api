@@ -6,6 +6,9 @@ Many of these capabilities are on the backend and will be necessary once normal 
 
 These features are presented in no particular order, and they will be implemented in a systematic manner, including agile project management as the business's needs evolve.
 
+
+## Features to Incorporate:
+
 * Incorporate CRM
 * Incorporate help desk ticketing into app
 * Incorporate user forums
