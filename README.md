@@ -1,4 +1,4 @@
-# Read Me
+# Telephant API
 
 <img alt="Waterford Institute of Technology" width="30%" height="30%" src="https://github.com/telephant-co-za/telephant-api/blob/1db76d351260cac7c2a7e33e305c8e1705c04cb0/README/img/wit-logo.jpeg">
 
@@ -86,8 +86,6 @@
       </tr>
    </tbody>
 </table>
-
-# Telephant API
 
 ## Table of Contents
 
