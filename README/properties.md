@@ -22,18 +22,17 @@ The characteristics and functionalities required per the assignment rubric are l
         <td>
             2 new API routes - including parameterised URL
         </td>
-        <td>
-        </td>
+        <td>&nbsp</td>
     </tr>
     <tr>
         <td>[ ]</td>
         <td>Mongo integration</td>
-        <td></td>
+        <td>&nbsp</td>
     </tr>
     <tr>
         <td>[ ]</td>
         <td>Minimal React App integration (GET and POST data to API)</td>
-        <td></td>
+        <td>&nbsp</td>
     </tr>
 </table>
 
