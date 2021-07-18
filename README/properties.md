@@ -17,7 +17,7 @@ The characteristics and functionalities required per the assignment rubric are l
     </tr>
     <tr>
         <td>
-            √
+            <ul><li>[x] item1</li><li>[ ] item2</li></ul>
         </td>
         <td>
             2 new API routes - including parameterised URL
