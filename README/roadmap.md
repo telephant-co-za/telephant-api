@@ -2,6 +2,10 @@
 
 These are some of the features that may be added to the app after it passes through the initial beta stage and is ready for production and commercialization.
 
+Many of these capabilities are on the backend and will be necessary once normal users, merchants, and enterprises have signed up. Many of these capabilities will not be accessible via the API and are used to manage the system's governance. These features are generally not required for a proof-of-concept.
+
+These features are presented in no particular order, and they will be implemented in a systematic manner, including agile project management as the business's needs evolve.
+
 * Incorporate CRM
 * Incorporate help desk ticketing into app
 * Incorporate user forums
@@ -25,9 +29,9 @@ These are some of the features that may be added to the app after it passes thro
 * Employee and vendors - batch uploads
 * Comprehensive reports for users / accounts
 * Admin interface
-* Better deposit / withdrawl functions
-* Credit card withrawl
-* EFT withdrawl
+* Better deposit / withdrawal functions
+* Credit card withdrawal
+* EFT withdrawal
 * Withdraw limits
 * Compliance - RICA and KYC
 * QR Code poster sharing
