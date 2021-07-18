@@ -14,7 +14,7 @@ The Telephant API source code can be found in the github repositories indicated 
 
 * [https://github.com/telephant-co-za/www-telephant-co-za](https://github.com/telephant-co-za/www-telephant-co-za)
 
-Please review the README files in the appropriate repository to get a better understanding of the CI/CD processes implemented.
+Please review the README files in the appropriate repository to get a better understanding of the CI/CD processes are implemented.
 
 ## Video
 
