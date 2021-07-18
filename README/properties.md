@@ -47,6 +47,8 @@ The characteristics and functionalities required per the assignment rubric are l
 </table>
 
 
+
+
 **Confident Developer**
 <table>
     <tr>
