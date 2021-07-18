@@ -2,7 +2,7 @@
 
 The characteristics and functionalities required per the assignment rubric are listed below.
 
-## Foundation Skill Set
+**Foundation Skill Set**
 <table>
     <tr>
         <th>
@@ -35,6 +35,7 @@ The characteristics and functionalities required per the assignment rubric are l
         <td>&nbsp</td>
     </tr>
 </table>
+
 
 **Confident Developer**
 <table>
@@ -84,7 +85,7 @@ The characteristics and functionalities required per the assignment rubric are l
     </tr>
 </table>
 
-### Independent Learner
+**Independent Learner**
 <table>
     <tr>
         <th>
@@ -124,7 +125,7 @@ The characteristics and functionalities required per the assignment rubric are l
     </tr>
 </table>
 
-### Exceptional Ability
+**Exceptional Ability**
 <table>
     <tr>
         <th>
