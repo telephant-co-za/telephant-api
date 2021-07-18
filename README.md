@@ -1,6 +1,6 @@
 # Read Me
 
-<img alt="Waterford Institute of Technology" width="50%" height="50%" src="https://github.com/telephant-co-za/telephant-api/blob/1db76d351260cac7c2a7e33e305c8e1705c04cb0/README/img/wit-logo.jpeg">
+<img alt="Waterford Institute of Technology" width="30%" height="30%" src="https://github.com/telephant-co-za/telephant-api/blob/1db76d351260cac7c2a7e33e305c8e1705c04cb0/README/img/wit-logo.jpeg">
 
 <table>
    <tbody>
@@ -102,7 +102,7 @@
 In South Africa, between 20 and 22 million individuals use smartphones, accounting for roughly one-third of the population. However, with more than 90 million mobile connections, the aggregate number of connections is substantially larger, as dual SIM phones are popular and widely utilized in the country and across the continent.  A significant proportion of users are using the prepaid model to access voice and data services.   The prepaid model is colloquially known as *pay-as-you-go*.  As adoption of mobile phones and data apps have increased revenues have reflected the growth.  Prepaid mobile data income has expanded rapidly in South Africa, more than tripling from 2015 to 2020, reaching around 2.1 billion US dollars in 2020, and surpassing prepaid mobile voice revenue for the first time during this period.
 
 ### Situation
-Uber, Uber Eats, Taxify, Mr Delivery, and Take-a-Lot, among other companies, have created a considerable number of job opportunities for drivers. Large fleets of delivery drivers on motorcycles and taxi drivers are on the road 24 hours a day, seven days a week. To use these applications, they need data, and they collectively spend millions of Rand per month on data.  Meanwhile, communication apps such as Whats App, Telegram, and Viber are widely utilized because they save money on cell phone calls, which are pricey per minute, and since these communication apps use relatively little inexpensive data to make calls, send messages and media. The cost of a call over data is unaffected by whether calls, messages, or media are sent abroad or locally, which is enticing to a population like that found in cities like Johannesburg, where migrant workers come from all across Africa to work.
+Uber, Uber Eats, Taxify, Mr Delivery, and Take-a-Lot, among other companies, have created a considerable number of job opportunities for drivers. Large fleets of delivery drivers on motorcycles and taxi drivers are on the road 24 hours a day, seven days a week. To use these applications, they need data, and they collectively spend millions of Rand per month on data.  Meanwhile, communication apps such as WhatsApp, Telegram, and Viber are widely utilized because they save money on cell phone calls, which are pricey per minute, and since these communication apps use relatively little inexpensive data to make calls, send messages and media. The cost of a call over data is unaffected by whether calls, messages, or media are sent abroad or locally, which is enticing to a population like that found in cities like Johannesburg, where migrant workers come from all across Africa to work.
 
 <img alt="Waterford Institute of Technology" width="50%" height="50%" src="https://github.com/telephant-co-za/telephant-api/blob/746e74e0cb1f681b449b7d89dc88f8aee51d01a4/README/img/6.jpeg">
 
@@ -115,8 +115,8 @@ Many people may not have access to internet hotspots in their homes, and they ma
 
 <img alt="Waterford Institute of Technology" width="50%" height="50%" src="https://github.com/telephant-co-za/telephant-api/blob/746e74e0cb1f681b449b7d89dc88f8aee51d01a4/README/img/2.jpeg">
 
-### Oppurtunity
-I became aware of that developers can utilize Africa's Talking's API to create apps that send airtime to phones. The company offers this service on major cellphone networks in numerous African nations, including South Africa.  To assist *pre-paid* customers in overcoming the difficulties of getting airtime I have set out to to create a web app to assist and find oppurtunity in solving the following potential use cases:
+### Opportunity
+I became aware that developers can utilize Africa's Talking's API to create apps that send airtime to phones. The company offers this service on major cell phone networks in numerous African nations, including South Africa.  To assist *prepaid* customers in overcoming the difficulties of getting airtime I have set out to to create a web app to assist and find opportunity in solving the following potential use cases:
 
 ### Use Cases
 
@@ -158,6 +158,3 @@ https://www.statista.com/statistics/488376/forecast-of-smartphone-users-in-south
 https://www.svcapital.co.za/product-page/delivery-bike
 
 https://www.voanews.com/africa/uber-struggles-spreads-africa
-
-
-
