@@ -1,6 +1,6 @@
 # Properties
 
-The characteristics and functionalities required per the assignment rubric are listed below.
+The properties, characteristics and functionalities required per the assignment rubric are listed below.
 
 **Foundation Skill Set**
 <table>
@@ -45,8 +45,6 @@ The characteristics and functionalities required per the assignment rubric are l
         <td>&nbsp</td>
     </tr>
 </table>
-
-
 
 
 **Confident Developer**
