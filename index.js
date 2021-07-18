@@ -1,6 +1,12 @@
 import dotenv from 'dotenv';
 import express from 'express';
+
+// security
 import https from 'https';
+var hpp = require('hpp');
+var bodyParser = require('body-parser');
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
 
 // import main routers
 import apiRouter from './api/v1/v1Router';
@@ -18,8 +24,21 @@ dotenv.config();
 //const port = process.env.PORT;
 const app = express();
 
+app.set('trust proxy', 1);
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
+
 app
 .use(express.json())
+.use(bodyParser.urlencoded())
+
+// Security middleware
+.use(hpp())
+.use(helmet())
+.use(limiter)
 
 // top routes
 .use('/docs', docsRouter)
