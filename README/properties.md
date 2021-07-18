@@ -36,7 +36,7 @@ The characteristics and functionalities required per the assignment rubric are l
     </tr>
 </table>
 
-## Confident Developer
+**Confident Developer**
 <table>
     <tr>
         <th>
