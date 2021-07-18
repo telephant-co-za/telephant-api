@@ -89,6 +89,8 @@
 
 ## Table of Contents
 
+The following are links to relevant assignment documentation:
+
 * [Introduction](#introduction)
 * [Work Carried Out](README/work-carried-out.md)
 * [Deliverables](README/deliverables.md)
