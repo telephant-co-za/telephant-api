@@ -89,12 +89,13 @@
 
 ## Table of Contents
 
-* Introduction
-* Work Carried Out
-* Delivarables
-* Properties
+* [Introduction](#introduction)
+* [Work Carried Out](README/work-carried-out.md)
+* [Deliverables](README/deliverables.md)
+* [Properties](README/properties.md)
+* [Roadmap](README/roadmap.md)
 
-## Introduction
+## <a name="introduction"></a>Introduction
 
 ### Context
 In South Africa, between 20 and 22 million individuals use smartphones, accounting for roughly one-third of the population. However, with more than 90 million mobile connections, the aggregate number of connections is substantially larger, as dual SIM phones are popular and widely utilized in the country and across the continent.  A significant proportion of users are using the prepaid model to access voice and data services.   The prepaid model is colloquially known as *pay-as-you-go*.  As adoption of mobile phones and data apps have increased revenues have reflected the growth.  Prepaid mobile data income has expanded rapidly in South Africa, more than tripling from 2015 to 2020, reaching around 2.1 billion US dollars in 2020, and surpassing prepaid mobile voice revenue for the first time during this period.
