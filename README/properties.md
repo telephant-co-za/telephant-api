@@ -17,7 +17,7 @@ The characteristics and functionalities required per the assignment rubric are l
     </tr>
     <tr>
         <td>
-            - [ ]
+            - []
         </td>
         <td>
             2 new API routes - including parameterised URL
@@ -25,7 +25,7 @@ The characteristics and functionalities required per the assignment rubric are l
         <td>&nbsp</td>
     </tr>
     <tr>
-        <td>[ ]</td>
+        <td>[]</td>
         <td>Mongo integration</td>
         <td>&nbsp</td>
     </tr>
