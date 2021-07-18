@@ -4,17 +4,17 @@ The characteristics and functionalities required per the assignment rubric are l
 
 ## Foundation Skill Set
 <table>
-    <th>
-        <td>
+    <tr>
+        <th>
             Attempted
-        </td>
-        <td>
+        </th>
+        <th>
             Property / Characteristic
-        </td>
-        <td>
+        </th>
+        <th>
             Implemntation Comment
-        </td>
-    </th>
+        </th>
+    </tr>
     <tr>
         <td>
             [ ]
