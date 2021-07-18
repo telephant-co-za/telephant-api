@@ -23,3 +23,17 @@ These are some of the features that may be added to the app after it passes thro
 * Developer API key
 * Reoccuring transactions
 * Employee and vendors - batch uploads
+* Comprehensive reports for users / accounts
+* Admin interface
+* Better deposit / withdrawl functions
+* Credit card withrawl
+* EFT withdrawl
+* Withdraw limits
+* Compliance - RICA and KYC
+* QR Code poster sharing
+* System Oracle
+    * Fraud detection
+    * Trial balance check
+    * Alerts on ...
+    * Imbalance investigation
+    * Auto locking funds to reserves
