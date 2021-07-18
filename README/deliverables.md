@@ -27,7 +27,7 @@ A meeting will be scheduled on the Zoom platform with the appropriate lectures t
 
 ## Links
 
-The API links are:
+The live links are:
 
 * [https://api.telephant.co.za](https://api.telephant.co.za).  This link will take you to a live API implementation. This is a live API that does not use demo data. Heroku is the platform where it is hosted.  Heroku's application is updated on a regular basis thanks to a continuous integration.  MongoDB Atlas is used to host the NoSQL database of the API.
 
