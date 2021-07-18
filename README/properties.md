@@ -17,7 +17,7 @@ The characteristics and functionalities required per the assignment rubric are l
     </tr>
     <tr>
         <td>
-            <li>[x] </li>
+            <li>[ ] </li>
         </td>
         <td>
             2 new API routes - including parameterised URL
@@ -26,14 +26,14 @@ The characteristics and functionalities required per the assignment rubric are l
     </tr>
     <tr>
         <td>
-            <li>[x] </li>
+            <li>[ ] </li>
         </td>
         <td>Mongo integration</td>
         <td>&nbsp</td>
     </tr>
     <tr>
         <td>
-            <li>[x] </li>
+            <li>[ ] </li>
         </td>
         <td>Minimal React App integration (GET and POST data to API)</td>
         <td>&nbsp</td>
@@ -56,7 +56,7 @@ The characteristics and functionalities required per the assignment rubric are l
     </tr>
     <tr>
         <td>
-            <li>[x] </li>
+            <li>[ ] </li>
         </td>
         <td>
             Coherent API design and modelling supporting full manipulation of resources
@@ -66,7 +66,7 @@ The characteristics and functionalities required per the assignment rubric are l
     </tr>
     <tr>
         <td>
-            <li>[x] </li>
+            <li>[ ] </li>
         </td>
         <td>
             Nested document and / or object referencing in Mongo/Mongoose
@@ -76,21 +76,21 @@ The characteristics and functionalities required per the assignment rubric are l
     </tr>
     <tr>
         <td>
-            <li>[x] </li>
+            <li>[ ] </li>
         </td>
         <td>Basic authentication and protected routes</td>
         <td></td>
     </tr>
     <tr>
         <td>
-            <li>[x] </li>
+            <li>[ ] </li>
         </td>
         <td>Good use of express middleware (eg. error handling)</td>
         <td></td>
     </tr>
     <tr>
         <td>
-            <li>[x] </li>
+            <li>[ ] </li>
         </td>
         <td>Substantial React App integration</td>
         <td></td>
@@ -112,35 +112,35 @@ The characteristics and functionalities required per the assignment rubric are l
     </tr>
     <tr>
         <td>
-            <li>[x] </li>
+            <li>[ ] </li>
         </td>
         <td>Advanced authentication / verification to accomplish richer functionality</td>
         <td></td>
     </tr>
     <tr>
         <td>
-            <li>[x] </li>
+            <li>[ ] </li>
         </td>
         <td>Excellent use of 3rd party tools, services and modules</td>
         <td></td>
     </tr>
     <tr>
         <td>
-            <li>[x] </li>
+            <li>[ ] </li>
         </td>
         <td>Full API documentation (Swagger / Open API)</td>
         <td></td>
     </tr>
     <tr>
         <td>
-            <li>[x] </li>
+            <li>[ ] </li>
         </td>
         <td>Logging</td>
         <td></td>
     </tr>
     <tr>
         <td>
-            <li>[x] </li>
+            <li>[ ] </li>
         </td>
         <td>Unit Testing</td>
         <td></td>
@@ -162,21 +162,21 @@ The characteristics and functionalities required per the assignment rubric are l
     </tr>
     <tr>
         <td>
-            <li>[x] </li>
+            <li>[ ] </li>
         </td>
         <td>Live Hosting</td>
         <td></td>
     </tr>
     <tr>
         <td>
-            <li>[x] </li>
+            <li>[ ] </li>
         </td>
         <td>Analytics</td>
         <td></td>
     </tr>
     <tr>
         <td>
-            <li>[x] </li>
+            <li>[ ] </li>
         </td>
         <td>Movie recommendation based on users favourites</td>
         <td></td>
