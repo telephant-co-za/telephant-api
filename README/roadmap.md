@@ -3,9 +3,9 @@
 These are some of the features that may be added to the app after it passes through the initial beta stage and is ready for production and commercialization.
 
 * Incorporate CRM
-* Incorporate help tesk ticketing into app
-* Incorpotate user forums
-* Above with integration into a ERP Next as a backend
+* Incorporate help desk ticketing into app
+* Incorporate user forums
+* Above with integration into a ERPNext as a backend
 * Write user help docs
 * Data mining on usage
 * Compliance with banking regulations
@@ -17,9 +17,9 @@ These are some of the features that may be added to the app after it passes thro
 * Liquidity / cash reserve management
 * Credit card payments
 * VAT management
-* Online sellling for vendors
+* Online selling for vendors
 * Credit expiry or incentives to spend
-* Notiifcation - low balances
+* Notification - low balances
 * Developer API key
-* Recoccutring transactions
+* Reoccuring transactions
 * Employee and vendors - batch uploads
