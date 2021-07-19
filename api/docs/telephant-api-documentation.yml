@@ -928,12 +928,23 @@ components:
           schema:
             type: object
             properties:
-              username:
-                type: string
-              avatar:          # <-- image embedded into JSON
-                type: string
-                format: byte
-                description: Base64-encoded contents of the avatar image
+              code:
+                type: integer
+                description: |
+                  Please review the documentation for [HTTP Response Status Codes] (http://developer.telephant.co.za/#section/HTTP-Response-Status-Codes)
+
+                  Possible values are:
+                    - 400 - Bad Request
+                    - 401 - Unauthorized
+                    - 403 - Forbidden
+                    - 404 - Not Found
+                    - 405 - Method Not Allowed
+              name:
+                type: String
+              name:
+                type: message
+
+
     '5XX':
       description: Server erro
       content:

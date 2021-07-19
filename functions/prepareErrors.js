@@ -17,10 +17,17 @@ module.exports = function(error, req, res, next) {
     res.status(error.status);
     if (error.status == 500){
       // Hide the 500 errors to not give away security and infrastructure secrets
-      res.json({message: "We are sorry but something went wrong on our side."});
+      res.json({
+        code: error.status,
+        name: error.name,
+        message: "We are sorry but something went wrong on our side."});
     }
     else
     {
-      res.json({ message: error.message });
+      res.json({
+        code: error.status,
+        name: error.name,
+        message: error.message
+      });
     }
   };
