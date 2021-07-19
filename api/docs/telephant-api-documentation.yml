@@ -123,10 +123,10 @@ paths:
           format: uuid
         required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        'Client Error':
+          $ref: '#/components/responses/4XX'
 
-        '5XX':
+        'Server Error':
           $ref: '#/components/responses/ServerError'
     post:
       summary: Create account.
