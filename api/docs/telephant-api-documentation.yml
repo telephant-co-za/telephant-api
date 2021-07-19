@@ -48,7 +48,18 @@ info:
     #### 500 - Internal Server Error
     The server has come upon a circumstance that it is unsure how to handle.  Our team will be reviewing the root cause of issues and resolving the problems as soon as possible.
 
-    ## x-account-id Header
+    ## Headers
+
+    ### Accept
+    Clients can send requests with varied values for the 'Accept' header, and the response format will be adjusted to accommodate the request. This is supplied to make interacting with browsers and other clients easier. It's worth noting that only JSON-formatted success and error messages will be returned. The API is designed to return JSON in general, hence the functionality is not further documented.
+
+    #### Mime Types Accepted:
+    - text/plain - will return a string of text
+    - text/html - will return a formatted table of results
+    - application/json - will return formatted json
+    - text/csv - will return results in a downloadable CSV file
+
+    ### x-account-id Header
     Clients can send requests as a separate account associated to the username by including the x-account-id header, which should contain the Telephant account ID of the account the client desires to act on.
 
   terms-of-service: http://www.telephant.co.za/terms-of-service
