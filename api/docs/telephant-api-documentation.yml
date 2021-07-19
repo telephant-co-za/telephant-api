@@ -928,15 +928,6 @@ components:
     4XX:
       description: |
         Client error
-
-        Please review the documentation for [HTTP Response Status Codes](/#section/HTTP-Response-Status-Codes)
-
-        Possible values are:
-        - 400 - Bad Request
-        - 401 - Unauthorized
-        - 403 - Forbidden
-        - 404 - Not Found
-        - 405 - Method Not Allowed
       content:
         application/json:
           schema:
