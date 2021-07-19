@@ -16,7 +16,7 @@ info:
 
     Telephant API makes use of the following HTTP status codes, grouped into three classes:
 
-    ### Successful Responses
+    ### Successful Responses - 2XX
 
     #### 200 - OK
 
@@ -26,7 +26,7 @@ info:
 
     As a result of the request's success, a new resource has been generated. This is the response that is normally sent in response to POST or some PUT queries.
 
-    ### Client Error
+    ### Client Error - 4XX
     
     #### 400 - Bad Request
     Due to incorrect syntax, the server was unable to understand the request.
@@ -43,10 +43,13 @@ info:
     #### 405 - Method Not Allowed
     A GET request on a form that needs data to be presented via POST, or a PUT request on a read-only resource, for example, is not supported for the requested resource.
 
-    ### Server Error
+    ### Server Error - 5XX
 
     #### 500 - Internal Server Error
     The server has come upon a circumstance that it is unsure how to handle.  Our team will be reviewing the root cause of issues and resolving the problems as soon as possible.
+
+    ## x-account-id Header
+    Clients can send requests as a separate account associated to the username by including the x-account-id header, which should contain the Telephant account ID of the account the client desires to act on.
 
   terms-of-service: http://www.telephant.co.za/terms-of-service
   version: '1.0'
@@ -122,7 +125,25 @@ paths:
           type: string
           format: uuid
         required: false
+      - in: query
+        name: page
+        description: The page number of results to return.
+        schema:
+            type: integer
+      - in: query
+        name: limit
+        description: The numbers of items to return per page.
+        schema:
+          type: integer
       responses:
+        '2XX':
+          description: Success
+          content:
+            application/json:
+              examples:
+                Accounts-Get:
+                  $ref: '#/components/examples/Accounts-Get'
+
         '4XX':
           $ref: '#/components/responses/4XX'
 
@@ -973,9 +994,28 @@ components:
                 type: String
                 example: 'We are sorry but something went wrong on our side.'
 
-    '2XX':
-      description: Success
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ServerError'
+  examples:
+    Accounts-Get:
+      value:
+        {
+          "page": 1,
+          "total_pages": 1,
+          "total_results": 3,
+          "results": [
+                        {
+                          "_id": "60f57f3a6023f819ae7aa454",
+                          "accountName": "27829524031"
+                        },
+                        {
+                          "_id": "60ebd53e2f79311541618bc4",
+                          "accountName": "MyCompany",
+                          "description": "The account description for My Company"
+                        },
+                        {
+                          "_id": "60ebd53e2f79311541618bc5",
+                          "accountName": "My Company 2",
+                          "description": "The account description for My Company 2"
+                        }
+                    ]
+                }
+
