@@ -1,7 +1,5 @@
 const createError = require('http-errors');
 
-console.log("hello");
-
 module.exports = function(req, res, next) {
     if (res.locals == null)
     {

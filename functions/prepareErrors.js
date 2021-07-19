@@ -2,7 +2,7 @@ module.exports = function(error, req, res, next) {
 
     // Log the error
     // Make less verbose (comment out outputting stack and req)
-    // Errors logged will appear in Cloudwatch Stream
+
     var now = new Date();
 
     console.log('\n\n*** ERROR LOGGED BY prepareErrors ***');

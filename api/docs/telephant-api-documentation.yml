@@ -11,6 +11,43 @@ info:
 
     Happy programming **:-)**
 
+    ## HTTP Response Status Codes
+    HTTP response status codes show whether or not a particular HTTP request was completed successfully. Section 10 of RFC 2616 defines the status codes listed below. RFC 7231 contains an updated specification.
+
+    Telephant API makes use of the following HTTP status codes, grouped into three classes:
+
+    ### Successful Responses
+
+    #### 200 - OK
+
+    The request has succeeded.
+
+    #### 201 - Created
+
+    As a result of the request's success, a new resource has been generated. This is the response that is normally sent in response to POST or some PUT queries.
+
+    ### Client Error
+    
+    #### 400 - Bad Request
+    Due to incorrect syntax, the server was unable to understand the request.
+    
+    #### 401 - Unauthorized
+    Authentication is required and has failed or has not yet been provided.
+    
+    #### 403 - Forbidden
+    The server refuses to provide the requested resource because the client does not have access permissions to the resource; that is, it is unauthorized. Unlike 401, the server is aware of the client's identity.
+    
+    #### 404 - Not Found
+    The requested resource was not found. The client is free to make additional requests.
+    
+    #### 405 - Method Not Allowed
+    A GET request on a form that needs data to be presented via POST, or a PUT request on a read-only resource, for example, is not supported for the requested resource.
+
+    ### Server Error
+
+    #### 500 - Internal Server Error
+    The server has come upon a circumstance that it is unsure how to handle.  Our team will be reviewing the root cause of issues and resolving the problems as soon as possible.
+
   terms-of-service: http://www.telephant.co.za/terms-of-service
   version: '1.0'
   contact:
@@ -859,25 +896,6 @@ components:
               * The password must contain one or more special characters
             example: P@ssword123
 
-    Unauthorised:
-      type: object
-      properties:
-        status_message: 
-          type: string
-          example: 'Unauthorised'
-        status_code:
-          type: integer
-          example: 401
-    ServerError:
-      type: object
-      properties:
-        status_message: 
-          type: string
-          example: 'Server error. Please try again later'
-        status_code:
-          type: integer
-          example: 500
-
     Transactions:
       type: object
       required:
@@ -901,21 +919,29 @@ components:
             - SEND
             - RECEIVE
       description: The Transactions are represented in the form of the following JSON model.
+
   responses:
-    NotFound:
-      description: The specified resource was not found
+    '4XX':
+      description: Client error
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/NotFound'
-    Unauthorised:
-      description: Unauthorised
+            type: object
+            properties:
+              username:
+                type: string
+              avatar:          # <-- image embedded into JSON
+                type: string
+                format: byte
+                description: Base64-encoded contents of the avatar image
+    '5XX':
+      description: Server erro
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Unauthorised'
-    ServerError:
-      description: Server Error
+    '2XX':
+      description: Success
       content:
         application/json:
           schema:
