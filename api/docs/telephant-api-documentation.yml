@@ -124,7 +124,7 @@ paths:
         required: false
       responses:
         'Client Error':
-          $ref: '#/components/responses/4XX'
+          $ref: '#/components/responses/404ClientError'
 
         'Server Error':
           $ref: '#/components/responses/ServerError'
@@ -921,7 +921,7 @@ components:
       description: The Transactions are represented in the form of the following JSON model.
 
   responses:
-    '4XX':
+    4XXClientError:
       description: Client error
       content:
         application/json:
