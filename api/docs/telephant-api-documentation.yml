@@ -941,8 +941,8 @@ components:
                     - 405 - Method Not Allowed
               name:
                 type: String
-              name:
-                type: message
+              message:
+                type: String
 
 
     '5XX':
