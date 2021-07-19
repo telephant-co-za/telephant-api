@@ -123,11 +123,11 @@ paths:
           format: uuid
         required: false
       responses:
-        'Client Error':
-          $ref: '#/components/responses/404ClientError'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
-        'Server Error':
-          $ref: '#/components/responses/ServerError'
+        '5XX':
+          $ref: '#/components/responses/5XX'
     post:
       summary: Create account.
       description: Create a new group account.
@@ -150,11 +150,11 @@ paths:
                   maxLength: 50
                   example: My Company's Airtime Account
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
     put:
       summary: Update account.
       description: Update the details of a group account.
@@ -185,11 +185,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
     delete:
       summary: Delete account.
       description: Delete a specific group account.
@@ -206,11 +206,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
   /v1/airtime:
     get:
       summary: Get airtime balance.
@@ -228,11 +228,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
     post:
       summary: Use airtime.
       description: Convert positive airtime balance for use as airtime on phone.
@@ -241,11 +241,11 @@ paths:
       security:
         - BearerAuth: []
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
   /v1/airtime/{ContactsPhoneNumber}:
     get:
       summary: Request airtime.
@@ -270,11 +270,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
     post:
       summary: Send airtime.
       description: Send airtime credit to a contact.
@@ -298,11 +298,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
   /v1/contacts:
     get:
       summary: List the contacts of an individual or group account.
@@ -320,11 +320,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
     post:
       summary: Create contact.
       description: Create a contact for a individual or group account.
@@ -341,11 +341,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
   /v1/contacts/{ContactsPhoneNumber}:
     get:
       summary: View specific contact.
@@ -370,11 +370,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
     put:
       summary: Update specific contact.
       description: Update a specific contact for an individual or group account.
@@ -398,11 +398,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
     delete:
       summary: Delete specific contact.
       description: Delete a specific contact for an individual or group account.
@@ -426,11 +426,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
   /v1/notifications:
     get:
       summary: Get list of notifications.
@@ -448,10 +448,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
+
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
     post:
       summary:  Mark unread notifications as read.
       description: Mark all unread notifications as read on an individual or group account.
@@ -468,10 +469,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
+
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
   /v1/notifications/{NotificationID}:
     get:
       summary: View specific notification.
@@ -496,10 +498,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
+
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
     post:
       summary: Mark notifcation as read.
       description: On an individual or group account, mark a specific notification as read.
@@ -523,10 +526,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
+
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
     put:
       summary: Accept or reject airtime request.
       description: Accept or reject a specific airtime send request from a contact.
@@ -550,11 +554,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
   /ping:
     get:
       summary: Ping the API.
@@ -579,11 +583,11 @@ paths:
       tags:
         - Retailers
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
     post:
       summary: Create a retailer listing.
       description: Create a Telephant retailer listing.
@@ -600,11 +604,11 @@ paths:
             format: uuid
           required: true
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
   /v1/retailers/{RetailerID}:
     put:
       summary: Update retailer.
@@ -629,11 +633,11 @@ paths:
             format: uuid
           required: true
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
     delete:
       summary: Delete retailer.
       description: Delete a retailer listing.
@@ -657,11 +661,11 @@ paths:
             format: uuid
           required: true
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
   /v1/transactions:
     get:
       summary: Get transactions.
@@ -679,11 +683,11 @@ paths:
       security:
         - BearerAuth: []
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
   /v1/transactions/{TransactionID}:
     get:
       summary: View a transaction.
@@ -708,11 +712,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
   /v1/users:
     post:
       summary: User authentication.
@@ -820,11 +824,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
     post:
       summary: Create verifications.
       description: Submit verification requirements on a per-account or per-group basis.
@@ -841,11 +845,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
     put:
       summary: Update verification.
       description: Update the verification requirements for a single account or a group account.
@@ -862,11 +866,11 @@ paths:
             format: uuid
           required: false
       responses:
-        '401':
-          $ref: '#/components/responses/Unauthorised'
+        '4XX':
+          $ref: '#/components/responses/4XX'
 
         '5XX':
-          $ref: '#/components/responses/ServerError'
+          $ref: '#/components/responses/5XX'
 
 
 components:
@@ -921,17 +925,28 @@ components:
       description: The Transactions are represented in the form of the following JSON model.
 
   responses:
-    4XXClientError:
-      description: Client error
+    4XX:
+      description: |
+        Client error
+
+        Please review the documentation for [HTTP Response Status Codes](/#section/HTTP-Response-Status-Codes)
+
+        Possible values are:
+        - 400 - Bad Request
+        - 401 - Unauthorized
+        - 403 - Forbidden
+        - 404 - Not Found
+        - 405 - Method Not Allowed
       content:
         application/json:
           schema:
             type: object
             properties:
               code:
-                type: integer
+                type: Integer
+                example: 400
                 description: |
-                  Please review the documentation for [HTTP Response Status Codes] (http://developer.telephant.co.za/#section/HTTP-Response-Status-Codes)
+                  Please review the documentation for [HTTP Response Status Codes](/#section/HTTP-Response-Status-Codes)
 
                   Possible values are:
                     - 400 - Bad Request
@@ -941,16 +956,32 @@ components:
                     - 405 - Method Not Allowed
               name:
                 type: String
+                example: 'BadRequest'
+                description: This value will always be returned as 'bumpy case'.
               message:
                 type: String
+                description: |
+                  The message field will provide specific information as to the reason for the error.
+                example: 'The account ID provided is not valid.'
 
-
-    '5XX':
-      description: Server erro
+    5XX:
+      description: |
+        Server error  
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Unauthorised'
+            type: object
+            properties:
+              code:
+                type: Integer
+                example: 500
+              name:
+                type: String
+                example: 'InternalServerError'
+              message:
+                type: String
+                example: 'We are sorry but something went wrong on our side.'
+
     '2XX':
       description: Success
       content:
