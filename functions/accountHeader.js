@@ -39,7 +39,7 @@ async function accountHeader(req, res, next) {
         res.locals.account_name = req.user.telephoneNumber;
     }
 
-    // 3) If the account id is set in the header
+    // 3) If the account_id is set in the header
     if (req.headers.account_id)
     {
         // Make sure the account_id is actually the same pattern as a Mongo id before passing into mongo

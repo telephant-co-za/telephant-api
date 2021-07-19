@@ -59,8 +59,8 @@ info:
     - application/json - will return formatted json
     - text/csv - will return results in a downloadable CSV file
 
-    ### x-account-id Header
-    Clients can send requests as a separate account associated to the username by including the x-account-id header, which should contain the Telephant account ID of the account the client desires to act on.
+    ### account_id Header
+    Clients can send requests as a separate account associated to the username by including the account_id header, which should contain the Telephant account ID of the account the client desires to act on.
 
   terms-of-service: http://www.telephant.co.za/terms-of-service
   version: '1.0'
@@ -130,8 +130,8 @@ paths:
         - BearerAuth: []
       parameters:
       - in: header
-        name: x-account-id
-        description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+        name: account_id
+        description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
         schema:
           type: string
           format: uuid
@@ -210,8 +210,8 @@ paths:
                   example: My Company's Airtime Account
       parameters:
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -231,8 +231,8 @@ paths:
         - BearerAuth: []
       parameters:
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -253,8 +253,8 @@ paths:
         - BearerAuth: []
       parameters:
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -295,8 +295,8 @@ paths:
           required: true
           description: A contact's unique mobile phone number from an accounts contacts list.
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -323,8 +323,8 @@ paths:
           required: true
           description: A contact's unique mobile phone number from an accounts contacts list.
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -345,8 +345,8 @@ paths:
         - BearerAuth: []
       parameters:
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -366,8 +366,8 @@ paths:
         - BearerAuth: []
       parameters:
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -395,8 +395,8 @@ paths:
           required: true
           description: A contact's unique mobile phone number from an accounts contacts list.
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -423,8 +423,8 @@ paths:
           required: true
           description: A contact's unique mobile phone number from an accounts contacts list.
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -451,8 +451,8 @@ paths:
           required: true
           description: A contact's unique mobile phone number from an accounts contacts list.
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -473,8 +473,8 @@ paths:
         - BearerAuth: []
       parameters:
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -494,8 +494,8 @@ paths:
         - BearerAuth: []
       parameters:
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -523,8 +523,8 @@ paths:
           required: true
           description: Unique ID of the notification.
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -551,8 +551,8 @@ paths:
           required: true
           description: Unique ID of the notification.
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -579,8 +579,8 @@ paths:
           required: true
           description: Unique ID of the notification.
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -629,8 +629,8 @@ paths:
         - BearerAuth: []
       parameters:
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -658,8 +658,8 @@ paths:
           required: true
           description: Unique ID of the retailer listing.
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -686,8 +686,8 @@ paths:
           required: true
           description: Unique ID of the retailer listing.
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -704,8 +704,8 @@ paths:
       description: Get a transaction listing for an individual or group account.
       parameters:
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -737,8 +737,8 @@ paths:
           required: true
           description: Unique ID of the transaction.
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -849,8 +849,8 @@ paths:
         - BearerAuth: []
       parameters:
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -870,8 +870,8 @@ paths:
         - BearerAuth: []
       parameters:
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid
@@ -891,8 +891,8 @@ paths:
         - BearerAuth: []
       parameters:
         - in: header
-          name: x-account-id
-          description: Clients can make requests as connected accounts using the special header x-account-id which should contain a Telephant account ID.
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
           schema:
             type: string
             format: uuid

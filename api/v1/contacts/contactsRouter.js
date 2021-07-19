@@ -127,7 +127,7 @@ router
                     switch(result.nModified){
                         case 0:
                             //{ n: 1, nModified: 0, ok: 1 }               
-                            err = createError(409, 'Contact already matches state requested.');
+                            err = createError(400, 'Contact already matches state requested.');
                             next(err);
                             break;
                         case 1:
@@ -143,7 +143,7 @@ router
                     switch(result.ok){
                         case 0:
                             //{ n: 0, nModified: 0, ok: 0 }                
-                            err = createError(406, 'The request was unacceptable.');
+                            err = createError(400, 'The request was unacceptable.');
                             next(err);
                             break;
                         case 1:

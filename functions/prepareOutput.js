@@ -49,7 +49,7 @@ module.exports = function(req, res, next) {
         });
       },
       default : function(){
-        throw createError(406, `The format you requested is not acceptable. For more details, go to http://developer.telephant.co.za.`)
+        throw createError(400, `The format you requested is not acceptable. For more details, go to http://developer.telephant.co.za.`)
       },
     });
   };
