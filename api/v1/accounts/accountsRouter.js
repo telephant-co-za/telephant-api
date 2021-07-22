@@ -7,8 +7,8 @@ const createError = require('http-errors');
 const router = express.Router();
 
 // Import models
-import Account from '../../../models/account';
-import User from '../../../models/user';
+import Account from '../../../models/accountModel';
+import User from '../../../models/userModel';
 
 // custom functions
 const wrongPath = require('../../../functions/wrongPath');

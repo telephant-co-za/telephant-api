@@ -7,7 +7,7 @@ const createError = require('http-errors');
 const router = express.Router();
 
 // models
-import Contact from '../../../models/contact';
+import Contact from '../../../models/contactModel';
 
 // custom functions
 import wrongPath from '../../../functions/wrongPath';

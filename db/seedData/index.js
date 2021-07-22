@@ -1,9 +1,9 @@
-import accountModel from '../../models/account';
-import contactModel from '../../models/contact';
-import notificationsModel from '../../models/notification';
-import retailersModel from '../../models/retailer'
-import transactionsModel from '../../models/transaction';
-import userModel from '../../models/user';
+import accountModel from '../../models/accountModel';
+import contactModel from '../../models/contactModel';
+import notificationsModel from '../../models/notificationModel';
+import retailersModel from '../../models/retailerModel'
+import transactionsModel from '../../models/transactionModel';
+import userModel from '../../models/userModel';
 
 import { accounts } from './accounts';
 import { contacts } from './contacts';
@@ -16,7 +16,7 @@ export async function loadAccounts() {
   console.log('Load Accounts collection data.');
   try {
     await accountModel.deleteMany();
-    await accountModel.collection.insertMany(accounts);
+    accounts.forEach(account => accountModel.create(account));
     console.info(`${accounts.length} Accounts were successfully stored.`);
   } catch (err) {
     console.error(`Failed to load Accounts data: ${err}`);
@@ -27,7 +27,7 @@ async function loadContacts() {
   console.log('Load Contacts collection data.');
   try {
     await contactModel.deleteMany();
-    await contactModel.collection.insertMany(contacts);
+    contacts.forEach(contacts => contactModel.create(contacts));
     console.info(`${contacts.length} contacts were successfully stored.`);
   } catch (err) {
     console.error(`Failed to load Contacts data: ${err}`);
@@ -38,7 +38,7 @@ async function loadNotifications() {
   try {
     await notificationsModel.deleteMany();
     notifications.forEach(notifications => notificationsModel.create(notifications));
-    console.info(`${transactions.length} notifications were successfully stored.`);
+    console.info(`${notifications.length} notifications were successfully stored.`);
   } catch (err) {
     console.error(`failed to load Notifcations data: ${err}`);
   }

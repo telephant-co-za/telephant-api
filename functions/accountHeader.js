@@ -1,5 +1,5 @@
 // Import models
-import Account from '../models/account';
+import Account from '../models/accountModel';
 const ObjectId = require('mongoose').Types.ObjectId;
 const createError = require('http-errors');
 

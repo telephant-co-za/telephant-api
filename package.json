@@ -54,6 +54,7 @@
     "moment-timezone": "^0.5.33",
     "mongoose": "^5.12.14",
     "mongoose-transactions": "^1.1.4",
+    "mongoose-type-email": "^1.1.2",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "swagger-ui-express": "^4.1.6"

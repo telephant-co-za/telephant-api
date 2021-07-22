@@ -9,7 +9,7 @@ const NotificationSchema = new Schema({
   read: {type: Boolean},
   type: {
     type: String,
-    enum : ['info','request'],
+    enum : ['INFO','REQUEST'],
     default: 'user'},
   owner: {type: String}
 });

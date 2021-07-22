@@ -9,7 +9,7 @@ const router = express.Router();
 
 // models
 
-import User from '../../../models/user';
+import User from '../../../models/userModel';
 //import prepareErrors from '../../../functions/prepareErrors';
 
 

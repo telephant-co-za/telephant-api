@@ -7,7 +7,7 @@ const createError = require('http-errors');
 const router = express.Router();
 
 // models
-import Notification from '../../../models/notification';
+import Notification from '../../../models/notificationModel';
 
 // custom functions
 import wrongPath from '../../../functions/wrongPath';

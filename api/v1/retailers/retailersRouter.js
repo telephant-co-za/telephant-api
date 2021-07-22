@@ -10,7 +10,7 @@ const createError = require('http-errors');
 const router = express.Router();
 
 // models
-import Retailer from '../../../models/retailer';
+import Retailer from '../../../models/retailerModel';
 
 // custom functions
 import wrongPath from '../../../functions/wrongPath';
