@@ -486,7 +486,7 @@ paths:
             application/json:
               examples:
                 Notifcations-Get:
-                  $ref: '#/components/examples/Notifcations-Get'
+                  $ref: '#/components/examples/Notifications-Get'
         '4XX':
           $ref: '#/components/responses/4XX'
 
