@@ -548,7 +548,7 @@ paths:
             format: uuid
           required: false
         - in: path
-          name: notificationID
+          name: NotificationID
           description: Use a valid resource id to identify the notification to query.
           schema:
             type: string
