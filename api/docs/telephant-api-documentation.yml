@@ -505,7 +505,7 @@ paths:
   /v1/notifications/count:
     get:
       summary: Get a count of notifications.
-      description: Get a count by read, unread and total notifications.
+      description: Get a count of read, unread and total notifications.
       tags:
         - Notifications
       security:
@@ -518,6 +518,42 @@ paths:
             type: string
             format: uuid
           required: false
+      responses:
+        '2XX':
+          description: Success
+          content:
+            application/json:
+              examples:
+                Notifcations-Get:
+                  $ref: '#/components/examples/Notifications-Count'
+        '4XX':
+          $ref: '#/components/responses/4XX'
+        '5XX':
+          $ref: '#/components/responses/5XX'
+
+  /v1/notifications/{NotificationID}:
+    get:
+      summary: Get specific notification.
+      description: Retrieve the details of a specific notification by it id.
+      tags:
+        - Notifications
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: header
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
+        - in: path
+          name: notificationID
+          description: Use a valid resource id to identify the notification to query.
+          schema:
+            type: string
+            format: uuid
+          required: true
       responses:
         '2XX':
           description: Success
