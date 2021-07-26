@@ -588,63 +588,7 @@ paths:
 
         '5XX':
           $ref: '#/components/responses/5XX'
-          
-    post:
-      summary: Mark notifcation as read.
-      description: On an individual or group account, mark a specific notification as read.
-      tags:
-        - Notifications
-      security:
-        - BearerAuth: []
-      parameters:
-        - in: path
-          name: NotificationID
-          schema:
-            type: string
-            format: uuid
-          required: true
-          description: Unique ID of the notification.
-        - in: header
-          name: account_id
-          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
-          schema:
-            type: string
-            format: uuid
-          required: false
-      responses:
-        '4XX':
-          $ref: '#/components/responses/4XX'
 
-        '5XX':
-          $ref: '#/components/responses/5XX'
-    put:
-      summary: Accept or reject airtime request.
-      description: Accept or reject a specific airtime send request from a contact.
-      tags:
-        - Notifications
-      security:
-        - BearerAuth: []
-      parameters:
-        - in: path
-          name: NotificationID
-          schema:
-            type: string
-            format: uuid
-          required: true
-          description: Unique ID of the notification.
-        - in: header
-          name: account_id
-          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
-          schema:
-            type: string
-            format: uuid
-          required: false
-      responses:
-        '4XX':
-          $ref: '#/components/responses/4XX'
-
-        '5XX':
-          $ref: '#/components/responses/5XX'
   /ping:
     get:
       summary: Ping the API.
