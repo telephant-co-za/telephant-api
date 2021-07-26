@@ -569,8 +569,8 @@ paths:
           $ref: '#/components/responses/5XX'
 
     post:
-      summary:  Mark unread notifications as read.
-      description: Mark all unread notifications as read on an individual or group account.
+      summary:  Mark notification as read.
+      description: Mark a specific notification as read for an individual or group account.
       tags:
         - Notifications
       security:
@@ -583,6 +583,24 @@ paths:
             type: string
             format: uuid
           required: false
+        - in: path
+          name: NotificationID
+          description: Use a valid resource id to identify the notification to query.
+          schema:
+            type: string
+            format: uuid
+          required: true
+          example: '60ebd53e2f79311541619554'
+      responses:
+        '2XX':
+          description: Success
+          content:
+            application/json:
+              examples:
+                value:
+                  {
+                      message: '1 notifications were marked as read.'
+                  }
       responses:
         '4XX':
           $ref: '#/components/responses/4XX'
