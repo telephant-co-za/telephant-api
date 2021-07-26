@@ -29,10 +29,8 @@ const AccountSchema = new mongoose.Schema({
     sign: { 
       type: Number,
       enum: [-1,1]
-     },
-    owners: {
-      type: Array
     },
+    owners: [String],
     description: {
       type: String,
       maxLength: 300

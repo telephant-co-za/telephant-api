@@ -25,7 +25,6 @@ export const accounts =
       "balance": 1925,
       "sign": 1,
       "accountName": "africa-talking",
-      "owners": "",
       "description": "Africa Talking",
       "businessType": "",
       "verified": null
@@ -37,7 +36,6 @@ export const accounts =
       "balance": 10000,
       "sign": -1,
       "accountName": "capital",
-      "owners": "",
       "description": "Initial capital.",
       "businessType": "",
       "verified": null
@@ -49,7 +47,6 @@ export const accounts =
       "balance": 10350,
       "sign": 1,
       "accountName": "cash",
-      "owners": "",
       "description": "Cash in bank account available to app.",
       "businessType": "",
       "verified": null
@@ -61,7 +58,6 @@ export const accounts =
       "balance": 10,
       "sign": -1,
       "accountName": "fee",
-      "owners": "",
       "description": "Fee revenue",
       "businessType": "",
       "verified": null
@@ -73,7 +69,7 @@ export const accounts =
       "balance": 1448.85,
       "sign": -1,
       "accountName": "my-business-1",
-      "owners": "['27829524031', '27829524033']",
+      "owners": ['27829524031', '27829524033'],
       "description": "My Business Pty (Ltd)",
       "businessType": "private",
       "verified": true
@@ -85,7 +81,6 @@ export const accounts =
       "balance": 397.7,
       "sign": -1,
       "accountName": "27829524031",
-      "owners": "",
       "description": "",
       "businessType": "",
       "verified": null
@@ -97,7 +92,6 @@ export const accounts =
       "balance": 148.85,
       "sign": -1,
       "accountName": "27829524032",
-      "owners": "",
       "description": "",
       "businessType": "",
       "verified": null
@@ -109,7 +103,6 @@ export const accounts =
       "balance": 244.25,
       "sign": -1,
       "accountName": "27829524033",
-      "owners": "",
       "description": "",
       "businessType": "",
       "verified": null
@@ -121,7 +114,6 @@ export const accounts =
       "balance": 10,
       "sign": -1,
       "accountName": "27829524034",
-      "owners": "",
       "description": "",
       "businessType": "",
       "verified": null
@@ -133,7 +125,6 @@ export const accounts =
       "balance": 3.85,
       "sign": -1,
       "accountName": "27829524035",
-      "owners": "",
       "description": "",
       "businessType": "",
       "verified": null
@@ -145,7 +136,6 @@ export const accounts =
       "balance": 10,
       "sign": -1,
       "accountName": "27829524036",
-      "owners": "",
       "description": "",
       "businessType": "",
       "verified": null
@@ -157,7 +147,6 @@ export const accounts =
       "balance": 1.5,
       "sign": -1,
       "accountName": "vat",
-      "owners": "",
       "description": "VAT owed to SARS.",
       "businessType": "",
       "verified": null
@@ -169,7 +158,7 @@ export const accounts =
       "balance": 0,
       "sign": -1,
       "accountName": "another-business",
-      "owners": "['27829524031', '27829524035']",
+      "owners": ['27829524031', '27829524035'],
       "description": "Another Business",
       "businessType": "public",
       "verified": true
@@ -181,7 +170,7 @@ export const accounts =
       "balance": 0,
       "sign": -1,
       "accountName": "a-ngo",
-      "owners": "['27829524031']",
+      "owners": ['27829524031'],
       "description": "Notptofit Org",
       "businessType": "ngo",
       "verified": false
@@ -193,7 +182,7 @@ export const accounts =
       "balance": 0,
       "sign": -1,
       "accountName": "gov-department",
-      "owners": "['27829524031']",
+      "owners": ['27829524031'],
       "description": "Government Department",
       "businessType": "gov",
       "verified": false

@@ -7,7 +7,7 @@ export const transactions =
   {
     "transactionID": "4zx66egq",
     "accountID": "60ebd53e2f79311541618bc3",
-    "dateTime": "2021-05-1T10:23",
+    "dateTime": "2021-05-01T10:23",
     "type": "INITIAL",
     "amount": 10000,
     "sign": 1,
@@ -16,7 +16,7 @@ export const transactions =
   {
     "transactionID": "4zx66egq",
     "accountID": "60ebd53e2f79311541618bc2",
-    "dateTime": "2021-05-1T10:23",
+    "dateTime": "2021-05-01T10:23",
     "type": "INITIAL",
     "amount": 10000,
     "sign": -1,
@@ -25,7 +25,7 @@ export const transactions =
   {
     "transactionID": "7868wibk",
     "accountID": "60ebd53e2f79311541618bc1",
-    "dateTime": "2021-05-4T10:23",
+    "dateTime": "2021-05-04T10:23",
     "type": "AIRTIME",
     "amount": 2000,
     "sign": 1,
@@ -34,7 +34,7 @@ export const transactions =
   {
     "transactionID": "7868wibk",
     "accountID": "60ebd53e2f79311541618bc3",
-    "dateTime": "2021-05-4T10:23",
+    "dateTime": "2021-05-04T10:23",
     "type": "PAY",
     "amount": 2000,
     "sign": -1,
@@ -43,7 +43,7 @@ export const transactions =
   {
     "transactionID": "8he49vuc",
     "accountID": "60ebd53e2f79311541618bc3",
-    "dateTime": "2021-05-5T14:12",
+    "dateTime": "2021-05-05T14:12",
     "type": "DEPOSIT",
     "amount": 500,
     "sign": 1,
@@ -52,7 +52,7 @@ export const transactions =
   {
     "transactionID": "8he49vuc",
     "accountID": "60ebd53e2f79311541618bc6",
-    "dateTime": "2021-05-5T14:12",
+    "dateTime": "2021-05-05T14:12",
     "type": "TOPUP",
     "amount": 500,
     "sign": -1,
@@ -61,7 +61,7 @@ export const transactions =
   {
     "transactionID": "khm6yoax",
     "accountID": "60ebd53e2f79311541618bc3",
-    "dateTime": "2021-05-8T9:16",
+    "dateTime": "2021-05-08T09:16",
     "type": "DEPOSIT",
     "amount": 50,
     "sign": 1,
@@ -70,7 +70,7 @@ export const transactions =
   {
     "transactionID": "khm6yoax",
     "accountID": "60ebd53e2f79311541618bc7",
-    "dateTime": "2021-05-8T9:16",
+    "dateTime": "2021-05-08T09:16",
     "type": "TOPUP",
     "amount": 50,
     "sign": -1,
@@ -97,7 +97,7 @@ export const transactions =
   {
     "transactionID": "prq10vg0",
     "accountID": "60ebd53e2f79311541618bc3",
-    "dateTime": "2021-05-13T5:27",
+    "dateTime": "2021-05-13T05:27",
     "type": "DEPOSIT",
     "amount": 300,
     "sign": 1,
@@ -106,7 +106,7 @@ export const transactions =
   {
     "transactionID": "prq10vg0",
     "accountID": "60ebd53e2f79311541618bc8",
-    "dateTime": "2021-05-13T5:27",
+    "dateTime": "2021-05-13T05:27",
     "type": "TOPUP",
     "amount": 300,
     "sign": -1,
@@ -169,7 +169,7 @@ export const transactions =
   {
     "transactionID": "y3huwi17",
     "accountID": "60ebd53e2f79311541618bc5",
-    "dateTime": "2021-05-23T9:18",
+    "dateTime": "2021-05-23T09:18",
     "type": "SEND",
     "amount": 50,
     "sign": 1,
@@ -178,7 +178,7 @@ export const transactions =
   {
     "transactionID": "y3huwi17",
     "accountID": "60ebd53e2f79311541618bc5",
-    "dateTime": "2021-05-23T9:18",
+    "dateTime": "2021-05-23T09:18",
     "type": "FEE",
     "amount": 1,
     "sign": 1,
@@ -187,7 +187,7 @@ export const transactions =
   {
     "transactionID": "y3huwi17",
     "accountID": "60ebd53e2f79311541618bc5",
-    "dateTime": "2021-05-23T9:18",
+    "dateTime": "2021-05-23T09:18",
     "type": "TAX",
     "amount": 0.15,
     "sign": 1,
@@ -196,7 +196,7 @@ export const transactions =
   {
     "transactionID": "y3huwi17",
     "accountID": "60ebd53e2f79311541618bc7",
-    "dateTime": "2021-05-23T9:18",
+    "dateTime": "2021-05-23T09:18",
     "type": "RECEIVE",
     "amount": 50,
     "sign": -1,
@@ -205,7 +205,7 @@ export const transactions =
   {
     "transactionID": "y3huwi17",
     "accountID": "60ebd53e2f79311541618bc4",
-    "dateTime": "2021-05-23T9:18",
+    "dateTime": "2021-05-23T09:18",
     "type": "FEE_REVENUE",
     "amount": 1,
     "sign": -1,
@@ -214,7 +214,7 @@ export const transactions =
   {
     "transactionID": "y3huwi17",
     "accountID": "60ebd53e2f79311541618b12",
-    "dateTime": "2021-05-23T9:18",
+    "dateTime": "2021-05-23T09:18",
     "type": "TAX_ACCOUNT",
     "amount": 0.15,
     "sign": -1,
@@ -277,7 +277,7 @@ export const transactions =
   {
     "transactionID": "2dguitrb",
     "accountID": "60ebd53e2f79311541618bc6",
-    "dateTime": "2021-06-1T11:12",
+    "dateTime": "2021-06-01T11:12",
     "type": "SEND",
     "amount": 10,
     "sign": 1,
@@ -286,7 +286,7 @@ export const transactions =
   {
     "transactionID": "2dguitrb",
     "accountID": "60ebd53e2f79311541618bc6",
-    "dateTime": "2021-06-1T11:12",
+    "dateTime": "2021-06-01T11:12",
     "type": "FEE",
     "amount": 1,
     "sign": 1,
@@ -295,7 +295,7 @@ export const transactions =
   {
     "transactionID": "2dguitrb",
     "accountID": "60ebd53e2f79311541618bc6",
-    "dateTime": "2021-06-1T11:12",
+    "dateTime": "2021-06-01T11:12",
     "type": "TAX",
     "amount": 0.15,
     "sign": 1,
@@ -304,7 +304,7 @@ export const transactions =
   {
     "transactionID": "2dguitrb",
     "accountID": "60ebd53e2f79311541618bc8",
-    "dateTime": "2021-06-1T11:12",
+    "dateTime": "2021-06-01T11:12",
     "type": "RECEIVE",
     "amount": 10,
     "sign": -1,
@@ -313,7 +313,7 @@ export const transactions =
   {
     "transactionID": "2dguitrb",
     "accountID": "60ebd53e2f79311541618bc4",
-    "dateTime": "2021-06-1T11:12",
+    "dateTime": "2021-06-01T11:12",
     "type": "FEE_REVENUE",
     "amount": 1,
     "sign": -1,
@@ -322,7 +322,7 @@ export const transactions =
   {
     "transactionID": "2dguitrb",
     "accountID": "60ebd53e2f79311541618b12",
-    "dateTime": "2021-06-1T11:12",
+    "dateTime": "2021-06-01T11:12",
     "type": "TAX_ACCOUNT",
     "amount": 0.15,
     "sign": -1,
@@ -331,7 +331,7 @@ export const transactions =
   {
     "transactionID": "axu684oc",
     "accountID": "60ebd53e2f79311541618bc8",
-    "dateTime": "2021-06-7T9:23",
+    "dateTime": "2021-06-07T09:23",
     "type": "SEND",
     "amount": 10,
     "sign": 1,
@@ -340,7 +340,7 @@ export const transactions =
   {
     "transactionID": "axu684oc",
     "accountID": "60ebd53e2f79311541618bc8",
-    "dateTime": "2021-06-7T9:23",
+    "dateTime": "2021-06-07T09:23",
     "type": "FEE",
     "amount": 1,
     "sign": null,
@@ -349,7 +349,7 @@ export const transactions =
   {
     "transactionID": "axu684oc",
     "accountID": "60ebd53e2f79311541618bc8",
-    "dateTime": "2021-06-7T9:23",
+    "dateTime": "2021-06-07T09:23",
     "type": "TAX",
     "amount": 0.15,
     "sign": null,
@@ -358,7 +358,7 @@ export const transactions =
   {
     "transactionID": "axu684oc",
     "accountID": "60ebd53e2f79311541618bc9",
-    "dateTime": "2021-06-7T9:23",
+    "dateTime": "2021-06-07T09:23",
     "type": "RECEIVE",
     "amount": 10,
     "sign": -1,
@@ -367,7 +367,7 @@ export const transactions =
   {
     "transactionID": "axu684oc",
     "accountID": "60ebd53e2f79311541618bc4",
-    "dateTime": "2021-06-7T9:23",
+    "dateTime": "2021-06-07T09:23",
     "type": "FEE_REVENUE",
     "amount": 1,
     "sign": -1,
@@ -376,7 +376,7 @@ export const transactions =
   {
     "transactionID": "axu684oc",
     "accountID": "60ebd53e2f79311541618b12",
-    "dateTime": "2021-06-7T9:23",
+    "dateTime": "2021-06-07T09:23",
     "type": "TAX_ACCOUNT",
     "amount": 0.15,
     "sign": -1,
@@ -493,7 +493,7 @@ export const transactions =
   {
     "transactionID": "kbml24qg",
     "accountID": "60ebd53e2f79311541618bc8",
-    "dateTime": "2021-06-25T17:5",
+    "dateTime": "2021-06-25T17:50",
     "type": "SEND",
     "amount": 10,
     "sign": 1,
@@ -502,7 +502,7 @@ export const transactions =
   {
     "transactionID": "kbml24qg",
     "accountID": "60ebd53e2f79311541618bc8",
-    "dateTime": "2021-06-25T17:5",
+    "dateTime": "2021-06-25T17:50",
     "type": "FEE",
     "amount": 1,
     "sign": 1,
@@ -511,7 +511,7 @@ export const transactions =
   {
     "transactionID": "kbml24qg",
     "accountID": "60ebd53e2f79311541618bc8",
-    "dateTime": "2021-06-25T17:5",
+    "dateTime": "2021-06-25T17:50",
     "type": "TAX",
     "amount": 0.15,
     "sign": 1,
@@ -520,7 +520,7 @@ export const transactions =
   {
     "transactionID": "kbml24qg",
     "accountID": "60ebd53e2f79311541618b11",
-    "dateTime": "2021-06-25T17:5",
+    "dateTime": "2021-06-25T17:50",
     "type": "RECEIVE",
     "amount": 10,
     "sign": -1,
@@ -529,7 +529,7 @@ export const transactions =
   {
     "transactionID": "kbml24qg",
     "accountID": "60ebd53e2f79311541618bc4",
-    "dateTime": "2021-06-25T17:5",
+    "dateTime": "2021-06-25T17:50",
     "type": "FEE_REVENUE",
     "amount": 1,
     "sign": -1,
@@ -538,7 +538,7 @@ export const transactions =
   {
     "transactionID": "kbml24qg",
     "accountID": "60ebd53e2f79311541618b12",
-    "dateTime": "2021-06-25T17:5",
+    "dateTime": "2021-06-25T17:50",
     "type": "TAX_ACCOUNT",
     "amount": 0.15,
     "sign": -1,
@@ -547,7 +547,7 @@ export const transactions =
   {
     "transactionID": "4t98mypd",
     "accountID": "60ebd53e2f79311541618bc8",
-    "dateTime": "2021-06-30T14:2",
+    "dateTime": "2021-06-30T14:20",
     "type": "CONVERT",
     "amount": 21.15,
     "sign": 1,
@@ -556,7 +556,7 @@ export const transactions =
   {
     "transactionID": "4t98mypd",
     "accountID": "60ebd53e2f79311541618bc8",
-    "dateTime": "2021-06-30T14:2",
+    "dateTime": "2021-06-30T14:20",
     "type": "FEE",
     "amount": 1,
     "sign": 1,
@@ -565,7 +565,7 @@ export const transactions =
   {
     "transactionID": "4t98mypd",
     "accountID": "60ebd53e2f79311541618bc8",
-    "dateTime": "2021-06-30T14:2",
+    "dateTime": "2021-06-30T14:20",
     "type": "TAX",
     "amount": 0.15,
     "sign": 1,
@@ -574,7 +574,7 @@ export const transactions =
   {
     "transactionID": "4t98mypd",
     "accountID": "60ebd53e2f79311541618bc1",
-    "dateTime": "2021-06-30T14:2",
+    "dateTime": "2021-06-30T14:20",
     "type": "AIRTIME",
     "amount": 20,
     "sign": -1,
@@ -583,7 +583,7 @@ export const transactions =
   {
     "transactionID": "4t98mypd",
     "accountID": "60ebd53e2f79311541618bc4",
-    "dateTime": "2021-06-30T14:2",
+    "dateTime": "2021-06-30T14:20",
     "type": "FEE_REVENUE",
     "amount": 1,
     "sign": -1,
@@ -592,7 +592,7 @@ export const transactions =
   {
     "transactionID": "4t98mypd",
     "accountID": "60ebd53e2f79311541618b12",
-    "dateTime": "2021-06-30T14:2",
+    "dateTime": "2021-06-30T14:20",
     "type": "TAX_ACCOUNT",
     "amount": 0.15,
     "sign": -1,
@@ -601,7 +601,7 @@ export const transactions =
   {
     "transactionID": "r5gnb2ic",
     "accountID": "60ebd53e2f79311541618b10",
-    "dateTime": "2021-07-8T14:49",
+    "dateTime": "2021-07-08T14:49",
     "type": "CONVERT",
     "amount": 6.15,
     "sign": 1,
@@ -610,7 +610,7 @@ export const transactions =
   {
     "transactionID": "r5gnb2ic",
     "accountID": "60ebd53e2f79311541618b10",
-    "dateTime": "2021-07-8T14:49",
+    "dateTime": "2021-07-08T14:49",
     "type": "FEE",
     "amount": 1,
     "sign": 1,
@@ -619,7 +619,7 @@ export const transactions =
   {
     "transactionID": "r5gnb2ic",
     "accountID": "60ebd53e2f79311541618b10",
-    "dateTime": "2021-07-8T14:49",
+    "dateTime": "2021-07-08T14:49",
     "type": "TAX",
     "amount": 0.15,
     "sign": 1,
@@ -628,7 +628,7 @@ export const transactions =
   {
     "transactionID": "r5gnb2ic",
     "accountID": "60ebd53e2f79311541618bc1",
-    "dateTime": "2021-07-8T14:49",
+    "dateTime": "2021-07-08T14:49",
     "type": "AIRTIME",
     "amount": 5,
     "sign": -1,
@@ -637,7 +637,7 @@ export const transactions =
   {
     "transactionID": "r5gnb2ic",
     "accountID": "60ebd53e2f79311541618bc4",
-    "dateTime": "2021-07-8T14:49",
+    "dateTime": "2021-07-08T14:49",
     "type": "FEE_REVENUE",
     "amount": 1,
     "sign": -1,
@@ -646,7 +646,7 @@ export const transactions =
   {
     "transactionID": "r5gnb2ic",
     "accountID": "60ebd53e2f79311541618b12",
-    "dateTime": "2021-07-8T14:49",
+    "dateTime": "2021-07-08T14:49",
     "type": "TAX_ACCOUNT",
     "amount": 0.15,
     "sign": -1,

@@ -27,7 +27,11 @@ const TransactionsSchema = new Schema({
     ],
     default: 'SEND'
   },
-  amount: Number,
+  amount: 
+    {
+      type: Number,
+      min: 0
+    },
   sign: {
     type: Number,
     enum: [1, -1]
@@ -36,7 +40,7 @@ const TransactionsSchema = new Schema({
     { type: String,
       max: [100, 'Description is too long']
   },
-  dateTime: { type: String }
+  dateTime: { type: Date }
 });
 
 export default mongoose.model('Transactions', TransactionsSchema);

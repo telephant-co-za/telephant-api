@@ -5,12 +5,23 @@ import asyncHandler from 'express-async-handler';
 
 const createError = require('http-errors');
 const router = express.Router();
+const ObjectId = require('mongoose').Types.ObjectId;
 
 // models
 import Notification from '../../../models/notificationModel';
 
 // custom functions
 import wrongPath from '../../../functions/wrongPath';
+
+function isValidObjectId(id){
+
+    if(ObjectId.isValid(id)){
+        if((String)(new ObjectId(id)) === id)
+            return true;
+        return false;
+    }
+    return false;
+}
 
 // ROUTER
 
@@ -25,8 +36,7 @@ router
         const notificationsPromise = Notification
             .find({ owner: res.locals.account_name })
             .limit(limit)
-            .skip((page - 1) * limit)
-            //.select(' _id first_name last_name email owner ');
+            .skip((page - 1) * limit);
 
         const notifications = await notificationsPromise;
         const totalDocuments = await Notification
@@ -56,27 +66,105 @@ router
     }
 }))
 
-// GET return list of notifications
-.get('/:NotificationID', (req, res) => {
-    res.json({"will" : "return a specific notification"});
-})
+// GET a specific notification
+.get('/:NotificationID', asyncHandler(async(req, res, next) => {
+
+    // isValidObjectId
+    if (!isValidObjectId(req.params.NotificationID))
+    {
+        const err = createError(400, 'The Notification ID provided is not valid.');
+        return next(err);
+    }
+
+   // Check notification exists    
+    const CheckExists = await Notification.find({
+       owner: res.locals.account_name, 
+       _id: req.params.NotificationID})
+
+   if (!CheckExists || CheckExists ==0)
+   {
+       const err = createError(404, 'The Notification ID could not be found.');
+       return next(err);        
+   }
+
+   try {
+            const returnObject = await Notification.findOne({owner: res.locals.account_name, 
+                                                            _id: req.params.NotificationID });
+
+            res.locals.output = returnObject;
+            next();
+        }
+        catch (error) 
+        {
+            const err = createError(500, error);
+            return next(err);
+        }
+        
+}))
 
 // POST Mark all unread notifications as read
-.post('/', (req, res) => {
-    res.json({"will" : "mark all unread notifications as read"});
+.post('/', (req, res, next) => {
+
+    Notification.updateMany({owner: res.locals.account_name, read: false }, 
+        {read:true}, function (error, docs) {
+
+            if (error){
+                const err = createError(500, error);
+                return next(err);
+            }
+            else{
+                console.log(docs)
+                res.status(200).json({
+                    message: docs.n + " notifications were marked as read.",        
+                });
+                next();
+            }
+        });
+        
 })
 
 // POST Mark a specific notification as read
-.post('/:NotificationID', (req, res) => {
-    res.json({"will" : "mark a specific notification as read"});
-})
+.post('/:NotificationID', asyncHandler(async (req, res, next) => {
 
-// PUT Accept / Reject a specific credit request
-.put('/:NotificationID', (req, res) => {
-    res.json({"will" : "Accept / Reject a specific credit request"})
-})
+    // isValidObjectId
+     if (!isValidObjectId(req.params.NotificationID))
+     {
+         const err = createError(400, 'The Notification ID provided is not valid.');
+         return next(err);
+     }
 
-// Catches all the wrong routes and refers person to documentation site
+    // Check notification exists    
+     const CheckExists = await Notification.find({
+        owner: res.locals.account_name, 
+        _id: req.params.NotificationID})
+
+    if (!CheckExists || CheckExists ==0)
+    {
+        const err = createError(404, 'The Notification ID could not be found.');
+        return next(err);        
+    }
+
+    Notification.updateOne({
+        owner: res.locals.account_name, 
+        read: false, 
+        _id: req.params.NotificationID }
+        , 
+        {read:true}, function (error, docs) {
+    
+            if (error)
+            {
+                const err = createError(500, error);
+                return next(err);
+            }
+            else{
+                res.status(200).json({
+                    message: docs.n + " notifications were marked as read.",        
+                });
+                next();
+            }
+        });
+}))
+
 .all('/*', wrongPath);
 
 export default router;
