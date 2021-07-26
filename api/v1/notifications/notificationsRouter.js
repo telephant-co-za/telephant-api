@@ -66,8 +66,35 @@ router
     }
 }))
 
-// GET a specific notification
+// GET a count
 .get('/:NotificationID', asyncHandler(async(req, res, next) => {
+
+    // want action to be specified in the path not as a query for use in the react app
+    if (req.params.NotificationID === 'count')
+    {
+
+    try {
+            const read = await Notification.count({ owner: res.locals.account_name, read: true });
+            const unread = await Notification.count({ owner: res.locals.account_name, read: false });
+            const total = await Notification.count({ owner: res.locals.account_name });
+
+            const returnObject = {
+                read: read,
+                unread: unread,
+                total: total
+            };
+
+            res.locals.output = returnObject;
+            next();
+        }
+    catch (error) 
+        {
+            const err = createError(500, error);
+            return next(err);
+        }
+    }
+
+    // Look up individual notifcation
 
     // isValidObjectId
     if (!isValidObjectId(req.params.NotificationID))
