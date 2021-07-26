@@ -1,5 +1,9 @@
 // Notifcations intersect with to Contacts and Transacrions
 
+const mongoose = require('mongoose');
+
+const a = mongoose.Types.ObjectId('60ebd53e2f79311541619554');
+
 export const notifications = 
 [
     {
@@ -9,7 +13,8 @@ export const notifications =
       "read": false,
       "type": "INFO",
       "owner": "27829524031",
-      "link": "8he49vuc"
+      "link": "8he49vuc",
+      "_id": a
     },
     {
       "date_time": "2021-05-05T14:12",

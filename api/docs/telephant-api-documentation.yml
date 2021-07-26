@@ -554,6 +554,7 @@ paths:
             type: string
             format: uuid
           required: true
+          example: '60ebd53e2f79311541619554'
       responses:
         '2XX':
           description: Success
