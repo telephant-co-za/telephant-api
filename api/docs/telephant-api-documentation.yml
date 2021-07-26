@@ -534,7 +534,7 @@ paths:
   /v1/notifications/{NotificationID}:
     get:
       summary: Get specific notification.
-      description: Retrieve the details of a specific notification by it id.
+      description: Retrieve the details of a specific notification by it's id.
       tags:
         - Notifications
       security:
@@ -1004,7 +1004,7 @@ components:
                 example: 'We are sorry but something went wrong on our side.'
 
   examples:
-    Notification-Get-Item:
+    Notifications-Get-Item:
       value:
         {
             "date_time": "2021-05-23T07:18:00.000Z",
