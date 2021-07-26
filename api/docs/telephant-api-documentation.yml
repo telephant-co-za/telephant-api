@@ -561,7 +561,7 @@ paths:
             application/json:
               examples:
                 Notifcations-Get:
-                  $ref: '#/components/examples/Notifications-Count'
+                  $ref: '#/components/examples/Notifications-Get-Item'
         '4XX':
           $ref: '#/components/responses/4XX'
         '5XX':
@@ -1088,6 +1088,21 @@ components:
                 example: 'We are sorry but something went wrong on our side.'
 
   examples:
+    Notification-Get-Item:
+      value:
+        {
+            "date_time": "2021-05-23T07:18:00.000Z",
+            "read": false,
+            "type": "INFO",
+            "_id": "60fed5f105b740691acc2d91",
+            "subject": "Sent",
+            "message": "You sent Napoleon R 50",
+            "owner": "my-business-1",
+            "link": "y3huwi17",
+            "createdAt": "2021-07-26T15:34:09.689Z",
+            "updatedAt": "2021-07-26T15:34:09.689Z",
+            "__v": 0
+        }
     Notifications-Count:
       value:
         {
