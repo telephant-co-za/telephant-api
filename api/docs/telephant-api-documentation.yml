@@ -598,7 +598,7 @@ paths:
           description: Success
           content:
             application/json:
-              examples:
+              example:
                 value:
                   {
                       message: '1 notifications were marked as read.'
