@@ -504,6 +504,36 @@ paths:
         '5XX':
           $ref: '#/components/responses/5XX'
 
+    post:
+      summary: Mark all notifications read.
+      description: Changes the status of all notifications to read.
+      tags:
+        - Notifications
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: header
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
+      responses:
+        '2XX':
+          description: Success
+          content:
+            application/json:
+              example:
+                value:
+                  {
+                      message: '1 notifications were marked as read.'
+                  }
+        '4XX':
+          $ref: '#/components/responses/4XX'
+        '5XX':
+          $ref: '#/components/responses/5XX'
+
   /v1/notifications/count:
     get:
       summary: Get a count of notifications.
