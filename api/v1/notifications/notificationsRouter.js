@@ -185,7 +185,7 @@ router
             }
             else{
                 res.status(200).json({
-                    message: docs.n + " notifications were marked as read.",        
+                    message: docs.n + "The notification was marked as read.",        
                 });
                 next();
             }

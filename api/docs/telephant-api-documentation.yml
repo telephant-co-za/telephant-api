@@ -630,7 +630,7 @@ paths:
             application/json:
               example:
                 {
-                    message: '1 notifications were marked as read.'
+                    message: 'The notification was marked as read.'
                 }
         '4XX':
           $ref: '#/components/responses/4XX'
@@ -1006,7 +1006,10 @@ components:
     Notifications:
       type: object
       properties:
-        date_time:
+        _id:
+          type: string
+          format: uuid
+        dateTime:
           example: "2021-05-11T16:55:00.000Z"
           type: string
           format: date-time
@@ -1016,7 +1019,9 @@ components:
         type:
           example: "INFO"
           type: string
-          enum: ['INFO']
+          enum:
+            - INFO
+            - REQUEST
         subject:
           example: "Top Up"
           type: string
@@ -1092,7 +1097,7 @@ components:
     Notifications-Get-Item:
       value:
         {
-            "date_time": "2021-05-23T07:18:00.000Z",
+            "dateTime": "2021-05-23T07:18:00.000Z",
             "read": false,
             "type": "INFO",
             "_id": "60fed5f105b740691acc2d91",
@@ -1120,7 +1125,7 @@ components:
           "total_results": 2,
           "results": [
                         {
-                            "date_time": "2021-05-11T16:55:00.000Z",
+                            "dateTime": "2021-05-11T16:55:00.000Z",
                             "read": false,
                             "type": "INFO",
                             "_id": "60fed5f105b740691acc2d8d",
@@ -1133,7 +1138,7 @@ components:
                             "__v": 0
                         },
                         {
-                            "date_time": "2021-05-23T07:18:00.000Z",
+                            "dateTime": "2021-05-23T07:18:00.000Z",
                             "read": false,
                             "type": "INFO",
                             "_id": "60fed5f105b740691acc2d91",

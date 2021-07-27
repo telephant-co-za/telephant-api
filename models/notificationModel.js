@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const NotificationSchema = new Schema({
-  date_time: {
+  dateTime: {
     type: Date,
     required: true,
     default: Date.now()
