@@ -525,10 +525,9 @@ paths:
           content:
             application/json:
               example:
-                value:
-                  {
-                      message: '1 notifications were marked as read.'
-                  }
+                {
+                    message: '10 notifications were marked as read.'
+                }
         '4XX':
           $ref: '#/components/responses/4XX'
         '5XX':
@@ -1072,9 +1071,9 @@ components:
     Notifications-Count:
       value:
         {
-            "read": 0,
+            "read": 10,
             "unread": 2,
-            "total": 2
+            "total": 12
         }
 
     Notifications-Get:
