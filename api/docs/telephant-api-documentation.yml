@@ -501,52 +501,52 @@ paths:
                   $ref: '#/components/examples/Notifications-Get'
               schema:
                 type: object
-                  properties:
-                    page:
-                      type: Integer
-                      example: 1
-                    total_pages:
-                      type: Integer
-                      example: 1
-                    total_results:
-                      type: Integer
-                      example: 1
-                    results:
-                      type: Array
-                      items:
-                        type: object
-                        properties:
-                          date_time:
-                            example: "2021-05-11T16:55:00.000Z"
-                            type: string
-                            format: date-time
-                          read:
-                            example: false
-                            type: boolean
-                          type:
-                            example: "INFO"
-                            type: string
-                            enum: ['INFO']
-                          subject:
-                            example: "Top Up"
-                            type: string
-                          message:
-                            example: "You deposited R 1500 into your telphant account."
-                            type: string
-                          owner: 
-                            example: "my-business-1"
-                            type: string
-                          link: 
-                            example: "3zm9e5o5"
-                            type: string
-                          createdAt:
-                            example: "2021-07-26T15:34:09.689Z"
-                            type: string
-                            format: date-time
-                          updatedAt:
-                            example: "2021-07-26T15:34:09.689Z"
-                            type: string
-                            format: date-time
+                properties:
+                  page:
+                    type: Integer
+                    example: 1
+                  total_pages:
+                    type: Integer
+                    example: 1
+                  total_results:
+                    type: Integer
+                    example: 1
+                  results:
+                    type: Array
+                    items:
+                      type: object
+                      properties:
+                        date_time:
+                          example: "2021-05-11T16:55:00.000Z"
+                          type: string
+                          format: date-time
+                        read:
+                          example: false
+                          type: boolean
+                        type:
+                          example: "INFO"
+                          type: string
+                          enum: ['INFO']
+                        subject:
+                          example: "Top Up"
+                          type: string
+                        message:
+                          example: "You deposited R 1500 into your telphant account."
+                          type: string
+                        owner: 
+                          example: "my-business-1"
+                          type: string
+                        link: 
+                          example: "3zm9e5o5"
+                          type: string
+                        createdAt:
+                          example: "2021-07-26T15:34:09.689Z"
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          example: "2021-07-26T15:34:09.689Z"
+                          type: string
+                          format: date-time
 
         '4XX':
           $ref: '#/components/responses/4XX'
