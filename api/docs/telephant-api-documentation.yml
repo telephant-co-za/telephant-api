@@ -272,6 +272,9 @@ paths:
       description: |
                       Delete a specific group account.
 
+                      **Note:** The ability to delete a group account has been removed.  
+                      In future a method for achieving this will be implemented.
+
                       **Note:** It is not possible delete your own username's account through the API.
                         Deleteion of a user account will be made possbile through MFA process and settings functionality.
       tags:
