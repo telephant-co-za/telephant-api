@@ -205,7 +205,17 @@ paths:
             application/json:
               example:
                 {
-                    message: '10 notifications were marked as read.'
+                    message: 'The group account was successfully created.'
+                }
+        '400':
+          description: BadRequestError
+          content: 
+            application/json:
+              example:
+                {
+                    "code": 400,
+                    "name": "BadRequestError",
+                    "message": "Account validation failed : A account name is required."
                 }
 
         '409':
@@ -214,7 +224,9 @@ paths:
             application/json:
               example:
                 {
-                    message: 'This group account name is already registered.  Please choose another.'
+                    "code": 409,
+                    "name": "ConflictError",
+                    "message": "This group account name is already registered.  Please choose another."
                 }
 
         '5XX':
