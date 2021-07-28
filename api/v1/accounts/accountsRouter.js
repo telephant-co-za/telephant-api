@@ -101,7 +101,7 @@ router
 
                 //  Attributes that can be set                
                     accountName: req.body.accountName,         // must validate against scheme, /^[a-z0-9-]{3,16}$/
-                    description: req.body.description          // 3 - 16 charac, lowercase letter (a-z), number (0-9), or underscores
+                    description: req.body.description          // 3 - 16 charac, lowercase letter (a-z), number (0-9)
                 });                                            // this will be used be used as a reference on bank statements - for auto allocation of funds
                 res.status(201).json({
                     message: "The group account was successfully created.",        

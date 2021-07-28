@@ -181,16 +181,19 @@ paths:
                   type: string
                   minLength: 3
                   maxLength: 16
-                  example: My Company's Airtime Account
+                  example: my-company
                   description: |
-                                  This field must be used as a reference on bank statements 
-                                  and will be used by Telephant as for automatching.
-
-                                  *Note:* This filed only accepts alphanumeric characters and hyphen as a space.
+                                  This field must be used as a reference on bank statements, 
+                                  and Telephant will use it to simplify the process.
+                                  
+                                  *Note:* Only alphanumeric characters and hyphens as spaces are accepted 
+                                  in this field.
 
                   format: /^[a-z0-9-]{3,16}$/
                 description:
                   type: string
+                  maxLength: 300
+                  example: My Company (Pty) Ltd Airtime Account
 
       responses:
         '4XX':
