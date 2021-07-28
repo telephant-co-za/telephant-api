@@ -236,7 +236,7 @@ paths:
       description: |
                       Update the details of a group account.
 
-                      **Note:** It is not possible update your own username's account through the API 
+                      **Note:** It is not possible to update your own username's account through the API 
                       so an account_id must be provided in the header.
       tags:
         - Accounts
@@ -264,7 +264,17 @@ paths:
                     In the South African phone number format, a user's unique mobile phone number.
 
                     You can assign multiple owners to a group account but only one per request.
-
+                description:
+                  type: string
+                  maxLength: 300
+                  example: My Company (Pty) Ltd Airtime Account
+                businessType:
+                  type: string
+                  enum:
+                    - private
+                    - public
+                    - ngo
+                    - gov
       parameters:
         - in: header
           name: account_id
@@ -272,7 +282,7 @@ paths:
           schema:
             type: string
             format: uuid
-          required: false
+          required: true
       responses:
         '4XX':
           $ref: '#/components/responses/4XX'
