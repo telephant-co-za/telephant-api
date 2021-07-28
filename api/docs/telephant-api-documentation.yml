@@ -267,8 +267,13 @@ paths:
         '5XX':
           $ref: '#/components/responses/5XX'
     delete:
+      deprecated: true
       summary: Delete account.
-      description: Delete a specific group account.
+      description: |
+                      Delete a specific group account.
+
+                      **Note:** It is not possible delete your own username's account through the API.
+                        Deleteion of a user account will be made possbile through MFA process and settings functionality.
       tags:
         - Accounts
       security:
@@ -280,13 +285,18 @@ paths:
           schema:
             type: string
             format: uuid
-          required: false
+          required: true
       responses:
-        '4XX':
-          $ref: '#/components/responses/4XX'
-
-        '5XX':
-          $ref: '#/components/responses/5XX'
+        '410':
+          description: Gone
+          content: 
+            application/json:
+              example:
+                {
+                    "code": 410,
+                    "name": "Gone",
+                    "message": "The ability to delete a group account has been removed.  In future a method for achieving this will be implemented."
+                }
   /v1/airtime:
     get:
       summary: Get airtime balance.
