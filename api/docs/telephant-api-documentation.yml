@@ -284,8 +284,38 @@ paths:
             format: uuid
           required: true
       responses:
+        '201':
+          description: Success
+          content: 
+            application/json:
+              example:
+                {
+                    message: 'The group account was successfully updated.'
+                }          
+
         '4XX':
-          $ref: '#/components/responses/4XX'
+          description: BadRequestError
+          content:
+            application/json:
+              examples:
+                ConflictError-1:
+                  {
+                      "code": 400,
+                      "name": "ConflictError",
+                      "message": "The user telephone number is already an owner on this account."
+                  }
+                ConflictError-2:
+                  {
+                      "code": 400,
+                      "name": "ConflictError",
+                      "message": "Not a valid user's telphone number."
+                  }
+                ConflictError-3:
+                  {
+                      "code": 400,
+                      "name": "ConflictError",
+                      "message": "No relevant fields to update were defined."
+                  }
 
         '5XX':
           $ref: '#/components/responses/5XX'
