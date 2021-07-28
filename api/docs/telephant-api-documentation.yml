@@ -277,7 +277,8 @@ paths:
                       Delete a specific group account.
 
                       **Note:** The ability to delete a group account has been removed.  
-                      In future a method for achieving this will be implemented.
+                      In future a method for achieving the deletion of an account will be implemented
+                      on the UPDATE method.
       tags:
         - Accounts
       security:
