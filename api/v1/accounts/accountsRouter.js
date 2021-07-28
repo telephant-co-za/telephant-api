@@ -2,6 +2,7 @@
 
 import express from 'express';
 import asyncHandler from 'express-async-handler';
+import { notifications } from '../../../db/seedData/notifications';
 
 const createError = require('http-errors');
 const router = express.Router();
@@ -138,9 +139,22 @@ router
     // DELETE delete a specified accounts
     .delete('/', asyncHandler(async (req, res, next) => {
 
+        res.status(410).json({
+            "code": 410,
+            "name": "Gone",
+            "message": "The ability to delete a group account has been removed.  In future a method for achieving this will be implemented."
+        });
+    }))
+
+
+        // NOTE: Will not be possible to delete account as this will lead to problems in transactions
+        // and notifications.  Will deprecate this ability.
+        // May introduce ability later.
+
         // changing own account - cannot delete your own account
         // Note: this scenario was identified in accountHeader and tagged with 'listing'
-        if (res.locals.action === 'listing') {
+
+/*         if (res.locals.action === 'listing') {
             const err = createError(403, 'It is not possible to delete your own account.  Please provide a group account in the header.  See the documentation for detail.');
             return next(err);
         }
@@ -157,7 +171,7 @@ router
                 return next(err);
             }
         }
-    }))
+    })) */
 
     // PUT update a specified account
     .put('/', asyncHandler(async (req, res, next) => {

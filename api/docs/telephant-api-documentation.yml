@@ -233,13 +233,17 @@ paths:
           $ref: '#/components/responses/5XX'
     put:
       summary: Update account.
-      description: Update the details of a group account.
+      description: |
+                      Update the details of a group account.
+
+                      **Note:** It is not possible update your own username's account through the API 
+                      so an account-id must be provided in the header.
       tags:
         - Accounts
       security:
         - BearerAuth: []
       requestBody:
-        description: Define the properties of the account to create.
+        description: Define the properties of the account to update.
         required: true
         content:
           application/json:
@@ -274,9 +278,6 @@ paths:
 
                       **Note:** The ability to delete a group account has been removed.  
                       In future a method for achieving this will be implemented.
-
-                      **Note:** It is not possible delete your own username's account through the API.
-                        Deleteion of a user account will be made possbile through MFA process and settings functionality.
       tags:
         - Accounts
       security:
