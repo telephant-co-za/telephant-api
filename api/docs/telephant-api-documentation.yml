@@ -202,14 +202,20 @@ paths:
         '200':
           description: Success
           content: 
-            appliction/json
+            application/json:
               example:
                 {
-                    message: "The group account was successfully created.",        
+                    message: '10 notifications were marked as read.'
                 }
 
-        '4XX':
-          $ref: '#/components/responses/4XX'
+        '409':
+          description: Conflict
+          content: 
+            application/json:
+              example:
+                {
+                    message: 'This group account name is already registered.  Please choose another.'
+                }
 
         '5XX':
           $ref: '#/components/responses/5XX'
