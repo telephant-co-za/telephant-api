@@ -237,25 +237,34 @@ paths:
                       Update the details of a group account.
 
                       **Note:** It is not possible update your own username's account through the API 
-                      so an account-id must be provided in the header.
+                      so an account_id must be provided in the header.
       tags:
         - Accounts
       security:
         - BearerAuth: []
       requestBody:
-        description: Define the properties of the account to update.
+        description: |
+                        Define the properties of the account to update.
+
+                        The fields that are available to be modified are:
+                        - owners
+                        - description
+                        - businessType
         required: true
         content:
           application/json:
             schema:
               type: object
-              required:
-                - name
               properties:
-                name:
+                owners:
                   type: string
-                  maxLength: 50
-                  example: My Company's Airtime Account
+                  pattern: ^(27)[0-9]{9}$
+                  example: 27821234567
+                  description: | 
+                    In the South African phone number format, a user's unique mobile phone number.
+
+                    You can assign multiple owners to a group account but only one per request.
+
       parameters:
         - in: header
           name: account_id
