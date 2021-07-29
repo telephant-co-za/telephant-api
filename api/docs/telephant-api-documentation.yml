@@ -1009,15 +1009,7 @@ paths:
                     "message": "Unable to authenticate using credentials provided."
                   }
         '5xx':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: 'We are sorry but something went wrong on our side.'
+          $ref: '#/components/responses/5XX'
 
   /v1/verifications:
     get:
