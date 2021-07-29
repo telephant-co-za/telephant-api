@@ -468,6 +468,16 @@ paths:
             type: string
             format: uuid
           required: false
+        - in: query
+          name: page
+          description: The page number of results to return.
+          schema:
+              type: integer
+        - in: query
+          name: limit
+          description: The numbers of items to return per page.
+          schema:
+            type: integer
       responses:
         '4XX':
           $ref: '#/components/responses/4XX'
