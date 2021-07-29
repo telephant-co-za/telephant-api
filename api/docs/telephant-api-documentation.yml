@@ -986,6 +986,13 @@ paths:
                       "name": "BadRequestError",
                       "message": 'User validation failed : The telephone number does not conform to the South African format (27XXXXXXXXX).'
                     }
+                User-taken:
+                  value:
+                    {
+                      "code": 400,
+                      "name": "BadRequestError",
+                      "message": "This telephone number is already registered."
+                    }
         '401':
           description: Unauthorised
           content:
@@ -1001,21 +1008,6 @@ paths:
                     "name": "UnauthorizedError",
                     "message": "Unable to authenticate using credentials provided."
                   }
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                example:
-                    {
-                      "code": 400,
-                      "name": "BadRequestError",
-                      "message": "This telephone number is already registered."
-                    }
         '5xx':
           description: Internal Server Error
           content:
