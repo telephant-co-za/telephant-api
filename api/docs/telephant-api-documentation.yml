@@ -478,6 +478,46 @@ paths:
           description: The numbers of items to return per page.
           schema:
             type: integer
+      requestBody:
+        description: Define the properties of the contact to create.
+
+telephoneNumber
+
+owner
+
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - telephoneNumber
+              properties:
+                telephoneNumber:
+                  type: string
+                  pattern: ^(27)[0-9]{9}$
+                  description: Provide a valid South African mobile telphone number in the format 27XXXXXXXXX.
+                  example: "27821234567"
+                  required: true
+                firstName:
+                  description: You can only use alpha characters in a name.
+                  type: string
+                  maxLength: 30
+                  example: Piet
+                  pattern: /^[a-zA-Z]*$/
+                lastName:
+                  description: You can only use alpha characters in a name.
+                  type: string
+                  maxLength: 30
+                  example: Pompies
+                  format: /^[a-zA-Z]*$/
+                email:
+                  description: A valid email address for the contact.
+                  type: string
+                  format: email
+                  example: piet@example.com
+                
+
       responses:
         '2XX':
           description: Success
