@@ -1002,6 +1002,96 @@ paths:
         '5xx':
           $ref: '#/components/responses/5XX'
 
+  /v1/users?status=signup:
+    post:
+      summary: User actions (signup and login).
+      description: An end point to sign up as a user or log in.
+      tags:
+        - Users
+      parameters:
+        - in: query
+          name: action
+          schema:
+            type: string
+            enum:
+              - signup
+              - login
+          description: >
+            User actions:
+             * `signup` - Create a user account.
+             * `login` - As a user, sign in.
+      requestBody:
+        description: Provide the telephone number and a password to signup or login.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Users'
+      responses:
+        '201':
+          description: Created (after successful signup)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  
+                  message: 
+                    type: string
+                    example: 'The user was successfully registered.'
+        '202':
+          description: Accepted (after successful login)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'User successfully logged in.'
+                  token:
+                    type: string
+                    example: 'BEARER <TOKEN STRING>'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Password-complexity:
+                  value:
+                    {
+                      "code": 400,
+                      "name": "BadRequestError",
+                      "message": 'User validation failed : Password not complex enough.'
+                    }
+                South-Africa-format:
+                  value:
+                    {
+                      "code": 400,
+                      "name": "BadRequestError",
+                      "message": 'User validation failed : The telephone number does not conform to the South African format (27XXXXXXXXX).'
+                    }
+                User-taken:
+                  value:
+                    {
+                      "code": 400,
+                      "name": "BadRequestError",
+                      "message": "This telephone number is already registered."
+                    }
+        '401':
+          description: Unauthorised
+          content:
+            application/json:
+              example:
+                  {
+                    "code": 401,
+                    "name": "UnauthorizedError",
+                    "message": "Unable to authenticate using credentials provided."
+                  }
+        '5xx':
+          $ref: '#/components/responses/5XX'
+    
+
   /v1/verifications:
     get:
       summary: Get verifications.
