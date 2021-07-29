@@ -478,6 +478,34 @@ paths:
           description: The numbers of items to return per page.
           schema:
             type: integer
+      responses:
+        '2XX':
+          description: Success
+          content:
+            application/json:
+              examples:
+                Accounts-Get:
+                  $ref: '#/components/examples/Contacts-Get'
+        '4XX':
+          $ref: '#/components/responses/4XX'
+
+        '5XX':
+          $ref: '#/components/responses/5XX'
+    post:
+      summary: Create contact.
+      description: Create a contact for a individual or group account.
+      tags:
+        - Contacts
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: header
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
       requestBody:
         description: Define the properties of the contact to create.
         required: true
@@ -511,37 +539,7 @@ paths:
                   type: string
                   format: email
                   example: piet@example.com
-                
-
-      responses:
-        '2XX':
-          description: Success
-          content:
-            application/json:
-              examples:
-                Accounts-Get:
-                  $ref: '#/components/examples/Contacts-Get'
-        '4XX':
-          $ref: '#/components/responses/4XX'
-
-        '5XX':
-          $ref: '#/components/responses/5XX'
-    post:
-      summary: Create contact.
-      description: Create a contact for a individual or group account.
-      tags:
-        - Contacts
-      security:
-        - BearerAuth: []
-      parameters:
-        - in: header
-          name: account_id
-          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
-          schema:
-            type: string
-            format: uuid
-          required: false
-      responses:
+      responses:      
         '4XX':
           $ref: '#/components/responses/4XX'
 
