@@ -182,8 +182,9 @@ router
             const err = createError(403, 'It is not possible to change your own account.    Please provide a different group account in the header.  See the documentation for detail.');
             return next(err);
         }
-        // make sure that request does not include 'illegal' items and reject if set
-        else if (req.body.type || req.body.balance || req.body.sign || req.body._id)
+        // make sure that request does not include items that are controlled internally and reject if set
+        // will not be in documentation as should not be known by developers
+        else if (req.body.type || req.body.balance || req.body.sign || req.body._id || req.verified || req.group )
         {
             const err = createError(403, 'The request attempts to replace values on the account that are forbidden and illegal.  See the documentation for detail.');
             return next(err);
@@ -195,6 +196,7 @@ router
         }
 
         // Updates sections
+        // Pass {new: true} if you want the updated result in the doc variable:
         
         if (req.body){
 
@@ -223,6 +225,32 @@ router
                     }
                 }
             }
+
+            // businesType
+            if (req.body.businessType) {
+                try {
+                    const account = await Account.findOneAndUpdate(
+                        { _id: req.headers.account_id },
+                        { description: req.body.businessType },
+                        { new: true }
+                    );
+                    res.locals.output = account;
+                }
+                catch (error) 
+                { 
+                    if(typeof error.errors !== 'undefined' && error.errors.description)
+                    {
+                        const errStr = error._message + ' : ' + error.errors.accountName.properties.message;
+                        const err = createError(400, errStr);
+                        return next(err);
+                    }
+                    else
+                    {
+                        const err = createError(500, error);
+                        return next(err);
+                        }
+                    }
+                }
 
             // owner
             if (req.body.owner) 
