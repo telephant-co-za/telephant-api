@@ -101,7 +101,7 @@ tags:
   description: |
     Logging in and registering are both done through the Users interface.
 
-    **Note:** Before you may interact with this API, you must first obtain a JWT bearer token via the signup action on the Users endpoint.
+    **Note:** Before you can use this API, you must first sign up and then use the login action to receive a JWT bearer token.
 - name: Ping
   description: Ping is a utility function that can be used to test the health of the Telephant service.  The ping service only responds with 'Pong'.
 

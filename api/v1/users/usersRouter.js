@@ -13,8 +13,6 @@ import User from '../../../models/userModel';
 //import prepareErrors from '../../../functions/prepareErrors';
 
 
-
-
 // LOGIC
 
 // Sign up
@@ -87,15 +85,5 @@ router.post('/', asyncHandler(async (req, res, next) => {
 
     }
 }));
-
-// Update a user
-// router.put('/:id', async (req, res) => {
-//     if (req.body._id) delete req.body._id;
-//     const user = await User.findByIdAndUpdate(req.params.id, req.body, {new:true});
-//     if (user)
-//         res.json(200, user);
-//     else
-//         res.json(404, NotFound);
-// });
 
 export default router;
