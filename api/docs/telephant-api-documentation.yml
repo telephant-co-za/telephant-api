@@ -533,7 +533,7 @@ paths:
                   type: string
                   maxLength: 30
                   example: Pompies
-                  format: /^[a-zA-Z]*$/
+                  pattern: /^[a-zA-Z]*$/
                 email:
                   description: A valid email address for the contact.
                   type: string
