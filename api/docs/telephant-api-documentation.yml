@@ -1089,7 +1089,7 @@ components:
           type: string
           pattern: ^(27)[0-9]{9}$
           description: Provide a valid South African mobile telphone number in the format 27XXXXXXXXXX.
-          example: 27821234567
+          example: "27821234567"
         password:
           type: string
           pattern: /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/
