@@ -485,7 +485,7 @@ paths:
             application/json:
               examples:
                 Accounts-Get:
-                  $ref: '#/components/examples/Accounts-Get'
+                  $ref: '#/components/examples/Contacts-Get'
         '4XX':
           $ref: '#/components/responses/4XX'
 
