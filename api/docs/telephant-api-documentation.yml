@@ -454,8 +454,8 @@ paths:
           $ref: '#/components/responses/5XX'
   /v1/contacts:
     get:
-      summary: List the contacts of an individual or group account.
-      description: List the contacts for account  
+      summary: List the contacts of an account.
+      description: List the contacts of an individual or group account. 
       tags:
         - Contacts
       security:
