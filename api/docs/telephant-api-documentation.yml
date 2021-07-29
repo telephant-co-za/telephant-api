@@ -479,6 +479,13 @@ paths:
           schema:
             type: integer
       responses:
+        '2XX':
+          description: Success
+          content:
+            application/json:
+              examples:
+                Accounts-Get:
+                  $ref: '#/components/examples/Accounts-Get'
         '4XX':
           $ref: '#/components/responses/4XX'
 
