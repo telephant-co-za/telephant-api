@@ -913,7 +913,7 @@ paths:
 
         '5XX':
           $ref: '#/components/responses/5XX'
-  /v1/users:
+  /v1/users?status=login:
     post:
       summary: User actions (signup and login).
       description: An end point to sign up as a user or log in.
