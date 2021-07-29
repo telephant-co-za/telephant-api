@@ -913,10 +913,11 @@ paths:
 
         '5XX':
           $ref: '#/components/responses/5XX'
+
   /v1/users?status=login:
     post:
-      summary: User actions (signup and login).
-      description: An end point to sign up as a user or log in.
+      summary: User signup.
+      description: An end point to sign up as a user.
       tags:
         - Users
       parameters:
@@ -926,13 +927,12 @@ paths:
             type: string
             enum:
               - signup
-              - login
           description: >
-            User actions:
+            User actions can be:
              * `signup` - Create a user account.
              * `login` - As a user, sign in.
       requestBody:
-        description: Provide the telephone number and a password to signup or login.
+        description: Provide the telephone number and a password to signup.
         required: true
         content:
           application/json:
@@ -940,7 +940,7 @@ paths:
               $ref: '#/components/schemas/Users'
       responses:
         '201':
-          description: Created (after successful signup)
+          description: Created
           content:
             application/json:
               schema:
@@ -950,19 +950,6 @@ paths:
                   message: 
                     type: string
                     example: 'The user was successfully registered.'
-        '202':
-          description: Accepted (after successful login)
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: 'User successfully logged in.'
-                  token:
-                    type: string
-                    example: 'BEARER <TOKEN STRING>'
         '400':
           description: Bad Request
           content:
@@ -989,23 +976,13 @@ paths:
                       "name": "BadRequestError",
                       "message": "This telephone number is already registered."
                     }
-        '401':
-          description: Unauthorised
-          content:
-            application/json:
-              example:
-                  {
-                    "code": 401,
-                    "name": "UnauthorizedError",
-                    "message": "Unable to authenticate using credentials provided."
-                  }
         '5xx':
           $ref: '#/components/responses/5XX'
 
-  /v1/users?status=signup:
+  /v1/users?status=login:
     post:
-      summary: User actions (signup and login).
-      description: An end point to sign up as a user or log in.
+      summary: User login.
+      description: An end point to log in a user.
       tags:
         - Users
       parameters:
@@ -1014,33 +991,20 @@ paths:
           schema:
             type: string
             enum:
-              - signup
               - login
           description: >
-            User actions:
+            User actions can be:
              * `signup` - Create a user account.
              * `login` - As a user, sign in.
       requestBody:
-        description: Provide the telephone number and a password to signup or login.
+        description: Provide the telephone number and a password to login.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Users'
-      responses:
-        '201':
-          description: Created (after successful signup)
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  
-                  message: 
-                    type: string
-                    example: 'The user was successfully registered.'
         '202':
-          description: Accepted (after successful login)
+          description: Accepted
           content:
             application/json:
               schema:
@@ -1052,32 +1016,6 @@ paths:
                   token:
                     type: string
                     example: 'BEARER <TOKEN STRING>'
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              examples:
-                Password-complexity:
-                  value:
-                    {
-                      "code": 400,
-                      "name": "BadRequestError",
-                      "message": 'User validation failed : Password not complex enough.'
-                    }
-                South-Africa-format:
-                  value:
-                    {
-                      "code": 400,
-                      "name": "BadRequestError",
-                      "message": 'User validation failed : The telephone number does not conform to the South African format (27XXXXXXXXX).'
-                    }
-                User-taken:
-                  value:
-                    {
-                      "code": 400,
-                      "name": "BadRequestError",
-                      "message": "This telephone number is already registered."
-                    }
         '401':
           description: Unauthorised
           content:
