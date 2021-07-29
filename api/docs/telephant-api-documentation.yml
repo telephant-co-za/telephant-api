@@ -1005,6 +1005,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Users'
+      responses:
         '202':
           description: Accepted
           content:
