@@ -975,11 +975,15 @@ paths:
                 Password-complexity:
                   value:
                     {
+                      "code": 400,
+                      "name": "BadRequestError",
                       "message": 'User validation failed : Password not complex enough.'
                     }
                 South-Africa-format:
                   value:
                     {
+                      "code": 400,
+                      "name": "BadRequestError",
                       "message": 'User validation failed : The telephone number does not conform to the South African format (27XXXXXXXXX).'
                     }
         '401':
@@ -991,7 +995,13 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: 'Unable to authenticate using credentials provided.'
+                    example:
+                      value:
+                        {
+                          "code": 401,
+                          "name": "UnauthorizedError",
+                          "message": "Unable to authenticate using credentials provided."
+                        }
         '403':
           description: Forbidden
           content:
