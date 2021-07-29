@@ -1196,22 +1196,35 @@ components:
         Server error  
       content:
         application/json:
-          examples:
-            Notifications-Get-Item:
-              value:
-                {
-                    "dateTime": "2021-05-23T07:18:00.000Z",
-                    "read": false,
-                    "type": "INFO",
-                    "_id": "60fed5f105b740691acc2d91",
-                    "subject": "Sent",
-                    "message": "You sent Napoleon R 50",
-                    "owner": "my-business-1",
-                    "link": "y3huwi17",
-                    "createdAt": "2021-07-26T15:34:09.689Z",
-                    "updatedAt": "2021-07-26T15:34:09.689Z",
-                    "__v": 0
-                }
+          schema:
+            type: object
+            properties:
+              code:
+                type: Integer
+                example: 500
+              name:
+                type: String
+                example: 'InternalServerError'
+              message:
+                type: String
+                example: 'We are sorry but something went wrong on our side.'
+
+  examples:
+    Notifications-Get-Item:
+      value:
+        {
+            "dateTime": "2021-05-23T07:18:00.000Z",
+            "read": false,
+            "type": "INFO",
+            "_id": "60fed5f105b740691acc2d91",
+            "subject": "Sent",
+            "message": "You sent Napoleon R 50",
+            "owner": "my-business-1",
+            "link": "y3huwi17",
+            "createdAt": "2021-07-26T15:34:09.689Z",
+            "updatedAt": "2021-07-26T15:34:09.689Z",
+            "__v": 0
+        }
     Notifications-Count:
       value:
         {
