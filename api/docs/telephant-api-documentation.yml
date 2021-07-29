@@ -99,7 +99,7 @@ tags:
   description: View the details of a given transaction from a filtered or unfiltered list of transactions on an account.
 - name: Users
   description: |
-    Logging in and registering are both done through the Users interface.
+    Logging in and registering are both done through the Users endpoint.
 
     **Note:** Before you can use this API, you must first sign up and then use the login action to receive a JWT bearer token.
 
@@ -940,7 +940,7 @@ paths:
               $ref: '#/components/schemas/Users'
       responses:
         '201':
-          description: Created
+          description: Created (after successful signup)
           content:
             application/json:
               schema:
@@ -950,7 +950,7 @@ paths:
                     type: string
                     example: 'The user was successfully registered.'
         '202':
-          description: Accepted
+          description: Accepted (after successful login)
           content:
             application/json:
               schema:
@@ -971,7 +971,13 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: ['User validation failed : Password not complex enough.','User validation failed : The telephone number does not conform to the South African format (27XXXXXXXXX).']
+              examples:
+                Password-complexity:
+                  value:
+                    'User validation failed : Password not complex enough.'
+                South-Africa-format:
+                  value:
+                    'User validation failed : The telephone number does not conform to the South African format (27XXXXXXXXX).']
         '401':
           description: Unauthorised
           content:
