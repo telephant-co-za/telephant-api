@@ -594,7 +594,7 @@ paths:
 
   /v1/notifications:
     get:
-      summary: Get list of notifications.
+      summary: List of notifications.
       description: Get the list of notifications for an individual or group account.
       tags:
         - Notifications
@@ -784,7 +784,7 @@ paths:
 
   /v1/retailers:
     get:
-      summary: Get retailers.
+      summary: List retailers.
       description: Get a listing of Telephant retailers.
       tags:
         - Retailers
@@ -874,7 +874,7 @@ paths:
           $ref: '#/components/responses/5XX'
   /v1/transactions:
     get:
-      summary: Get transactions.
+      summary: List transactions.
       description: Get a transaction listing for an individual or group account.
       parameters:
         - in: header
@@ -1040,72 +1040,6 @@ paths:
                     "message": "Unable to authenticate using credentials provided."
                   }
         '5xx':
-          $ref: '#/components/responses/5XX'
-    
-
-  /v1/verifications:
-    get:
-      summary: Get verifications.
-      description: Check the status of an individual or group account's verification.
-      tags:
-        - Verifications
-      security:
-        - BearerAuth: []
-      parameters:
-        - in: header
-          name: account_id
-          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
-          schema:
-            type: string
-            format: uuid
-          required: false
-      responses:
-        '4XX':
-          $ref: '#/components/responses/4XX'
-
-        '5XX':
-          $ref: '#/components/responses/5XX'
-    post:
-      summary: Create verifications.
-      description: Submit verification requirements on a per-account or per-group basis.
-      tags:
-        - Verifications
-      security:
-        - BearerAuth: []
-      parameters:
-        - in: header
-          name: account_id
-          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
-          schema:
-            type: string
-            format: uuid
-          required: false
-      responses:
-        '4XX':
-          $ref: '#/components/responses/4XX'
-
-        '5XX':
-          $ref: '#/components/responses/5XX'
-    put:
-      summary: Update verification.
-      description: Update the verification requirements for a single account or a group account.
-      tags:
-        - Verifications
-      security:
-        - BearerAuth: []
-      parameters:
-        - in: header
-          name: account_id
-          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
-          schema:
-            type: string
-            format: uuid
-          required: false
-      responses:
-        '4XX':
-          $ref: '#/components/responses/4XX'
-
-        '5XX':
           $ref: '#/components/responses/5XX'
 
 
@@ -1332,4 +1266,107 @@ components:
                         }
                     ]
                 }
+    Contacts-Get:
+      value:
+        {
+    "page": 1,
+    "total_pages": 5,
+    "total_results": 41,
+    "results": [
+        {
+            "owner": [
+                "27829524031"
+            ],
+            "_id": "61027161e2eb5f1e6831ea09",
+            "telephoneNumber": "27828400904",
+            "firstName": "Avrom",
+            "lastName": "Ateggart",
+            "email": "aateggart4@linkedin.com"
+        },
+        {
+            "owner": [
+                "27829524031"
+            ],
+            "_id": "61027161e2eb5f1e6831ea0e",
+            "telephoneNumber": "27962371963",
+            "firstName": "Berkie",
+            "lastName": null
+        },
+        {
+            "owner": [
+                "27829524031"
+            ],
+            "_id": "61027161e2eb5f1e6831ea13",
+            "telephoneNumber": "27415630343",
+            "firstName": "Hyman",
+            "lastName": "Maudlin",
+            "email": "hmaudline@huffingtonpost.com"
+        },
+        {
+            "owner": [
+                "27829524031"
+            ],
+            "_id": "61027161e2eb5f1e6831ea18",
+            "telephoneNumber": "27422531972",
+            "firstName": "Ignatius",
+            "lastName": "Bransdon"
+        },
+        {
+            "owner": [
+                "27829524031"
+            ],
+            "_id": "61027161e2eb5f1e6831ea1d",
+            "telephoneNumber": "27534405808",
+            "firstName": "Donica",
+            "lastName": "Ussher"
+        },
+        {
+            "owner": [
+                "27829524031"
+            ],
+            "_id": "61027161e2eb5f1e6831ea22",
+            "telephoneNumber": "27706368969",
+            "firstName": "Dreddy",
+            "lastName": null
+        },
+        {
+            "owner": [
+                "27829524031"
+            ],
+            "_id": "61027161e2eb5f1e6831ea27",
+            "telephoneNumber": "27691370795",
+            "firstName": "Jeremie",
+            "lastName": "Desport"
+        },
+        {
+            "owner": [
+                "27829524031"
+            ],
+            "_id": "61027161e2eb5f1e6831ea05",
+            "telephoneNumber": "27847470159",
+            "firstName": "Bartlet",
+            "lastName": null,
+            "email": "bfairbourne0@nymag.com"
+        },
+        {
+            "owner": [
+                "27829524031"
+            ],
+            "_id": "61027161e2eb5f1e6831ea0a",
+            "telephoneNumber": "27230295211",
+            "firstName": "Bronnie",
+            "lastName": "Meader"
+        },
+        {
+            "owner": [
+                "27829524031"
+            ],
+            "_id": "61027161e2eb5f1e6831ea0f",
+            "telephoneNumber": "27129256706",
+            "firstName": null,
+            "lastName": "Giamitti",
+            "email": "agiamittia@bluehost.com"
+        }
+    ]
+}
 

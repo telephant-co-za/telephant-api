@@ -26,7 +26,7 @@ router
                     .find({ owner: res.locals.account_name })
                     .limit(limit)
                     .skip((page - 1) * limit)
-                    .select(' _id first_name last_name email owner ');
+                    .select(' _id firstName lastName telephoneNumber email owner ');
 
                 const contacts = await contactsPromise;
                 const totalDocuments = await Contact
