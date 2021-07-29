@@ -995,13 +995,13 @@ paths:
                 properties:
                   message:
                     type: string
-                    example:
-                      value:
-                        {
-                          "code": 401,
-                          "name": "UnauthorizedError",
-                          "message": "Unable to authenticate using credentials provided."
-                        }
+              example:
+                value:
+                  {
+                    "code": 401,
+                    "name": "UnauthorizedError",
+                    "message": "Unable to authenticate using credentials provided."
+                  }
         '403':
           description: Forbidden
           content:
