@@ -996,7 +996,6 @@ paths:
                   message:
                     type: string
               example:
-                value:
                   {
                     "code": 401,
                     "name": "UnauthorizedError",
@@ -1011,7 +1010,12 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: 'The telephone number already registered.'
+                example:
+                    {
+                      "code": 400,
+                      "name": "BadRequestError",
+                      "message": "This telephone number is already registered."
+                    }
         '5xx':
           description: Internal Server Error
           content:
