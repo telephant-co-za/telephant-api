@@ -86,7 +86,7 @@ router.post('/', asyncHandler(async (req, res, next) => {
     }
     else
     {
-        const err = createError(405, 'You have not specified a valid action.  Please review the documentation at http://developer.telephant.co.za.');
+        const err = createError(418, 'You aren\'t really a teapot but you have not specified a valid action.  Please review the documentation at http://developer.telephant.co.za.');
         next(err);        
     }
 }));

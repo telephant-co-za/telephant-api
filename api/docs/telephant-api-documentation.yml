@@ -928,6 +928,7 @@ paths:
             enum:
               - signup
           description: >
+          
             User actions can be:
              * `signup` - Create a user account.
              * `login` - As a user, sign in.
@@ -993,6 +994,7 @@ paths:
             enum:
               - login
           description: >
+
             User actions can be:
              * `signup` - Create a user account.
              * `login` - As a user, sign in.
