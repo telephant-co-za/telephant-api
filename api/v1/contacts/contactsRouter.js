@@ -83,9 +83,17 @@ router
     // POST create a new contact
     .post('/', asyncHandler(async (req, res, next) => {
 
+        const requestBody = {
+            "firstName": req.body.firstName,
+            "lastName": req.body.lastName,
+            "telephoneNumber": req.body.telephoneNumber,
+            "email": req.body.email,
+            "owner": [req.localacount_name]
+        }
+
         try{
-            new Contact(req.body).save();
-            res.status(200).json({ success: true });
+            new Contact(requestBody).save();
+            res.status(200).json({ message: 'The contact was successfully created.' });
         }
         catch(error)
         {

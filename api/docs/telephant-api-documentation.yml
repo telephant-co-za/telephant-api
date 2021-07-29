@@ -539,7 +539,15 @@ paths:
                   type: string
                   format: email
                   example: piet@example.com
-      responses:      
+      responses: 
+        '200':
+          description: Success
+          content:
+            application/json:
+              example:
+                { 
+                  message: 'The contact was successfully created.' 
+                }   
         '4XX':
           $ref: '#/components/responses/4XX'
 
