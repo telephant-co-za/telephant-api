@@ -974,10 +974,14 @@ paths:
               examples:
                 Password-complexity:
                   value:
-                    'User validation failed : Password not complex enough.'
+                    {
+                      "message": 'User validation failed : Password not complex enough.'
+                    }
                 South-Africa-format:
                   value:
-                    'User validation failed : The telephone number does not conform to the South African format (27XXXXXXXXX).'
+                    {
+                      "message": 'User validation failed : The telephone number does not conform to the South African format (27XXXXXXXXX).'
+                    }
         '401':
           description: Unauthorised
           content:
