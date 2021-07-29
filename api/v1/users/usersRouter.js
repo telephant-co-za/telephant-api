@@ -54,7 +54,7 @@ router.post('/', asyncHandler(async (req, res, next) => {
         }
 
 // Login        
-     } else {
+     } else if (req.query.action === 'login') {
         
         // Does user exist?
         const user = await User.findByUserName(req.body.telephoneNumber);
@@ -83,6 +83,11 @@ router.post('/', asyncHandler(async (req, res, next) => {
             }
         });
 
+    }
+    else
+    {
+        const err = createError(405, 'You have not specified a valid action.  Please review the documentation at http://developer.telephant.co.za.');
+        next(err);        
     }
 }));
 
