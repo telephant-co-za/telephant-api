@@ -456,7 +456,7 @@ paths:
 #### CONTACTS ####
   /v1/contacts:
 
-### CONTACTS GET ###
+### GET CONTACTS /v1/contacts ###
     get:
       summary: List the contacts.
       description: List the contacts of an individual or group account. 
@@ -495,6 +495,8 @@ paths:
 
         '5XX':
           $ref: '#/components/responses/5XX'
+
+### POST CONTACT /v1/contacts ###
     post:
       summary: Create contact.
       description: |
@@ -560,7 +562,9 @@ paths:
 
         '5XX':
           $ref: '#/components/responses/5XX'
-  /v1/contacts/{ContactsPhoneNumber}:
+
+### GET CONTACT /v1/contacts/{Contact_ID} ###
+  /v1/contacts/{Contact_ID}:
     get:
       summary: View specific contact.
       description: Get the details of a specific contact for an individual or group account.
@@ -589,6 +593,8 @@ paths:
 
         '5XX':
           $ref: '#/components/responses/5XX'
+
+### PUT CONTACT /v1/contacts/{Contact_ID} ###
     put:
       summary: Update specific contact.
       description: Update a specific contact for an individual or group account.
@@ -617,6 +623,8 @@ paths:
 
         '5XX':
           $ref: '#/components/responses/5XX'
+
+### DELETE CONTACT /v1/contacts/{Contact_ID} ###
     delete:
       summary: Delete specific contact.
       description: Delete a specific contact for an individual or group account.
@@ -626,12 +634,12 @@ paths:
         - BearerAuth: []
       parameters:
         - in: path
-          name: ContactsPhoneNumber
+          name: Contact_ID
           schema:
             type: string
-            pattern: ^(27)[0-9]{9}$
+            pattern: /^(27)[0-9]{9}$/
           required: true
-          description: A contact's unique mobile phone number from an accounts contacts list.
+          description: A contact's unique ID from the contacts list.
         - in: header
           name: account_id
           description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
@@ -640,13 +648,21 @@ paths:
             format: uuid
           required: false
       responses:
+        '200':
+          description: Success
+          content: 
+            application/json:
+              example:
+                {
+                    message: 'Contact succesfully deleted.'
+                }
         '4XX':
           $ref: '#/components/responses/4XX'
 
         '5XX':
           $ref: '#/components/responses/5XX'
 
-
+#############################################
   /v1/notifications:
     get:
       summary: List of notifications.
