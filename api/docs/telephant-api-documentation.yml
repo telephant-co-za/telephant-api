@@ -639,7 +639,11 @@ paths:
             type: string
             pattern: /^(27)[0-9]{9}$/
           required: true
-          description: A contact's unique ID from the contacts list.
+          description: |
+            A contact's unique ID from the contacts list.
+
+            Because it is possible to have two contacts with the same phone number in your contacts list, the contacts _id must be used to alter or delete the contact from the list.
+
         - in: header
           name: account_id
           description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.

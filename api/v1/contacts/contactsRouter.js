@@ -120,10 +120,10 @@ router
         try {
 
             const phoneq = req.params.phoneq;
-            const result = await Contact.deleteOne({ telephoneNumber: phoneq, owner: res.locals.account_name });
+            const result = await Contact.deleteOne({ _id: phoneq, owner: res.locals.account_name });
 
             if (result.deletedCount === 1) {
-                res.status(200).json({message: 'Contact succesfully deleted'});
+                res.status(200).json({message: 'Contact succesfully deleted.'});
             } else {
                 const err = createError(404, 'Could not find this phone number in your contacts.');
                 next(err);
