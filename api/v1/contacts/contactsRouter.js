@@ -12,6 +12,16 @@ import Contact from '../../../models/contactModel';
 // custom functions
 import wrongPath from '../../../functions/wrongPath';
 
+function isValidObjectId(id){
+
+    if(ObjectId.isValid(id)){
+        if((String)(new ObjectId(id)) === id)
+            return true;
+        return false;
+    }
+    return false;
+}
+
 // ROUTER
 
 // GET return list of contacts
@@ -116,7 +126,28 @@ router
     }))
 
     // DELETE delete a specified contact
-    .delete('/:phoneq', asyncHandler(async (req, res, next) => {
+    .delete('/:ContactID', asyncHandler(async (req, res, next) => {
+
+            // isValidObjectId
+            if (!isValidObjectId(req.params.ContactID))
+            {
+                const err = createError(400, 'The Contact ID provided is not valid.');
+                return next(err);
+            }
+
+        // Check contact exists    
+            const CheckExists = await Contact.find({
+            owner: res.locals.account_name, 
+            _id: req.params.ContactID});
+
+        if (!CheckExists || CheckExists ==0)
+        {
+            const err = createError(404, 'Could not find this Contact ID in your contacts.');
+            return next(err);        
+        }
+
+        // Pre-checks complete...
+
         try {
 
             const phoneq = req.params.phoneq;
@@ -125,7 +156,9 @@ router
             if (result.deletedCount === 1) {
                 res.status(200).json({message: 'Contact succesfully deleted.'});
             } else {
-                const err = createError(404, 'Could not find this phone number in your contacts.');
+
+                // Just incase 
+                const err = createError(404, 'Could not find this Contact ID in your contacts.');
                 next(err);
             }
         }

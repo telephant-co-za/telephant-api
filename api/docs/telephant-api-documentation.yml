@@ -637,7 +637,7 @@ paths:
           name: Contact_ID
           schema:
             type: string
-            pattern: /^(27)[0-9]{9}$/
+            format: uuid
           required: true
           description: |
             A contact's unique ID from the contacts list.
