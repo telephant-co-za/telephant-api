@@ -5,6 +5,7 @@ import asyncHandler from 'express-async-handler';
 
 const createError = require('http-errors');
 const router = express.Router();
+const ObjectId = require('mongoose').Types.ObjectId;
 
 // models
 import Contact from '../../../models/contactModel';
@@ -128,37 +129,38 @@ router
     // DELETE delete a specified contact
     .delete('/:ContactID', asyncHandler(async (req, res, next) => {
 
+const ContactID = req.params.ContactID;
+console.log(ContactID)
+
             // isValidObjectId
-            if (!isValidObjectId(req.params.ContactID))
+            if (!isValidObjectId(ContactID))
             {
                 const err = createError(400, 'The Contact ID provided is not valid.');
                 return next(err);
             }
 
-        // Check contact exists    
-            const CheckExists = await Contact.find({
-            owner: res.locals.account_name, 
-            _id: req.params.ContactID});
+            // Check contact exists    
+                const CheckExists = await Contact.find({
+                owner: res.locals.account_name, 
+                _id: ContactID});
 
-        if (!CheckExists || CheckExists ==0)
-        {
-            const err = createError(404, 'Could not find this Contact ID in your contacts.');
-            return next(err);        
-        }
+            if (!CheckExists || CheckExists ==0)
+            {
+                const err = createError(404, 'Could not find this Contact ID in your contacts');
+                return next(err);        
+            }
 
         // Pre-checks complete...
 
         try {
-
-            const phoneq = req.params.phoneq;
-            const result = await Contact.deleteOne({ _id: phoneq, owner: res.locals.account_name });
+            const result = await Contact.deleteOne({ _id: ContactID, owner: res.locals.account_name });
 
             if (result.deletedCount === 1) {
                 res.status(200).json({message: 'Contact succesfully deleted.'});
             } else {
 
-                // Just incase 
-                const err = createError(404, 'Could not find this Contact ID in your contacts.');
+                // Just in case 
+                const err = createError(404, 'Could not find this Contact ID in your contacts');
                 next(err);
             }
         }
