@@ -34,7 +34,7 @@ const ContactSchema = new Schema({
     required: false
   },
   owner: {
-    type: Array
+    type: String
   }
 });
 

@@ -24,8 +24,8 @@ import usersRouter from './users/usersRouter';
 const router = express();
 
 router
-.use(express.json())
-.use(express.urlencoded())
+//.use(express.json())
+//.use(express.urlencoded())
 
 .use('/accounts', protectRoute, accountHeader, accountsRouter)
 .use('/airtime', protectRoute, accountHeader, airtimeRouter)

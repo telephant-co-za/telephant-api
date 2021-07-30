@@ -4,7 +4,6 @@ import express from 'express';
 // security
 import https from 'https';
 var hpp = require('hpp');
-var bodyParser = require('body-parser');
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 
@@ -33,7 +32,7 @@ const limiter = rateLimit({
 
 app
 .use(express.json())
-.use(bodyParser.urlencoded())
+.use(express.urlencoded({ extended: true }))
 
 // Security middleware
 .use(hpp())

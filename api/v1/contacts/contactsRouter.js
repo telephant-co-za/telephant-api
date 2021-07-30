@@ -83,23 +83,36 @@ router
     // POST create a new contact
     .post('/', asyncHandler(async (req, res, next) => {
 
-        const requestBody = {
-            "firstName": req.body.firstName,
-            "lastName": req.body.lastName,
-            "telephoneNumber": req.body.telephoneNumber,
-            "email": req.body.email,
-            "owner": [req.localacount_name]
-        }
-
-        try{
-            new Contact(requestBody).save();
-            res.status(200).json({ message: 'The contact was successfully created.' });
-        }
-        catch(error)
-        {
-            const err = createError(500, error);
+        if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
+            const err = createError(400, 'Request body is missing.');
             next(err);
         }
+
+        else if(!req.body.telephoneNumber){
+            const err = createError(400, 'A telephone number is required.');
+            next(err);
+        }
+
+        // Pre-checks complete... Post the request
+        else {
+
+                const requestBody = {
+                    "firstName": req.body.firstName,
+                    "lastName": req.body.lastName,
+                    "telephoneNumber": req.body.telephoneNumber,
+                    "email": req.body.email,
+                    "owner": res.locals.account_name
+                };
+                try{
+                    new Contact(requestBody).save();
+                    res.status(200).json({ message: 'The contact was successfully created.' });
+                }
+                catch(error)
+                {
+                    const err = createError(500, error);
+                    next(err);
+                }
+            }
     }))
 
     // DELETE delete a specified contact
@@ -107,7 +120,7 @@ router
         try {
 
             const phoneq = req.params.phoneq;
-            const result = await Contact.deleteOne({ phone: phoneq, owner: req.body.owner });
+            const result = await Contact.deleteOne({ telephoneNumber: phoneq, owner: res.locals.account_name });
 
             if (result.deletedCount === 1) {
                 res.status(200).json({message: 'Contact succesfully deleted'});

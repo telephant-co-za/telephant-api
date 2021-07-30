@@ -452,7 +452,11 @@ paths:
 
         '5XX':
           $ref: '#/components/responses/5XX'
+
+#### CONTACTS ####
   /v1/contacts:
+
+### CONTACTS GET ###
     get:
       summary: List the contacts.
       description: List the contacts of an individual or group account. 
@@ -493,7 +497,10 @@ paths:
           $ref: '#/components/responses/5XX'
     post:
       summary: Create contact.
-      description: Create a contact for a individual or group account.
+      description: |
+        Create a contact for a individual or group account.
+
+        **Note** The account or username that makes the request will be assigned as the owner account.  It is not possible to change a contact's ownership to multiple owners.
       tags:
         - Contacts
       security:
