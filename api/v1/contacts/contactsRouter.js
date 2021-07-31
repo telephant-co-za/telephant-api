@@ -69,18 +69,29 @@ router
     ))
 
     // GET return details of a contact
-    .get('/:contactPhoneNumber', asyncHandler(async (req, res, next) => {
+    .get('/:ContactID', asyncHandler(async (req, res, next) => {
+
+        const ContactID = req.params.ContactID;
+
+        // isValidObjectId
+        if (!isValidObjectId(ContactID))
+        {
+            const err = createError(400, 'The Contact ID provided is not valid.');
+            return next(err);
+        }
+
+        // Pre-checks complete...
+
         try {
 
-            const contactPhoneNumber = req.params.contactPhoneNumber;
             const returnObject = await Contact
-                                        .find({ telephoneNumber: contactPhoneNumber, owner: res.locals.account_name })
+                                        .find({ _id: ContactID, owner: res.locals.account_name })
 
             if (returnObject.length > 0) {
                 res.locals.output = returnObject;
                 next();
             } else {
-                const err = createError(404, 'Could not find this phone number in your contacts.');
+                const err = createError(404, 'Could not find this Contact ID in your contacts.');
                 next(err);
             }
         }
@@ -142,7 +153,7 @@ router
                 owner: res.locals.account_name, 
                 _id: ContactID});
 
-            if (!CheckExists || CheckExists ==0)
+            if (!CheckExists || CheckExists == 0)
             {
                 const err = createError(404, 'Could not find this Contact ID in your contacts');
                 return next(err);        

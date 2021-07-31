@@ -579,7 +579,10 @@ paths:
             type: string
             format: uuid
           required: true
-          description: A contact's unique mobile phone number from an accounts contacts list.
+          description: |
+            A contact's unique ID from the contacts list.
+
+            Because it is possible to have two contacts with the same phone number in your contacts list, the contacts _id must be used to get, update or delete the contact from the list.
         - in: header
           name: account_id
           description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
@@ -588,6 +591,13 @@ paths:
             format: uuid
           required: false
       responses:
+        '200':
+          description: Success
+          content: 
+            application/json:
+              examples:
+                Contact-Get:
+                  $ref: '#/components/examples/Contact-Get'
         '4XX':
           $ref: '#/components/responses/4XX'
 
@@ -612,7 +622,7 @@ paths:
           description: |
             A contact's unique ID from the contacts list.
 
-            Because it is possible to have two contacts with the same phone number in your contacts list, the contacts id must be used to alter or delete the contact from the list.
+            Because it is possible to have two contacts with the same phone number in your contacts list, the contacts id must be used to get, update or delete the contact from the list.
 
         - in: header
           name: account_id
@@ -654,7 +664,7 @@ paths:
           description: |
             A contact's unique ID from the contacts list.
 
-            Because it is possible to have two contacts with the same phone number in your contacts list, the contacts _id must be used to alter or delete the contact from the list.
+            Because it is possible to have two contacts with the same phone number in your contacts list, the contacts _id must be used to get, update or delete the contact from the list.
 
         - in: header
           name: account_id
@@ -1353,6 +1363,18 @@ components:
                         }
                     ]
                 }
+    Contact-Get:
+      value:
+        [
+            {
+                "_id": "610557d603e71002e0219158",
+                "telephoneNumber": "27434921801",
+                "firstName": null,
+                "lastName": "Gatlin",
+                "owner": "27829524031",
+                "__v": 0
+            }
+        ]
     Contacts-Get:
       value:
         {
