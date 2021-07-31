@@ -198,7 +198,7 @@ paths:
                                   **Note:** The account id in the header will be ignored because 
                                   the owner of the group account will be set to your username's phone number.
 
-                  format: /^[a-z0-9-]{3,16}$/
+                  format: '^[a-z0-9-]{3,16}$'
                 description:
                   type: string
                   maxLength: 300
@@ -264,7 +264,7 @@ paths:
               properties:
                 owners:
                   type: string
-                  pattern: ^(27)[0-9]{9}$
+                  pattern: '^(27)[0-9]{9}$'
                   example: 27821234567
                   description: | 
                     In the South African phone number format, a user's unique mobile phone number.
@@ -408,7 +408,7 @@ paths:
           name: ContactsPhoneNumber
           schema:
             type: string
-            pattern: ^(27)[0-9]{9}$
+            pattern: '^(27)[0-9]{9}$'
           required: true
           description: A contact's unique mobile phone number from an accounts contacts list.
         - in: header
@@ -436,7 +436,7 @@ paths:
           name: ContactsPhoneNumber
           schema:
             type: string
-            pattern: ^(27)[0-9]{9}$
+            pattern: '^(27)[0-9]{9}$'
           required: true
           description: A contact's unique mobile phone number from an accounts contacts list.
         - in: header
@@ -530,7 +530,7 @@ paths:
               properties:
                 telephoneNumber:
                   type: string
-                  pattern: ^(27)[0-9]{9}$
+                  pattern: '^(27)[0-9]{9}$'
                   description: Provide a valid South African mobile telphone number in the format 27XXXXXXXXX.
                   example: "27821234567"
                   required: true
@@ -539,13 +539,13 @@ paths:
                   type: string
                   maxLength: 30
                   example: Piet
-                  pattern: /^[a-zA-Z]*$/
+                  pattern: '^[a-zA-Z]*$'
                 lastName:
                   description: You can only use alpha characters in a name.
                   type: string
                   maxLength: 30
                   example: Pompies
-                  pattern: /^[a-zA-Z]*$/
+                  pattern: '^[a-zA-Z]*$'
                 email:
                   description: A valid email address for the contact.
                   type: string
@@ -636,7 +636,7 @@ paths:
           required: false
       requestBody:
         description: |
-          Define the properties of the contact to create.
+          Define the properties of the contact to update.
 
           You can set a property to null.
         required: true
@@ -649,7 +649,7 @@ paths:
               properties:
                 telephoneNumber:
                   type: string
-                  pattern: ^(27)[0-9]{9}$
+                  pattern: '^(27)[0-9]{9}$'
                   description: Provide a valid South African mobile telphone number in the format 27XXXXXXXXX.
                   example: "27821234567"
                   required: true
@@ -658,13 +658,13 @@ paths:
                   type: string
                   maxLength: 30
                   example: Piet
-                  pattern: /^[a-zA-Z]*$/
+                  pattern: '^[a-zA-Z]*$'
                 lastName:
                   description: You can only use alpha characters in a name.
                   type: string
                   maxLength: 30
                   example: Pompies
-                  pattern: /^[a-zA-Z]*$/
+                  pattern: '^[a-zA-Z]*$'
                 email:
                   description: A valid email address for the contact.
                   type: string
@@ -1191,12 +1191,12 @@ components:
       properties:
         telephoneNumber:
           type: string
-          pattern: ^(27)[0-9]{9}$
+          pattern: '^(27)[0-9]{9}$'
           description: Provide a valid South African mobile telphone number in the format 27XXXXXXXXX.
           example: "27821234567"
         password:
           type: string
-          pattern: /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/
+          pattern: '(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$'
           description: |
             Provide a suitable password.
               * The password length must be greater than or equal to 8
