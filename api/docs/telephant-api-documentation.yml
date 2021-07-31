@@ -563,21 +563,21 @@ paths:
         '5XX':
           $ref: '#/components/responses/5XX'
 
-### GET CONTACT /v1/contacts/{Contact_ID} ###
-  /v1/contacts/{Contact_ID}:
+### GET CONTACT /v1/contacts/{contact_id} ###
+  /v1/contacts/{contact_id}:
     get:
       summary: View specific contact.
-      description: Get the details of a specific contact for an individual or group account.
+      description: Get the details of a specific contact from an individual or group account.
       tags:
         - Contacts
       security:
         - BearerAuth: []
       parameters:
         - in: path
-          name: ContactsPhoneNumber
+          name: contact_id
           schema:
             type: string
-            pattern: ^(27)[0-9]{9}$
+            format: uuid
           required: true
           description: A contact's unique mobile phone number from an accounts contacts list.
         - in: header
@@ -604,12 +604,16 @@ paths:
         - BearerAuth: []
       parameters:
         - in: path
-          name: ContactsPhoneNumber
+          name: contact_id
           schema:
             type: string
-            pattern: ^(27)[0-9]{9}$
+            format: uuid
           required: true
-          description: A contact's unique mobile phone number from an accounts contacts list.
+          description: |
+            A contact's unique ID from the contacts list.
+
+            Because it is possible to have two contacts with the same phone number in your contacts list, the contacts _id must be used to alter or delete the contact from the list.
+
         - in: header
           name: account_id
           description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
@@ -618,13 +622,21 @@ paths:
             format: uuid
           required: false
       responses:
+        '200':
+          description: Success
+          content: 
+            application/json:
+              example:
+                {
+                    message: 'Contact succesfully deleted.'
+                }
         '4XX':
           $ref: '#/components/responses/4XX'
 
         '5XX':
           $ref: '#/components/responses/5XX'
 
-### DELETE CONTACT /v1/contacts/{Contact_ID} ###
+### DELETE CONTACT /v1/contacts/{contact_id} ###
     delete:
       summary: Delete specific contact.
       description: Delete a specific contact for an individual or group account.
@@ -634,7 +646,7 @@ paths:
         - BearerAuth: []
       parameters:
         - in: path
-          name: Contact_ID
+          name: contact_id
           schema:
             type: string
             format: uuid

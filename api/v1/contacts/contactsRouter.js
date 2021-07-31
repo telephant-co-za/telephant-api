@@ -75,7 +75,6 @@ router
             const contactPhoneNumber = req.params.contactPhoneNumber;
             const returnObject = await Contact
                                         .find({ phone: contactPhoneNumber, owner: res.locals.account_name })
-                                        .select({ _id: 0 });   //drop off the ID - for internal use only;
 
             if (returnObject.length > 0) {
                 res.locals = returnObject;
@@ -129,8 +128,7 @@ router
     // DELETE delete a specified contact
     .delete('/:ContactID', asyncHandler(async (req, res, next) => {
 
-const ContactID = req.params.ContactID;
-console.log(ContactID)
+            const ContactID = req.params.ContactID;
 
             // isValidObjectId
             if (!isValidObjectId(ContactID))
@@ -171,52 +169,163 @@ console.log(ContactID)
     }))
 
     // PUT update a specified contact
-    .put('/:phoneq', asyncHandler(async (req, res, next) => {
-        try {
+    .put('/:ContactID', asyncHandler(async (req, res, next) => {
 
-            const phoneq = req.params.phoneq;
-            const result = await Contact.updateOne({ phone: phoneq }, {first_name:"ABCD"});
+        const ContactID = req.params.ContactID;
 
-            var err = ''; 
-            switch (result.n) {
-                case 1:
-                    switch(result.nModified){
-                        case 0:
-                            //{ n: 1, nModified: 0, ok: 1 }               
-                            err = createError(400, 'Contact already matches state requested.');
-                            next(err);
-                            break;
-                        case 1:
-                            //{n: 1, nModified: 1, ok: 1 }
-                            res.status(200).json({message: 'Contact updated succesfully.'});
-                            next(res);
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case 0:
-                    switch(result.ok){
-                        case 0:
-                            //{ n: 0, nModified: 0, ok: 0 }                
-                            err = createError(400, 'The request was unacceptable.');
-                            next(err);
-                            break;
-                        case 1:
-                            //{ n: 0, nModified: 0, ok: 1 }                
-                            err = createError(404, 'Could not find this phone number in contacts list.');
-                            next(err);
-                            break;
-                        default:
-                            break;
-                }             
-            }
-        }
-        catch (error) {
-            const err = createError(500, error);
+        if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
+            const err = createError(400, 'Request body is missing.');
             next(err);
         }
-    }))
+
+        // isValidObjectId
+        if (!isValidObjectId(ContactID))
+        {
+            const err = createError(400, 'The Contact ID provided is not valid.');
+            return next(err);
+        }
+
+        // Check contact exists    
+            const CheckExists = await Contact.find({
+            owner: res.locals.account_name, 
+            _id: ContactID});
+
+        if (!CheckExists || CheckExists ==0)
+        {
+            const err = createError(404, 'Could not find this Contact ID in your contacts');
+            return next(err);        
+        }
+
+        // Pre-checks complete...
+
+        //Can change: 
+        // telephoneNumber
+        // firstName
+        // lastName
+        // email
+
+        if (req.body){
+
+            // telephoneNumber
+            if (req.body.telephoneNumber) {
+
+                try {
+                    const contact = await Contact.findByIdAndUpdate(
+                        { _id: ContactID },
+                        { telephoneNumber: req.body.telephoneNumber },
+                        { new: true }
+                    );
+                    res.locals.output = contact;
+                }
+                catch (error) 
+                { 
+                    if(typeof error.errors !== 'undefined' && error.errors.telephoneNumber)
+                    {
+                        const errStr = error._message + ' : ' + error.errors.telephoneNumber.properties.message;
+                        const err = createError(400, errStr);
+                        return next(err);
+                    }
+                    else
+                    {
+                        const err = createError(500, error);
+                        return next(err);
+                        }
+                    }
+                }
+
+            // firstName
+            if (req.body.firstName || req.body.firstName === null) {
+
+                try {
+                    const contact = await Contact.findByIdAndUpdate(
+                        { _id: ContactID },
+                        { firstName: req.body.firstName },
+                        { new: true }
+                    );
+                    res.locals.output = contact;
+                }
+                catch (error) 
+                { 
+                    if(typeof error.errors !== 'undefined' && error.errors.firstName)
+                    {
+                        const errStr = error._message + ' : ' + error.errors.firstName.properties.message;
+                        const err = createError(400, errStr);
+                        return next(err);
+                    }
+                    else
+                    {
+                        const err = createError(500, error);
+                        return next(err);
+                        }
+                    }
+                }
+
+            // lastName
+           
+            if (req.body.lastName || req.body.lastName === null) {
+
+                try {
+                    const contact = await Contact.findByIdAndUpdate(
+                        { _id: ContactID },
+                        { lastName: req.body.lastName },
+                        { new: true }
+                    );
+                    res.locals.output = contact;
+                }
+                catch (error) 
+                { 
+                    if(typeof error.errors !== 'undefined' && error.errors.lastName)
+                    {
+                        const errStr = error._message + ' : ' + error.errors.lastName.properties.message;
+                        const err = createError(400, errStr);
+                        return next(err);
+                    }
+                    else
+                    {
+                        const err = createError(500, error);
+                        return next(err);
+                        }
+                    }
+                }
+
+            // email
+            if (req.body.email || req.body.email === null) {
+
+                try {
+                    const contact = await Contact.findByIdAndUpdate(
+                        { _id: ContactID },
+                        { email: req.body.email },
+                        { new: true }
+                    );
+                    res.locals.output = contact;
+                }
+                catch (error) 
+                { 
+                    if(typeof error.errors !== 'undefined' && error.errors.email)
+                    {
+                        const errStr = error._message + ' : ' + error.errors.email.properties.message;
+                        const err = createError(400, errStr);
+                        return next(err);
+                    }
+                    else
+                    {
+                        const err = createError(500, error);
+                        return next(err);
+                        }
+                    }
+                }
+            
+            if (!res.locals.output)
+                {
+                    const err = createError(400, 'No relevant fields to update were defined.');
+                    return next(err);
+                }
+
+            res.status(201).json({
+                message: "The contact was successfully updated.",        
+                });
+        
+        }}))
 
     // UNFOUND METHODS
     .all('/*', wrongPath);
