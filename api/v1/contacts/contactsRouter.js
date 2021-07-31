@@ -74,10 +74,10 @@ router
 
             const contactPhoneNumber = req.params.contactPhoneNumber;
             const returnObject = await Contact
-                                        .find({ phone: contactPhoneNumber, owner: res.locals.account_name })
+                                        .find({ telephoneNumber: contactPhoneNumber, owner: res.locals.account_name })
 
             if (returnObject.length > 0) {
-                res.locals = returnObject;
+                res.locals.output = returnObject;
                 next();
             } else {
                 const err = createError(404, 'Could not find this phone number in your contacts.');
@@ -261,7 +261,6 @@ router
                 }
 
             // lastName
-           
             if (req.body.lastName || req.body.lastName === null) {
 
                 try {

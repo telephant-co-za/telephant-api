@@ -596,7 +596,7 @@ paths:
 
 ### PUT CONTACT /v1/contacts/{Contact_ID} ###
     put:
-      summary: Update specific contact.
+      summary: Update a specific contact.
       description: Update a specific contact for an individual or group account.
       tags:
         - Contacts
@@ -612,7 +612,7 @@ paths:
           description: |
             A contact's unique ID from the contacts list.
 
-            Because it is possible to have two contacts with the same phone number in your contacts list, the contacts _id must be used to alter or delete the contact from the list.
+            Because it is possible to have two contacts with the same phone number in your contacts list, the contacts id must be used to alter or delete the contact from the list.
 
         - in: header
           name: account_id
@@ -628,7 +628,7 @@ paths:
             application/json:
               example:
                 {
-                    message: 'Contact succesfully deleted.'
+                    message: 'The contact was successfully updated.'
                 }
         '4XX':
           $ref: '#/components/responses/4XX'
