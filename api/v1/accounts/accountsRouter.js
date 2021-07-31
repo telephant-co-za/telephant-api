@@ -2,7 +2,6 @@
 
 import express from 'express';
 import asyncHandler from 'express-async-handler';
-import { notifications } from '../../../db/seedData/notifications';
 
 const createError = require('http-errors');
 const router = express.Router();
