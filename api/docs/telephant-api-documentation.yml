@@ -359,6 +359,8 @@ paths:
                     "name": "Gone",
                     "message": "The ability to delete a group account has been removed.  In future a method for achieving this will be implemented."
                 }
+
+#### AIRTIME ####
   /v1/airtime:
     get:
       summary: Get airtime balance.
@@ -376,6 +378,13 @@ paths:
             format: uuid
           required: false
       responses:
+        '200':
+          description: Success
+          content: 
+            application/json:
+              examples:
+                Airtime-Get:
+                  $ref: '#/components/examples/Airtime-Get'
         '4XX':
           $ref: '#/components/responses/4XX'
 
@@ -1646,4 +1655,14 @@ components:
         "description": "Sending fee"
     }
 ]
+    Airtime-Get:
+      value:
+        {
+          "accountID": "60ebd53e2f79311541618bc5",
+          "accountName": "my-business-1",
+          "description": "My Business Pty (Ltd)",
+          "balance": 1448.85,
+          "timestamp_ZA": "Sun Aug 01 2021 16:05:29 GMT+0200",
+          "timestamp_UTC": "2021-08-01T14:05:29.042Z"
+        }
 
