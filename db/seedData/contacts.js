@@ -20,7 +20,7 @@ export const contacts = [
 {"telephoneNumber":"27415630343","firstName":"Hyman","lastName":"Maudlin","email":"hmaudline@huffingtonpost.com","owner":"27829524031"},
 {"telephoneNumber":"27190674056","firstName":"Jamey","lastName":"Martello","owner":"27829524031"},
 {"telephoneNumber":"27583265683","firstName":null,"lastName":null,"email":"dmcleodg@360.cn","owner":"27829524031"},
-{"telephoneNumber":"27349288253","firstName":"Binni","lastName":"Tyndall","owner":"27829524031"},
+{"telephoneNumber":"27829524032","firstName":"Binni","lastName":"Tyndall","owner":"27829524031"},
 {"telephoneNumber":"27833879795","firstName":"Rocky","lastName":null,"owner":"27829524031"},
 {"telephoneNumber":"27422531972","firstName":"Ignatius","lastName":"Bransdon","owner":"27829524031"},
 {"telephoneNumber":"27407794747","firstName":null,"lastName":"Crickmore","owner":"27829524031"},

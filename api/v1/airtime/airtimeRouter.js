@@ -6,10 +6,12 @@ const moment = require('moment-timezone');
 
 const createError = require('http-errors');
 
-
 // Import models
 import Account from '../../../models/accountModel';
-import Transactions from '../../../models/transactionModel';
+import Transaction from '../../../models/transactionModel';
+import Contact from '../../../models/contactModel';
+import User from '../../../models/userModel';
+import Notification from '../../../models/notificationModel';
 
 // Funtions
 
@@ -106,57 +108,118 @@ router
 }))
 
 // POST /   use airtime
-.post('/', (req, res, next) => {
+.post('/', asyncHandler(async( req, res, next) => {
 
-})
+}))
 
 // GET /:ContactID     request airtime from a contact
-.get('/:ContactID', (req, res, next) => {
+.get('/:ContactID', asyncHandler(async( req, res, next) => {
 
-})
+}))
 
-// POST /:ContactID     send airtime to a contact
-.post('/:PhoneNumber', async (req, res, next) => {
+// PUT     send airtime to a contact
+                    // as in put airtime in someone hand
+.put('/', asyncHandler(async( req, res, next) => {
 
-});
+    if (!req.body.contactPhoneNumber)
+    {
+        const err = createError(400, 'There was no phone number for a contact to send airtime to.');
+        next(err);        
+    }
+
+    // gather request details
+    const contactphonenumber = req.body.contactPhoneNumber;
+    const user = res.locals.account_name;
+    const amount_to_send = req.body.amount
+
+    try {
+    // Check that phone number is in the contacts
+
+        const ReceiverContact = await Contact
+        .find({ telephoneNumber: contactphonenumber, owner: user });
+
+        // if no results return a message
+        if (ReceiverContact.length == 0)
+        {
+            const err = createError(400, 'The phone number provided for the receiver does not appear in the account\'s contact list.');
+            return next(err); 
+        }
+    }
+    catch (error) {
+        const err = createError(500, error);
+        return next(err);
+    }
+
+    try {
+        // Check that the receiver is a user of the telephant system
+    
+            const ReceiverUser = await User
+            .find({ telephoneNumber: contactphonenumber });
+    
+            // if no results return a message
+            if (ReceiverUser.length == 0)
+            {
+                const err = createError(400, 'The phone number provided for the receiver is not a registered user of the Telephant system.');
+                return next(err); 
+            }
+        }
+        catch (error) {
+            const err = createError(500, error);
+            return next(err);
+        } 
+        
+    try {
+        // Check that balance is sufficient
+    
+            const SenderAccount = await Account
+            .find({ accountName: user });
+    
+            // if balance less then amount to send is a problem
+            if ( SenderAccount[0].balance < amount_to_send)
+            {
+                const err = createError(400, 'There is insufficient balance to complete this send request.');
+                return next(err); 
+            }
+        }
+        catch (error) {
+            const err = createError(500, error);
+            return next(err);
+        } 
+
+    // Pre-checks complete...
+
+    // Make an object for using during transaction
+
+    const RequestDetails = {
+        dateTime: "2021-08-17T13:45"
+
+    };
+    
+    // Execute transaction
+
+    // Update balances
+
+    // Notify 
+
+        // Send notification to sender and receiver
+        // read, type set by default
+
+ /*        SenderNotification = {
+            "dateTime" : ,
+            "subject": "Sent",
+            "message": "You sent Cobello R 10",
+            "owner": username,
+            "link": "TO DO"
+          }
+
+          ReceiverNotification = {
+            "dateTime" : ,
+            "subject": "Recevied",
+            "message": "You sent Cobello R 10",
+            "owner": username,
+            "link": "TO DO"
+          } */
+
+}));
 
 export default router;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- /*    async function sendAirtime(credit, debit, balance) {
-
-
-    
-    // Need checkAccontBalance as used as control
-    async function checkAccountBalance(accountID) {
-    
-        const ownBalance = await Account.findOne({'_id': accountID}).select('sign balance').exec();
-    
-        if (ownBalance) {
-            // Reverse the sign of the account
-            let AccountBalance = (-1 * ownBalance.sign) * ownBalance.balance;
-            return AccountBalance;
-        } else {
-            return "Not Found";
-        }
-    } 
-    
-    
-    
-   
-*/
