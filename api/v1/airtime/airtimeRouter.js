@@ -1,77 +1,17 @@
 import express from 'express';
-const mongoose = require('mongoose');
 const moment = require('moment-timezone');
+const createError = require('http-errors');
+const router = express.Router();
 
 // Import models
 import Account from '../../../models/accountModel';
 import Transactions from '../../../models/transactionModel';
 
-const router = express.Router();
-
 // Funtions
-// Functions are shared by various routes
-
-async function sendAirtime(credit, debit, balance) {
-
-    try {
-            const session = await mongoose.startSession(); 
-            await session.withTransaction(async () => { 
-
-                // debit
-                const d = await Transactions.create(debit, { session });
-
-                // credit
-                const c = await Transactions.create(credit, { session });
-
-                // balance
-                const b = await Account.findOneAndUpdate([{ 'accountID': '710c7dd8-73e4-45b1-9c61-3c76a8f7fefe' }, { balance: 99999.99 }], { session });
-        
-            });
-
-            session.endSession();
-
-            console.log('success');
-        } 
-        catch (error) 
-        {
-            console.log(error);
-        }
-}
-
-
-async function checkAccountBalance(accountID) {
-
-    const query = {'accountID': accountID};
-    const ownBalance = await Account.findOne(query).select('sign balance').exec();
-    let AccountBalance;
-
-    if (ownBalance) {
-        ownBalance.sign ? AccountBalance = ownBalance.balance : AccountBalance = -1 * ownBalance.balance;
-        return AccountBalance;
-    } else {
-        return "Not Found";
-    }
-}
-
-async function checkAccountsViewable(accountID, username, rights) {
-
-    let accountRights = 
-        GroupsRights.
-            find({},{_id:0}).
-            where('rights').
-            gte(rights).
-            where('username').
-            equals(username).
-            select('accountID').
-            exec();
-
-    return accountRights;
-}
 
 async function lookupAccountID(username) {
-    
-    const query = {'name': username};
-    let document = await Account.findOne(query).select('_id').exec();
+
+    let document = await Account.findOne({'accountName': username}).select('_id').exec();
 
     if (!document)
     {
@@ -79,82 +19,115 @@ async function lookupAccountID(username) {
     }
         else
     {
-        console.log(document._id);
-        return document.accountID;
+        return document._id;
     }
-
-}
-
-async function lookupAccountName(accountID) {
-    
-    const query = {'_id': accountID};
-    let document = await Account.findOne(query).select('name').exec();
-
-    return document;
 }
 
 // Airtime does not have its own schema in the db but
 // will interact with the relevant schemas posting transactions and
 // doing relevant lookups
 
+//router
+router
+
 // GET /    balance
-router.get('/', async (req, res, next) => {
+.get('/', async (req, res, next) => {
 
     // Lookup the account ID for username
-    const AccountID = await lookupAccountID('+27829524031');
+    const AccountID = await lookupAccountID(res.locals.account_name);
 
-    // Check which other accounts the username can view (2)
-    let AccountsViewable = await checkAccountsViewable(AccountID, '+27829524031', 2);
+         try {
 
-    // A user will have level 5 control over their own account that will not be reflected in the
-    // groupsrights, so will add that account to AccountsViewable at the top of the array 
-    // of accounts
-    AccountsViewable.unshift({'accountID': AccountID});
+            const accountDetails = await Account
+                                        .find({ _id: AccountID })
+                                        .select(' balance sign accountName description');
 
-    // 
-    let balanceObject = [];
-    for (var accountID in AccountsViewable) {
+            if (accountDetails.length > 0) {
 
-        // Check which accounts the user can view
-        const AccountID = AccountsViewable[accountID].accountID;
+            // Get the balance and format it for RSA or it says Not Avaialble
+            let balance = accountDetails[0].balance;
+            
 
-        // Get the balance and format it for RSA
-        let AccountBalance = await checkAccountBalance(AccountID);
-        isNaN(AccountBalance) ? AccountBalance = 'Not Available' : AccountBalance = Intl.NumberFormat('en-ZA', { style: 'currency', currency: 'ZAR' }).format(AccountBalance)
-        
-        // Make a time stamp in GMT+2
-        var now = moment().tz('Africa/Johannesburg').format('dddd, MMMM Do YYYY, h:mm:ss a z');
 
-        // Get the accounts name
-        let AccountName = await lookupAccountName(AccountID);
-        !AccountName ? AccountName = AccountName = 'Not Defined' : AccountName = AccountName._doc.name;
+            if (isNaN(balance))
+            {
+                balance = 'Not Available';
+            }
+            else
+            {
+                // REMOVED formating will leave this for the GUI.  Dev may want to use value as a number.
+                
+                //balance = Intl.NumberFormat('en-ZA', 
+                //                            { style: 'currency', 
+                //                              currency: 'ZAR' }).format(balance);
 
-        balanceObject.push({
-            'accountID': AccountID,
-            'accountName': AccountName,
-            'balance': AccountBalance,
-            'dateTime': now
-        });
-    }
+                // reverse the sign
+                // should be positiove but incase there is a deficit on the account
+                // maybe suport credit lines in the future
+                balance = balance * (-1 * accountDetails[0].sign);
+            }
 
-    res.locals = balanceObject;
+            // Make a time stamp in GMT+2
+            let now = moment().tz('Africa/Johannesburg');
+
+            // Put the repsonse object together
+            const returnObject = {
+                accountID: accountDetails[0]._id,
+                accountName: accountDetails[0].accountName,
+                description: accountDetails[0].description,
+                balance: balance,
+                timestamp_ZA: now.toString(),
+                timestamp_UTC: now.toISOString() 
+            };
+
+            // Neaten up the response object, if no description then mute it
+            if (accountDetails[0].description == "")
+            {
+                returnObject.description = undefined;
+            }
+
+            res.locals.output = returnObject;
+
+            } else {
+                const err = createError(404, 'Could not find this Account ID in your available accounts.');
+                next(err);
+            }
+        }
+        catch (error) {
+            const err = createError(500, error);
+            next(err);
+        }
+    
     next();
-});
+})
 
 // POST /   use airtime
-router.post('/', (req, res) => {
-    res.json({ "will": "convert credit to airtime" });
-});
+.post('/', (req, res, next) => {
+
+})
 
 // GET /:ContactID     request airtime from a contact
-router.get('/:ContactID', (req, res) => {
-    res.json({ "will": "request airtime from a contact" });
-});
+.get('/:ContactID', (req, res, next) => {
+
+})
 
 // POST /:ContactID     send airtime to a contact
-router.post('/:PhoneNumber', async (req, res, next) => {
+.post('/:PhoneNumber', async (req, res, next) => {
 
-    // Send to telephone number
+});
+
+export default router;
+
+
+
+
+
+
+
+
+
+
+    /* // Send to telephone number
     // Can only be a telphant user
 
     // 1) Check for that telephone number as a username
@@ -227,8 +200,69 @@ router.post('/:PhoneNumber', async (req, res, next) => {
 
     }
     
-    res.json(req.body.amount);
+    res.json(req.body.amount); */
 
-});
 
-export default router;
+
+
+
+
+ /*    async function sendAirtime(credit, debit, balance) {
+
+        try {
+                const session = await mongoose.startSession(); 
+                await session.withTransaction(async () => { 
+    
+                    // debit
+                    const d = await Transactions.create(debit, { session });
+    
+                    // credit
+                    const c = await Transactions.create(credit, { session });
+    
+                    // balance
+                    const b = await Account.findOneAndUpdate([{ 'accountID': '710c7dd8-73e4-45b1-9c61-3c76a8f7fefe' }, { balance: 99999.99 }], { session });
+            
+                });
+    
+                session.endSession();
+    
+                console.log('success');
+            } 
+            catch (error) 
+            {
+                console.log(error);
+            }
+    }
+    
+    // Need checkAccontBalance as used as control
+    async function checkAccountBalance(accountID) {
+    
+        const ownBalance = await Account.findOne({'_id': accountID}).select('sign balance').exec();
+    
+        if (ownBalance) {
+            // Reverse the sign of the account
+            let AccountBalance = (-1 * ownBalance.sign) * ownBalance.balance;
+            return AccountBalance;
+        } else {
+            return "Not Found";
+        }
+    } 
+    
+    
+    
+   
+async function lookupAccountName(accountID) {
+    
+    const query = {'_id': accountID};
+    let document = await Account.findOne(query).select('name').exec();
+
+    return document;
+} 
+    
+    
+    
+    
+    
+    
+    
+    */
