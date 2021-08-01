@@ -1543,7 +1543,7 @@ components:
         }
     ]
 }
-    Transations-Get:
+    Transactions-Get:
       value:
         {
     "page": 1,
