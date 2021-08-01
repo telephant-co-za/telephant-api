@@ -92,7 +92,10 @@ tags:
 - name: Retailers
   description: Obtain a public list of Telephant credit-accepting merchants. Add, delete, or edit merchant information that will be made public.
 - name: Transactions
-  description: View the details of a given transaction from a filtered or unfiltered list of transactions on an account.
+  description: | 
+      Get a paginated list of transactions for a particular account or a the details of just a specific transaction.
+
+      **Note:** Transations are a read only resource and cannot be created, modified or deleted through this API.
 - name: Users
   description: |
     Logging in and registering are both done through the Users endpoint.
@@ -1069,6 +1072,14 @@ paths:
             format: uuid
           required: false
       responses:
+        '2XX':
+          description: Success
+          content:
+            application/json:
+              examples:
+                Contacts-Get:
+                  $ref: '#/components/examples/Transactions-Get'
+
         '4XX':
           $ref: '#/components/responses/4XX'
 
