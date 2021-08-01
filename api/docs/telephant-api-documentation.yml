@@ -1063,6 +1063,7 @@ paths:
             type: string
             format: uuid
           required: true
+          example: '2dguitrb'
           description: Unique ID of the transaction.
         - in: header
           name: account_id
