@@ -1077,8 +1077,8 @@ paths:
           content:
             application/json:
               examples:
-                Transactions-Get:
-                  $ref: '#/components/examples/Transactions-Get'
+                Transaction-Get:
+                  $ref: '#/components/examples/Transaction-Get'
 
         '4XX':
           $ref: '#/components/responses/4XX'
@@ -1086,6 +1086,7 @@ paths:
         '5XX':
           $ref: '#/components/responses/5XX'
 
+### USERS ###
   /v1/users?status=signup:
     post:
       summary: User signup.
@@ -1616,3 +1617,32 @@ components:
         }
     ]
 }
+    Transaction-Get:
+      value:
+        [
+    {
+        "type": "SEND",
+        "transactionID": "2dguitrb",
+        "accountID": "60ebd53e2f79311541618bc6",
+        "dateTime": "2021-06-01T09:12:00.000Z",
+        "amount": -10,
+        "description": "Sending credit"
+    },
+    {
+        "type": "TAX",
+        "transactionID": "2dguitrb",
+        "accountID": "60ebd53e2f79311541618bc6",
+        "dateTime": "2021-06-01T09:12:00.000Z",
+        "amount": -0.15,
+        "description": "VAT"
+    },
+    {
+        "type": "FEE",
+        "transactionID": "2dguitrb",
+        "accountID": "60ebd53e2f79311541618bc6",
+        "dateTime": "2021-06-01T09:12:00.000Z",
+        "amount": -1,
+        "description": "Sending fee"
+    }
+]
+

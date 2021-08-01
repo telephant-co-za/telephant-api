@@ -14,16 +14,6 @@ import Account from '../../../models/accountModel';
 // custom functions
 import wrongPath from '../../../functions/wrongPath';
 
-function isValidObjectId(id){
-
-    if(ObjectId.isValid(id)){
-        if((String)(new ObjectId(id)) === id)
-            return true;
-        return false;
-    }
-    return false;
-}
-
 async function getAccountID(account_name){
     const accountIDpromise = Account
             .find({ accountName : account_name })
@@ -97,9 +87,50 @@ router
     ))
 
 // GET return details of a specific transaction
-.get('/:TransactionID', (req, res) => {
-    res.json({"will" : "return a specific transaction"});
-})
+    // GET return details of a transaction
+    .get('/:TransactionID', asyncHandler(async (req, res, next) => {
+
+        const accountID = await getAccountID(res.locals.account_name);
+
+        const TransactionID = req.params.TransactionID;
+
+        // Pre-checks complete...
+
+        try {
+
+            const transactions = await Transaction
+                                        .find({ transactionID: TransactionID, 
+                                                accountID: accountID })
+                                        .select('-_id -__v')
+                                        .sort('dateTime');
+
+            // Will convert the amount into the right sign for the users perspective
+            for (const num in transactions) {
+
+                var amount = transactions[num].amount;
+                var sign2 = transactions[num].sign;
+
+                // reverse the sign
+                transactions[num].amount = amount * (sign2 *-1);
+
+                // take out sign from the user output
+                transactions[num].sign = undefined;
+
+                }
+
+            if (transactions.length > 0) {
+                res.locals.output = transactions;
+                next();
+            } else {
+                const err = createError(404, 'Could not find this Transaction ID in your transaction history.');
+                next(err);
+            }
+        }
+        catch (error) {
+            const err = createError(500, error);
+            next(err);
+        }
+    }))
 
     // UNFOUND METHODS
     .all('/*', wrongPath);
