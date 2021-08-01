@@ -5,7 +5,6 @@ import asyncHandler from 'express-async-handler';
 
 const createError = require('http-errors');
 const router = express.Router();
-const ObjectId = require('mongoose').Types.ObjectId;
 
 // models
 import Transaction from '../../../models/transactionModel';
