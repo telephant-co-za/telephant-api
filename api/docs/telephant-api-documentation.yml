@@ -1009,7 +1009,7 @@ paths:
           $ref: '#/components/responses/5XX'
 
 #### TRANSACTIONS ####
-
+  /v1/transactions:
     get:
       summary: List the transactions.
       description: List the transactions of an individual or group account. 
@@ -1077,7 +1077,7 @@ paths:
           content:
             application/json:
               examples:
-                Contacts-Get:
+                Transactions-Get:
                   $ref: '#/components/examples/Transactions-Get'
 
         '4XX':
