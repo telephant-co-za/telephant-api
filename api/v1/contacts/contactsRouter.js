@@ -47,7 +47,7 @@ router
                 // if no results return a message
                 if (totalDocuments == 0)
                 {
-                    const err = createError(400, 'No contacts found.');
+                    const err = createError(404, 'No contacts found.');
                     return next(err); 
                 }
 

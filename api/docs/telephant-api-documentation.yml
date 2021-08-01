@@ -452,7 +452,6 @@ paths:
 #### CONTACTS ####
   /v1/contacts:
 
-### GET CONTACTS /v1/contacts ###
     get:
       summary: List the contacts.
       description: List the contacts of an individual or group account. 
@@ -484,7 +483,7 @@ paths:
           content:
             application/json:
               examples:
-                Accounts-Get:
+                Contacts-Get:
                   $ref: '#/components/examples/Contacts-Get'
         '4XX':
           $ref: '#/components/responses/4XX'
@@ -492,7 +491,6 @@ paths:
         '5XX':
           $ref: '#/components/responses/5XX'
 
-### POST CONTACT /v1/contacts ###
     post:
       summary: Create contact.
       description: |
@@ -562,7 +560,6 @@ paths:
         '5XX':
           $ref: '#/components/responses/5XX'
 
-### GET CONTACT /v1/contacts/{contact_id} ###
   /v1/contacts/{contact_id}:
     get:
       summary: View specific contact.
@@ -603,7 +600,6 @@ paths:
         '5XX':
           $ref: '#/components/responses/5XX'
 
-### PUT CONTACT /v1/contacts/{Contact_ID} ###
     put:
       summary: Update a specific contact.
       description: Update a specific contact for an individual or group account.
@@ -681,7 +677,6 @@ paths:
         '5XX':
           $ref: '#/components/responses/5XX'
 
-### DELETE CONTACT /v1/contacts/{contact_id} ###
     delete:
       summary: Delete specific contact.
       description: Delete a specific contact for an individual or group account.
@@ -723,7 +718,8 @@ paths:
         '5XX':
           $ref: '#/components/responses/5XX'
 
-#############################################
+#### NOTIFICATIONS ####
+
   /v1/notifications:
     get:
       summary: List of notifications.
@@ -897,6 +893,8 @@ paths:
         '5XX':
           $ref: '#/components/responses/5XX'
 
+  #### PING ####
+
   /ping:
     get:
       summary: Ping the API.
@@ -913,6 +911,8 @@ paths:
                   message:
                     type: string
                     example: Pong.
+
+#### RETAILERS ####
 
   /v1/retailers:
     get:
@@ -1004,10 +1004,16 @@ paths:
 
         '5XX':
           $ref: '#/components/responses/5XX'
-  /v1/transactions:
+
+#### TRANSACTIONS ####
+
     get:
-      summary: List transactions.
-      description: Get a transaction listing for an individual or group account.
+      summary: List the transactions.
+      description: List the transactions of an individual or group account. 
+      tags:
+        - Transactions
+      security:
+        - BearerAuth: []
       parameters:
         - in: header
           name: account_id
@@ -1016,11 +1022,24 @@ paths:
             type: string
             format: uuid
           required: false
-      tags:
-        - Transactions
-      security:
-        - BearerAuth: []
+        - in: query
+          name: page
+          description: The page number of results to return.
+          schema:
+              type: integer
+        - in: query
+          name: limit
+          description: The numbers of items to return per page.
+          schema:
+            type: integer
       responses:
+        '2XX':
+          description: Success
+          content:
+            application/json:
+              examples:
+                Transactions-Get:
+                  $ref: '#/components/examples/Transactions-Get'
         '4XX':
           $ref: '#/components/responses/4XX'
 
@@ -1513,4 +1532,76 @@ components:
         }
     ]
 }
-
+    Transations-Get:
+      value:
+        {
+    "page": 1,
+    "total_pages": 1,
+    "total_results": 8,
+    "results": [
+        {
+            "type": "TOPUP",
+            "transactionID": "8he49vuc",
+            "accountID": "60ebd53e2f79311541618bc6",
+            "dateTime": "2021-05-05T12:12:00.000Z",
+            "amount": 500,
+            "description": "Account top up"
+        },
+        {
+            "type": "RECEIVE",
+            "transactionID": "4g7hcv7",
+            "accountID": "60ebd53e2f79311541618bc6",
+            "dateTime": "2021-05-17T11:45:00.000Z",
+            "amount": 10,
+            "description": "Received credit"
+        },
+        {
+            "type": "TAX",
+            "transactionID": "8q129bib",
+            "accountID": "60ebd53e2f79311541618bc6",
+            "dateTime": "2021-05-27T09:16:00.000Z",
+            "amount": -0.15,
+            "description": "VAT"
+        },
+        {
+            "type": "FEE",
+            "transactionID": "8q129bib",
+            "accountID": "60ebd53e2f79311541618bc6",
+            "dateTime": "2021-05-27T09:16:00.000Z",
+            "amount": -1,
+            "description": "Sending fee"
+        },
+        {
+            "type": "SEND",
+            "transactionID": "8q129bib",
+            "accountID": "60ebd53e2f79311541618bc6",
+            "dateTime": "2021-05-27T09:16:00.000Z",
+            "amount": -100,
+            "description": "Sending credit"
+        },
+        {
+            "type": "FEE",
+            "transactionID": "2dguitrb",
+            "accountID": "60ebd53e2f79311541618bc6",
+            "dateTime": "2021-06-01T09:12:00.000Z",
+            "amount": -1,
+            "description": "Sending fee"
+        },
+        {
+            "type": "SEND",
+            "transactionID": "2dguitrb",
+            "accountID": "60ebd53e2f79311541618bc6",
+            "dateTime": "2021-06-01T09:12:00.000Z",
+            "amount": -10,
+            "description": "Sending credit"
+        },
+        {
+            "type": "TAX",
+            "transactionID": "2dguitrb",
+            "accountID": "60ebd53e2f79311541618bc6",
+            "dateTime": "2021-06-01T09:12:00.000Z",
+            "amount": -0.15,
+            "description": "VAT"
+        }
+    ]
+}
