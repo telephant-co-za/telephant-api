@@ -11,8 +11,6 @@ const createError = require('http-errors');
 // Import models
 import Account from '../../../models/accountModel';
 import Transaction from '../../../models/transactionModel';
-import Contact from '../../../models/contactModel';
-import User from '../../../models/userModel';
 import Notification from '../../../models/notificationModel';
 
 // Funtions

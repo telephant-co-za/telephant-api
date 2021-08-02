@@ -390,6 +390,36 @@ paths:
 
         '5XX':
           $ref: '#/components/responses/5XX'
+
+    put:
+      summary: Send airtime.
+      description: |
+        Send airtime credit to another Telephant user.
+
+        Take note that in order to successfully send airtime the following is necessary:
+        * The balance in the sending accounting needs to exceed the amount to be sent.
+        * You can send airtime to another Telephant account that is registered.
+        * You can send airtime to an individual or a group account, but you must supply the correct account name.
+
+      tags:
+        - Airtime
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: header
+          name: account_id
+          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
+          schema:
+            type: string
+            format: uuid
+          required: false
+      responses:
+        '4XX':
+          $ref: '#/components/responses/4XX'
+
+        '5XX':
+          $ref: '#/components/responses/5XX'
+
     post:
       summary: Use airtime.
       description: Convert positive airtime balance for use as airtime on phone.
@@ -407,34 +437,6 @@ paths:
     get:
       summary: Request airtime.
       description: Request airtime credit from a contact.
-      tags:
-        - Airtime
-      security:
-        - BearerAuth: []
-      parameters:
-        - in: path
-          name: ContactsPhoneNumber
-          schema:
-            type: string
-            pattern: '^(27)[0-9]{9}$'
-          required: true
-          description: A contact's unique mobile phone number from an accounts contacts list.
-        - in: header
-          name: account_id
-          description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
-          schema:
-            type: string
-            format: uuid
-          required: false
-      responses:
-        '4XX':
-          $ref: '#/components/responses/4XX'
-
-        '5XX':
-          $ref: '#/components/responses/5XX'
-    post:
-      summary: Send airtime.
-      description: Send airtime credit to a contact.
       tags:
         - Airtime
       security:
