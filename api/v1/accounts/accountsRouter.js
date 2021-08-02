@@ -138,11 +138,9 @@ router
     // DELETE delete a specified accounts
     .delete('/', asyncHandler(async (req, res, next) => {
 
-        res.status(410).json({
-            "code": 410,
-            "name": "Gone",
-            "message": "The ability to delete a group account has been removed.  In future a method for achieving this will be implemented."
-        });
+        const errStr = 'The ability to delete a group account has been removed.  In future a method for achieving this will be implemented.';
+        const err = createError(410, errStr);
+        return next(err);
     }))
 
 
