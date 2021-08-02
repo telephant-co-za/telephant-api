@@ -1,8 +1,10 @@
 import express from 'express';
 const router = express.Router();
+const mongoose = require('mongoose');
 import asyncHandler from 'express-async-handler';
 
 const moment = require('moment-timezone');
+var crypto = require("crypto");
 
 const createError = require('http-errors');
 
@@ -121,47 +123,45 @@ router
                     // as in put airtime in someone hand
 .put('/', asyncHandler(async( req, res, next) => {
 
-    if (!req.body.contactPhoneNumber)
+    if (!req.body.accountName)
     {
         const err = createError(400, 'There was no phone number for a contact to send airtime to.');
         next(err);        
     }
 
     // gather request details
-    const contactphonenumber = req.body.contactPhoneNumber;
+    const account_name= req.body.accountName;
     const user = res.locals.account_name;
-    const amount_to_send = req.body.amount
+    const amount_to_send = req.body.amount;
 
-    try {
-    // Check that phone number is in the contacts
-
-        const ReceiverContact = await Contact
-        .find({ telephoneNumber: contactphonenumber, owner: user });
-
-        // if no results return a message
-        if (ReceiverContact.length == 0)
-        {
-            const err = createError(400, 'The phone number provided for the receiver does not appear in the account\'s contact list.');
-            return next(err); 
-        }
+    // Reject if amount_to_send NaN
+    if(isNaN(amount_to_send))
+    {
+        const err = createError(400, 'You have specified an amount to send that is not a valid positive number.');
+        return next(err); 
     }
-    catch (error) {
-        const err = createError(500, error);
-        return next(err);
+
+    // Reject if amount_to_send -Negative
+    if(amount_to_send<0)
+    {
+        const err = createError(400, 'You have specified an amount to send that is not a valid positive number.');
+        return next(err); 
     }
 
     try {
-        // Check that the receiver is a user of the telephant system
+        // Check that the receiver is an account of the telephant system
     
-            const ReceiverUser = await User
-            .find({ telephoneNumber: contactphonenumber });
+            const ReceiverAccount = await Account
+            .find({ accountName: account_name });
     
             // if no results return a message
-            if (ReceiverUser.length == 0)
+            if (ReceiverAccount.length == 0)
             {
-                const err = createError(400, 'The phone number provided for the receiver is not a registered user of the Telephant system.');
+                const err = createError(400, 'The account provided for the receiver is not a registered user of the Telephant system.');
                 return next(err); 
             }
+
+            var receiver = ReceiverAccount[0];
         }
         catch (error) {
             const err = createError(500, error);
@@ -180,6 +180,8 @@ router
                 const err = createError(400, 'There is insufficient balance to complete this send request.');
                 return next(err); 
             }
+
+            var sender = SenderAccount[0];
         }
         catch (error) {
             const err = createError(500, error);
@@ -188,37 +190,136 @@ router
 
     // Pre-checks complete...
 
-    // Make an object for using during transaction
+    // Make objects for using during transaction
 
-    const RequestDetails = {
-        dateTime: "2021-08-17T13:45"
+    let timestamp = moment().tz('Africa/Johannesburg').toISOString();
+    let amount_zar = Intl.NumberFormat('en-ZA', { style: 'currency', currency: 'ZAR' }).format(amount_to_send);
+    let trans_id = crypto.randomBytes(10).toString('hex'); // make a random stirng to group the transactions
+    let fee =  1.00;  //fee is fixed to R 1.00 for sending
+    let tax = fee * 0.15; // VAT is 15%
 
-    };
-    
-    // Execute transaction
+    // some static accounts are preset like COA accounts
+    // these are the same for any sending transaction
 
-    // Update balances
+    const transactionsObject = [
+        {
+            "transactionID": trans_id,
+            "accountID": sender._id,
+            "dateTime": timestamp,
+            "type": "SEND",
+            "amount": amount_to_send,
+            "sign": 1,
+            "description": `You sent ${account_name} ${amount_zar}`.substring(0, 200)
+          },
+          {
+            "transactionID": trans_id,
+            "accountID": "60ebd53e2f79311541618bc5",
+            "dateTime": timestamp,
+            "type": "FEE",
+            "amount": fee,
+            "sign": 1,
+            "description": "Sending fee"
+          },
+          {
+            "transactionID": trans_id,
+            "accountID": "60ebd53e2f79311541618bc5",
+            "dateTime": timestamp,
+            "type": "TAX",
+            "amount": tax,
+            "sign": 1,
+            "description": "VAT"
+          },
 
-    // Notify 
+          // Other half....
 
-        // Send notification to sender and receiver
-        // read, type set by default
-
- /*        SenderNotification = {
-            "dateTime" : ,
-            "subject": "Sent",
-            "message": "You sent Cobello R 10",
-            "owner": username,
-            "link": "TO DO"
+          {
+            "transactionID": trans_id,
+            "accountID": receiver._id,
+            "dateTime": timestamp,
+            "type": "RECEIVE",
+            "amount": amount_to_send,
+            "sign": -1,
+            "description": `You received ${amount_zar} from ${user}`.substring(0, 200)
+          },
+          {
+            "transactionID": trans_id,
+            "accountID": "60ebd53e2f79311541618bc4",
+            "dateTime": timestamp,
+            "type": "FEE_REVENUE",
+            "amount": fee,
+            "sign": -1,
+            "description": "Sending fee"
+          },
+          {
+            "transactionID": trans_id,
+            "accountID": "60ebd53e2f79311541618b12",
+            "dateTime": timestamp,
+            "type": "TAX_ACCOUNT",
+            "amount": tax,
+            "sign": -1,
+            "description": "VAT"
           }
+    ];
 
-          ReceiverNotification = {
-            "dateTime" : ,
-            "subject": "Recevied",
-            "message": "You sent Cobello R 10",
-            "owner": username,
-            "link": "TO DO"
-          } */
+    const balanceObject = [
+                            {
+                                "_id": sender._id,
+                                "balance": sender.balance - amount_to_send
+                            },
+                            {
+                                "_id": receiver._id,
+                                "balance": receiver.balance + amount_to_send
+                            }
+                        ];
+
+    const notificationsObject = [
+
+        // If field not set explicitly here then the defaults are take from the model
+                            {
+                                "dateTime" : timestamp,
+                                "subject": "Sent Airtime",
+                                "message": `You sent ${account_name} ${amount_zar}`.substring(0, 200),
+                                "owner": user
+                            },
+                            {
+                                "dateTime" : timestamp,
+                                "subject": "Recevied Airtime",
+                                "message": `You received ${amount_zar} from ${user}`.substring(0, 200),
+                                "owner": account_name
+                            }
+                        ];
+    
+    // Execute transactions all in one go
+    // All or nothing!!
+
+    try {
+        const session = await mongoose.startSession(); 
+        await session.withTransaction(async () => { 
+
+            // transactions
+            await Transaction.create(transactionsObject, { session });
+
+            // balances
+            // loop through updates to the balances
+
+            for (const item in balanceObject) {
+                await Account.findByIdAndUpdate(balanceObject[item]._id,{"balance": balanceObject[item].balance})
+              }
+
+            // notifications
+            await Notification.create(notificationsObject, { session });
+    
+        });
+
+        session.endSession();
+        res.status(200).json({ message: 'The airtime was sent successully' });
+
+    } 
+    catch (error) 
+    {
+        const err = createError(500, error);
+        next(err);
+    }
 
 }));
 
