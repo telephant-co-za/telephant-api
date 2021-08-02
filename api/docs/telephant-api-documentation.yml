@@ -396,11 +396,6 @@ paths:
       description: |
         Send airtime credit to another Telephant user.
 
-        **Note:** Keep in mind that the following is required in order to send airtime successfully:
-        * The balance in the sending accounting needs to exceed the amount to be sent.
-        * You can send airtime to another Telephant account that is registered.
-        * You can send airtime to an individual or a group account, but you must supply the correct account name.
-
       tags:
         - Airtime
       security:
@@ -413,7 +408,43 @@ paths:
             type: string
             format: uuid
           required: false
-      responses:
+      requestBody:
+        description: |
+          Define the details of the airtime send request.
+
+          **Note:** Keep in mind that the following is required in order to send airtime successfully:
+          * The balance in the sending accounting needs to exceed the amount to be sent.
+          * You can send airtime to another Telephant account that is registered.
+          * You can send airtime to an individual or a group account, but you must supply the correct account name.
+
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - accountName
+              properties:
+                accountName:
+                  type: string
+                  description: Provide a valid Telephant account name.
+                  examples:
+                    - "27821234567"
+                    - "my-business-1"
+                  required: true
+                amount:
+                  description: The amount of airtime to send to the recipient.
+                  type: number
+                  example: 10.00
+      responses: 
+        '200':
+          description: Success
+          content:
+            application/json:
+              example:
+                { 
+                  message: 'The contact was successfully created.' 
+                }   
         '4XX':
           $ref: '#/components/responses/4XX'
 
