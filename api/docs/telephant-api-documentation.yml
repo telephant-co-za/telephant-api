@@ -396,7 +396,7 @@ paths:
       description: |
         Send airtime credit to another Telephant user.
 
-        ** Note: ** Keep in mind that the following is required in order to send airtime successfully:
+        **Note:** Keep in mind that the following is required in order to send airtime successfully:
         * The balance in the sending accounting needs to exceed the amount to be sent.
         * You can send airtime to another Telephant account that is registered.
         * You can send airtime to an individual or a group account, but you must supply the correct account name.
