@@ -442,7 +442,7 @@ paths:
             application/json:
               example:
                 { 
-                  message: 'The airtime was sent successully.' 
+                  message: 'The airtime was sent successfully.' 
                 }   
         '4XX':
           $ref: '#/components/responses/4XX'
@@ -1129,7 +1129,7 @@ paths:
           $ref: '#/components/responses/5XX'
 
 ### USERS ###
-  /v1/users?status=signup:
+  /v1/users?action=signup:
     post:
       summary: User signup.
       description: An end point to sign up as a user.
@@ -1195,7 +1195,7 @@ paths:
         '5xx':
           $ref: '#/components/responses/5XX'
 
-  /v1/users?status=login:
+  /v1/users?action=login:
     post:
       summary: User login.
       description: An end point to log in a user.

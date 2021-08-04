@@ -55,7 +55,12 @@ router.post('/', asyncHandler(async (req, res, next) => {
 
 // Login        
      } else if (req.query.action === 'login') {
-        
+
+        if(!req.body.telephoneNumber || !req.body.password){
+            const err = createError(400, 'The request body does not contain the required information.');
+            next(err);
+        }
+
         // Does user exist?
         const user = await User.findByUserName(req.body.telephoneNumber);
         if (!user) {
@@ -71,10 +76,13 @@ router.post('/', asyncHandler(async (req, res, next) => {
                 const token = jwt.sign(req.body.telephoneNumber, process.env.secret);
 
                 // return the information including token as JSON
-                res.status(200).json({
-                    message: 'User successfully logged in.',
-                    token: 'BEARER ' + token,
-                });
+                console.log(token);
+                const err = createError(418, token);
+                next(err);
+                //res.status(200).json({
+                //    message: 'User successfully logged in.',
+                //    token: 'BEARER ' + token,
+                //});
 
             // if password does not match send error
             } else {

@@ -6,6 +6,7 @@ import https from 'https';
 var hpp = require('hpp');
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
+var cors = require('cors');
 
 // import main routers
 import apiRouter from './api/v1/v1Router';
@@ -30,6 +31,7 @@ const limiter = rateLimit({
 });
 
 app
+.use(cors())
 .use(express.json())
 .use(express.urlencoded({ extended: true }))
 
