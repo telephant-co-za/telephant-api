@@ -76,13 +76,10 @@ router.post('/', asyncHandler(async (req, res, next) => {
                 const token = jwt.sign(req.body.telephoneNumber, process.env.secret);
 
                 // return the information including token as JSON
-                console.log(token);
-                const err = createError(418, token);
-                next(err);
-                //res.status(200).json({
-                //    message: 'User successfully logged in.',
-                //    token: 'BEARER ' + token,
-                //});
+                res.status(200).json({
+                    message: 'User successfully logged in.',
+                    token: 'BEARER ' + token,
+                });
 
             // if password does not match send error
             } else {
