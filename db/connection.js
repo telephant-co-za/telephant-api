@@ -12,7 +12,7 @@ db.on('error', (err) => {
     logger.error(`database connection error: ${err}`);
 });
 db.on('disconnected', () => {
-    logger.warning('database disconnected');
+    logger.warn('database disconnected');
 });
 db.once('open', () => {
     logger.info(`database connected to ${db.name} on ${db.host}`);

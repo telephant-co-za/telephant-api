@@ -6,19 +6,20 @@ module.exports = function(error, req, res, next) {
     // Make less verbose (comment out outputting stack and req)
 
     var now = new Date();
-
-    logger.error('*** ERROR LOGGED BY prepareErrors ***');
-    logger.error('\nDate Time: ' + now.toUTCString());
-    logger.error('\nError status:' + error.status);
-    logger.error('\nMessage: ' + error.message);
-    logger.error('\nStack: \n' + error.stack);
-    logger.error('\nRequest: \n' + req);
-    logger.error('*** END ERROR LOG *** \n\n');
   
     // Output to client
     res.status(error.status);
     if (error.status == 500){
       // Hide the 500 errors to not give away security and infrastructure secrets
+      logger.error('*** ERROR LOGGED BY prepareErrors ***');
+      logger.error('Date Time: ' + now.toUTCString());
+      logger.error('Error status:' + error.status);
+      logger.error('Message: ' + error.message);
+      logger.error('Stack: \n' + error.stack);
+      logger.error('Request: \n' + req);
+      logger.error('*** END ERROR LOG *** \n\n');
+
+
       res.json({
         code: error.status,
         name: error.name,

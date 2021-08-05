@@ -140,7 +140,6 @@ router
                 return next(err);
             }
             else{
-                console.log(docs)
                 res.status(200).json({
                     message: docs.n + " notifications were marked as read.",        
                 });
