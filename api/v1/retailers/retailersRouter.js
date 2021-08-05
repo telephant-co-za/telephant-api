@@ -78,7 +78,6 @@ router.get('/', asyncHandler(async(req, res, next) =>
 
 // DELETE delete a specified retailer
 .delete('/:retailer_id', protectRoute, accountHeader, asyncHandler(async(req, res, next) => {
-    console.log(req.params.retailer_id);
 
     // isValidObjectId
     if (!isValidObjectId(req.params.retailer_id))

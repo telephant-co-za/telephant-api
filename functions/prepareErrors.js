@@ -1,3 +1,5 @@
+const logger = require("./logger");
+
 module.exports = function(error, req, res, next) {
 
     // Log the error
@@ -5,13 +7,13 @@ module.exports = function(error, req, res, next) {
 
     var now = new Date();
 
-    console.log('\n\n*** ERROR LOGGED BY prepareErrors ***');
-    console.log('\nDate Time:', now.toUTCString());
-    console.log('\nError status:', error.status);
-    console.log('\nMessage: ', error.message);
-    //console.log('\nStack: \n', error.stack);
-    //console.log('\nRequest: \n',req);
-    console.log('*** END ERROR LOG *** \n\n');
+    logger.error('*** ERROR LOGGED BY prepareErrors ***');
+    logger.error('\nDate Time: ' + now.toUTCString());
+    logger.error('\nError status:' + error.status);
+    logger.error('\nMessage: ' + error.message);
+    logger.error('\nStack: \n' + error.stack);
+    logger.error('\nRequest: \n' + req);
+    logger.error('*** END ERROR LOG *** \n\n');
   
     // Output to client
     res.status(error.status);
@@ -24,6 +26,13 @@ module.exports = function(error, req, res, next) {
     }
     else
     {
+      // 400 errors don't log stack and request but keep a record of these errors in case they need analysis
+      logger.warn('*** ERROR LOGGED BY prepareErrors ***');
+      logger.warn('Date Time: '+ now.toUTCString());
+      logger.warn('Error status: ' + error.status);
+      logger.warn('Message: '+ error.message);
+      logger.warn('*** END ERROR LOG *** \n\n');
+
       res.json({
         code: error.status,
         name: error.name,

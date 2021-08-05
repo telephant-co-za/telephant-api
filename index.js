@@ -13,15 +13,18 @@ import apiRouter from './api/v1/v1Router';
 import docsRouter from './api/docs/docs'
 import pingRouter from './api/ping/pingRouter';
 
-// import common middleware
+// import custom middleware
 const wrongPath = require('./functions/wrongPath');
 const prepareErrors = require('./functions/prepareErrors');
 const prepareOutput = require('./functions/prepareOutput');
+var logger = require('./functions/logger');
 
 // import env variables
 dotenv.config();
 //const port = process.env.PORT;
 const app = express();
+
+logger.info('Start app...')
 
 app.set('trust proxy', 1);
 
@@ -49,7 +52,7 @@ app
 .all('/*', wrongPath)
 
 // Error Handler
-.use(prepareErrors)
+.use(prepareErrors);
 
 // SSL
 const fs = require('fs');
@@ -60,5 +63,5 @@ const server = https.createServer({key: key, cert: cert }, app);
 
 // Run the server
 server.listen(sslPort,() => {
-  console.info(`HTTPS Server running at ${sslPort}`);
+  logger.info(`HTTPS Server running at ${sslPort}`);
 });

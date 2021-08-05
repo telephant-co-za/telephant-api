@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+var logger = require('../functions/logger');
 
 dotenv.config();
 
@@ -8,11 +9,11 @@ mongoose.connect(process.env.mongoDB, { useNewUrlParser: true });
 const db = mongoose.connection;
 
 db.on('error', (err) => {
-    console.log(`database connection error: ${err}`);
+    logger.error(`database connection error: ${err}`);
 });
 db.on('disconnected', () => {
-    console.log('database disconnected');
+    logger.warning('database disconnected');
 });
 db.once('open', () => {
-    console.log(`database connected to ${db.name} on ${db.host}`);
+    logger.info(`database connected to ${db.name} on ${db.host}`);
 });

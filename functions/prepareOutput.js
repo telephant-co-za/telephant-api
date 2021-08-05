@@ -39,7 +39,6 @@ module.exports = function(req, res, next) {
         // turn the string back into a useful array of obects to convert to csv
         const obj = JSON.parse(json);
     
-        console.log(json);
         // convert JSON array to CSV string
         converter.json2csv(obj, (err, csv) => {
         if (err) {
