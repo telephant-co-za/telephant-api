@@ -1,0 +1,14 @@
+# Ignore artifacts:
+.github
+/db
+/node_modules
+/ssl
+.babelrc
+.env
+.eslintrc.json
+.gitignore
+.prettierignore
+package-lock.json
+package.json
+README.md
+/api/docs

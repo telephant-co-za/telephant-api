@@ -1,46 +1,43 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
 const TransactionsSchema = new Schema({
-    transactionID: {
+  transactionID: {
     type: String,
-    required: [true, 'Transaction ID required.'],
-    min: [7, 'A unique string of 7 characters required']
+    required: [true, "Transaction ID required."],
+    min: [7, "A unique string of 7 characters required"],
   },
   accountID: { type: String },
   type: {
     type: String,
     enum: [
-      'AIRTIME', 
-      'INITIAL', 
-      'DEPOSIT', 
-      'PAY', 
-      'TOPUP', 
-      'FEE', 
-      'SEND', 
-      'RECEIVE', 
-      'TAX', 
-      'CONVERT',
-      'FEE_REVENUE',
-      'TAX_ACCOUNT'
+      "AIRTIME", //internal
+      "INITIAL", //internal
+      "DEPOSIT", //internal
+      "PAY", //internal
+      "TOPUP",
+      "FEE",
+      "SEND",
+      "RECEIVE",
+      "TAX",
+      "USE",
+      "CONVERT", //internal
+      "FEE_REVENUE", //internal
+      "TAX_ACCOUNT", //internal
     ],
-    default: 'SEND'
+    default: "SEND",
   },
-  amount: 
-    {
-      type: Number,
-      min: 0
-    },
+  amount: {
+    type: Number,
+    min: 0,
+  },
   sign: {
     type: Number,
-    enum: [1, -1]
-  }, 
-  description: 
-    { type: String,
-      max: [100, 'Description is too long']
+    enum: [1, -1],
   },
-  dateTime: { type: Date }
+  description: { type: String, max: [100, "Description is too long"] },
+  dateTime: { type: Date },
 });
 
-export default mongoose.model('Transactions', TransactionsSchema);
+export default mongoose.model("Transactions", TransactionsSchema);

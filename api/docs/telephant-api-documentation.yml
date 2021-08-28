@@ -463,10 +463,20 @@ paths:
 
         '5XX':
           $ref: '#/components/responses/5XX'
-  /v1/airtime/{ContactsPhoneNumber}:
+  /v1/airtime/{ContactsPhoneNumber}/{Amount}:
     get:
       summary: Request airtime.
-      description: Request airtime credit from a contact.
+      description: |
+        Request airtime credit from a user.
+
+        **Note** This is a GET request so that POS labeling via QR codes can be supported. 
+        A shopkeeper will be able to scan QR codes on the side of products and request credit 
+        from the customer.
+  
+        This functionality could be added to the app. Where the shopkeeper first captures 
+        the user's phone number, then scans each code and sends simple GET requests to 
+        the server.  The functionality could be built into a laptop or tablet browser and would not 
+        require sophisticated client side technology like scanners.
       tags:
         - Airtime
       security:
@@ -478,7 +488,13 @@ paths:
             type: string
             pattern: '^(27)[0-9]{9}$'
           required: true
-          description: A contact's unique mobile phone number from an accounts contacts list.
+          description: A contact's unique mobile phone number.
+        - in: path
+          name: Amount
+          schema:
+            type: number
+          required: true
+          description: The amount of money you would like to request.
         - in: header
           name: account_id
           description: Clients can make requests as connected accounts using the special header account_id which should contain a Telephant account ID.
