@@ -34,7 +34,8 @@ async function lookupAccountID(username) {
 // Set your app credentials
 const credentials = {
   apiKey: process.env.AFT_KEY,
-  username: process.env.AFT_USER,
+  username: "sandbox",
+  //process.env.AFT_USER,
 };
 
 // Initialize the SDK
@@ -43,7 +44,7 @@ const AfricasTalking = require("africastalking")(credentials);
 // Get the airtime service
 const airtime = AfricasTalking.AIRTIME;
 
-function sendAirtime(telephoneNumber, amount) {
+function convertAirtime(telephoneNumber, amount) {
   const options = {
     recipients: [
       {
@@ -60,13 +61,15 @@ function sendAirtime(telephoneNumber, amount) {
     .send(options)
     .then((response) => {
       console.log(response);
+      return response;
     })
     .catch((error) => {
       console.log(error);
+      return error;
     });
 }
 
-//sendAirtime();
+//####
 
 // Airtime does not have its own schema in the db but
 // will interact with the relevant schemas posting transactions and
@@ -188,10 +191,6 @@ router
       }
 
       // Pre-checks complete...
-
-      const AFTAcc = await Account.find({
-        accountName: "africa-talking",
-      });
 
       // Make objects for using during transaction
 
@@ -330,7 +329,12 @@ router
       }
 
       // This function sends a request to an external API sandbox
-      //sendAirtime(telephoneNumber, amount);
+      // This is failing (see the console) because right now the API is not
+      // supporting ZAR (South Africa)
+      // this should hopefully change soon...
+
+      convertAirtime("+" + telephoneNumber, amount);
+
       next();
     })
   )

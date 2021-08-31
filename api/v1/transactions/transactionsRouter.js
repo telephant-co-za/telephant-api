@@ -9,6 +9,8 @@ const router = express.Router();
 // models
 import Transaction from "../../../models/transactionModel";
 import Account from "../../../models/accountModel";
+import Notification from "../../../models/notificationModel";
+import Contact from "../../../models/contactModel";
 
 // custom functions
 import wrongPath from "../../../functions/wrongPath";
@@ -104,6 +106,11 @@ router
           .select("-_id -__v")
           .sort("dateTime");
 
+        const notificationObject = await Notification.find({
+          link: TransactionID,
+          owner: res.locals.account_name
+        });
+
         // Will convert the amount into the right sign for the users perspective
         for (const num in transactions) {
           var amount = transactions[num].amount;
@@ -117,7 +124,35 @@ router
         }
 
         if (transactions.length > 0) {
-          res.locals.output = transactions;
+
+          let total = 0;
+
+          for(var i in transactions ) {
+            total = total + transactions[i].amount;
+          }
+
+          let linesObject = [];
+          for(var j in transactions) {
+            let lines = {
+              type: transactions[j].type,
+              accountID: transactions[j].accountID,
+              amount: transactions[j].amount,
+              description: transactions[j].description             
+            };
+
+            linesObject.push(lines);
+          }
+
+          let transactionObject = {
+            header: {
+              transactionID: transactions[0].transactionID,
+              dateTime: transactions[0].dateTime.toString(),
+              total: total,
+            },
+            lines: linesObject,
+            notification: notificationObject
+          };
+          res.locals.output = transactionObject;
           next();
         } else {
           const err = createError(
