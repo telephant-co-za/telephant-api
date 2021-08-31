@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 const mongoose = require("mongoose");
 import asyncHandler from "express-async-handler";
-var bodyParser = require("body-parser");
+//var bodyParser = require("body-parser");
 
 const moment = require("moment-timezone");
 var crypto = require("crypto");

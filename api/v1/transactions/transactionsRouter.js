@@ -10,7 +10,6 @@ const router = express.Router();
 import Transaction from "../../../models/transactionModel";
 import Account from "../../../models/accountModel";
 import Notification from "../../../models/notificationModel";
-import Contact from "../../../models/contactModel";
 
 // custom functions
 import wrongPath from "../../../functions/wrongPath";
@@ -108,7 +107,7 @@ router
 
         const notificationObject = await Notification.find({
           link: TransactionID,
-          owner: res.locals.account_name
+          owner: res.locals.account_name,
         });
 
         // Will convert the amount into the right sign for the users perspective
@@ -124,20 +123,19 @@ router
         }
 
         if (transactions.length > 0) {
-
           let total = 0;
 
-          for(var i in transactions ) {
+          for (var i in transactions) {
             total = total + transactions[i].amount;
           }
 
           let linesObject = [];
-          for(var j in transactions) {
+          for (var j in transactions) {
             let lines = {
               type: transactions[j].type,
               accountID: transactions[j].accountID,
               amount: transactions[j].amount,
-              description: transactions[j].description             
+              description: transactions[j].description,
             };
 
             linesObject.push(lines);
@@ -150,7 +148,7 @@ router
               total: total,
             },
             lines: linesObject,
-            notification: notificationObject
+            notification: notificationObject,
           };
           res.locals.output = transactionObject;
           next();
