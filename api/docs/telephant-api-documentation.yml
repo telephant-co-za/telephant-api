@@ -1685,48 +1685,32 @@ components:
 }
     Transaction-Get:
       value:
-        {
-    "header": {
-        "transactionID": "8q129bib",
-        "dateTime": "Thu May 27 2021 11:16:00 GMT+0200 (South Africa Standard Time)",
-        "total": -101.15
+        [
+    {
+        "type": "SEND",
+        "transactionID": "2dguitrb",
+        "accountID": "60ebd53e2f79311541618bc6",
+        "dateTime": "2021-06-01T09:12:00.000Z",
+        "amount": -10,
+        "description": "Sending credit"
     },
-    "lines": [
-        {
-            "type": "TAX",
-            "accountID": "60ebd53e2f79311541618bc6",
-            "amount": -0.15,
-            "description": "VAT"
-        },
-        {
-            "type": "SEND",
-            "accountID": "60ebd53e2f79311541618bc6",
-            "amount": -100,
-            "description": "Sending credit"
-        },
-        {
-            "type": "FEE",
-            "accountID": "60ebd53e2f79311541618bc6",
-            "amount": -1,
-            "description": "Sending fee"
-        }
-    ],
-    "notification": [
-        {
-            "dateTime": "2021-05-27T09:16:00.000Z",
-            "read": false,
-            "type": "INFO",
-            "_id": "612d1463a0b8c748e8e5d1ff",
-            "subject": "Sent",
-            "message": "You sent Napoleon R 100",
-            "owner": "27829524031",
-            "link": "8q129bib",
-            "createdAt": "2021-08-30T17:24:51.713Z",
-            "updatedAt": "2021-08-30T17:24:51.713Z",
-            "__v": 0
-        }
-    ]
-}
+    {
+        "type": "TAX",
+        "transactionID": "2dguitrb",
+        "accountID": "60ebd53e2f79311541618bc6",
+        "dateTime": "2021-06-01T09:12:00.000Z",
+        "amount": -0.15,
+        "description": "VAT"
+    },
+    {
+        "type": "FEE",
+        "transactionID": "2dguitrb",
+        "accountID": "60ebd53e2f79311541618bc6",
+        "dateTime": "2021-06-01T09:12:00.000Z",
+        "amount": -1,
+        "description": "Sending fee"
+    }
+]
     Airtime-Get:
       value:
         {
